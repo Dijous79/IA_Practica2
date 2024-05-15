@@ -15,7 +15,7 @@
 (deffunction MAIN::demanar_int(?pregunta ?min ?max)
     (printout t ?pregunta crlf)
     (bind ?res (read))
-    (while (or (>= ?res ?max) (<= ?res ?min)) do
+    (while (or (not (integerp ?res)) (>= ?res ?max) (<= ?res ?min)) do
         (printout t crlf)
         (printout t "Valor no válido, por favor inténtalo de nuevo:" crlf)
         (printout t ?pregunta crlf)
@@ -27,7 +27,7 @@
 
 (deffunction MAIN::demanar_opcions (?pregunta $?opcions)
     (printout t ?pregunta)
-    (printout t " Respon amb una de les seguents opcions: " $?opcions crlf)
+    (printout t " Respon amb una de les seguents opcions: " crlf $?opcions crlf)
     (bind ?res (read))
     (while (not (member$ ?res $?opcions)) do
         (printout t crlf)

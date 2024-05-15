@@ -38,13 +38,34 @@
    (declare (salience 10))
    =>
    (make-instance Persona of Usuari)
+
+   (printout t "######                                                             #######         " crlf)
+	(printout t "#     #  #####     ##     ####    #####     #     ####     ##         #       ##   " crlf) 
+	(printout t "#     #  #    #   #  #   #    #     #       #    #    #   #  #        #      #  #  " crlf) 
+	(printout t "######   #    #  #    #  #          #       #    #       #    #       #     #    # " crlf)
+	(printout t "#        #####   ######  #          #       #    #       ######       #     ###### " crlf) 
+	(printout t "#        #   #   #    #  #    #     #       #    #    #  #    #       #     #    # " crlf) 
+	(printout t "#        #    #  #    #   ####      #       #     ####   #    #    #######  #    # " crlf crlf crlf crlf)
+   (system "timeout /t 1 /nobreak")
+   (printout t "#######               #       #                     ####                                         " crlf)
+	(printout t "   #     #     #      # #     #    ####   #####    #    #    ####     #    #   ####   #    #     " crlf) 
+	(printout t "   #     # # # #      #  #    #   #    #    #      #    #   #    #    #    #  #    #  #    #     " crlf) 
+	(printout t "   #     #  #  #      #   #   #   #    #    #      #        #    #    #    #  #       ######     " crlf)
+	(printout t "   #     #     #      #    #  #   #    #    #      #        #    #    #    #  #       #    #     " crlf) 
+	(printout t "   #     #     #      #     # #   #    #    #      #    #   #    #    #    #  #    #  #    #     " crlf) 
+	(printout t "#######  #     #      #       #    ####     #       ####     ####      ####    ####   #    #     " crlf crlf crlf crlf)
+   (system "timeout /t 1 /nobreak")
    (printout t "######" crlf)
-   (printout t "#     #  #####     ##     ####    #####     #     ####     ##" crlf) 
-   (printout t "#     #  #    #   #  #   #    #     #       #    #    #   #  #" crlf) 
-   (printout t "######   #    #  #    #  #          #       #    #       #    #" crlf)
-   (printout t "#        #####   ######  #          #       #    #       ######" crlf) 
-   (printout t "#        #   #   #    #  #    #     #       #    #    #  #    #" crlf) 
-   (printout t "#        #    #  #    #   ####      #       #     ####   #    #" crlf crlf)
+	(printout t "#     #   ####   #####    ##    #####   ####    " crlf) 
+	(printout t "#     #  #    #    #     #  #     #    #    #   " crlf) 
+	(printout t "######   #    #    #    #    #    #    #    #   " crlf)
+	(printout t "#        #    #    #    ######    #    #    #   " crlf) 
+	(printout t "#        #    #    #    #    #    #    #    #   " crlf) 
+	(printout t "#         ####     #    #    #    #     ####    " crlf crlf crlf)
+
+   (system "timeout /t 1aa /nobreak")
+   (printout t crlf)
+   
    (focus RECOLLIR_DADES)
 )
 
@@ -52,9 +73,11 @@
 
 ;; --------- SALUT ---------
 
+
 (defrule RECOLLIR_DADES::preguntesSalut
-    ?usuari <- (object (is-a Usuari))
-    =>
+    (declare (salience 30))
+   ?usuari <- (object (is-a Usuari))
+   =>
     (printout t "Siusplau respon a les següents preguntes sobre la teva salut" crlf)
     (bind ?edat (demanar_int "Quina edat tens?" 0 120))
     (bind ?estatura (demanar_float "En metres, quant mesures?" 0.0 3.0))
@@ -81,10 +104,11 @@
 ;; --------- DIETA ---------
 
 (defrule RECOLLIR_DADES::preguntesDieta
-    ?usuari <- (object (is-a Usuari))
-    =>
+   (declare (salience 20))
+   ?usuari <- (object (is-a Usuari))
+   =>
     (printout t "Siusplau respon a les següents preguntes sobre la teva dieta" crlf)
-    (bind ?apatsDiaris (demanar_int "Quants apats fas al dia?" 1 5))
+    (bind ?apatsDiaris (demanar_int "Quants apats fas al dia?" 1 6))
     (bind ?pica (demanar_opcions "Piques entre hores?" Si No))
     (bind ?pecesFruita (demanar_opcions "Quantes peçes de fruita menjes al dia?" 0-1 2-3 4+))
     (bind ?peixSetmanal (demanar_opcions "Quantes vegades menjes peix a la setmana?" 0-1 2-3 4+))
@@ -105,6 +129,7 @@
 ;; --------- OBJECTIUS ---------
 
 (defrule RECOLLIR_DADES::preguntesObjectius
+    (declare (salience 10))
     ?usuari <- (object (is-a Usuari))
     =>
     (printout t "Siusplau respon a les següents preguntes sobre els teus objectius" crlf)
