@@ -1,0 +1,7 @@
+;;(batch "run.clp.bat")
+(clear)
+(load "joel_funcions.clp")
+(load "onto.clp")
+(load "joel_regles.clp")
+(reset)
+(run)
