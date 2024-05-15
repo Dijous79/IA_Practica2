@@ -1,17 +1,23 @@
 ;;; ---------------------------------------------------------
-;;; .\onto.clips
+;;; .\onto.clp
 ;;; Translated by owl2clips
 ;;; Translated to CLIPS from ontology .\onto.ttl
-;;; :Date 15/05/2024 13:14:43
+;;; :Date 16/05/2024 00:07:20
 
 (defclass Exercici
     (is-a USER)
     (role concrete)
     (pattern-match reactive)
-    (multislot IntensitatExercici
+    (multislot Que_Treballa
         (type STRING)
         (create-accessor read-write))
-    (multislot Que_Treballa
+)
+
+(defclass ExercicisRutina
+    (is-a Exercici)
+    (role concrete)
+    (pattern-match reactive)
+    (multislot IntensitatExercici
         (type STRING)
         (create-accessor read-write))
     (multislot TempsDedicat
@@ -26,8 +32,17 @@
     (multislot Bloquejos
         (type STRING)
         (create-accessor read-write))
-    (multislot GrauLesió
+    (multislot GrauLesio
         (type INTEGER)
+        (create-accessor read-write))
+)
+
+(defclass Objectiu
+    (is-a USER)
+    (role concrete)
+    (pattern-match reactive)
+    (multislot Que_Busca_Treballar
+        (type STRING)
         (create-accessor read-write))
 )
 
@@ -41,13 +56,25 @@
     (multislot Te
         (type INSTANCE)
         (create-accessor read-write))
+    (multislot Imc
+        (type INTEGER)
+        (create-accessor read-write))
     (multislot IntensitatPersona
+        (type STRING)
+        (create-accessor read-write))
+    (multislot NivellFisic
         (type STRING)
         (create-accessor read-write))
     (multislot TempsDisponible
         (type INTEGER)
         (create-accessor read-write))
-)
-
-(definstances instances
+    (multislot edat
+        (type INTEGER)
+        (create-accessor read-write))
+    (multislot pressioMax
+        (type INTEGER)
+        (create-accessor read-write))
+    (multislot pressioMin
+        (type INTEGER)
+        (create-accessor read-write))
 )
