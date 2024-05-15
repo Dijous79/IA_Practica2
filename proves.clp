@@ -53,7 +53,8 @@
 (defrule entrada::perfil_persona
     (declare (salience 10))
     =>
-    (printout t "Siusplau respon a les següents preguntes" crlf)
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;SALUT;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    (printout t "Siusplau respon a les següents preguntes sobre la teva salut" crlf)
     (bind ?edat (demanar_int "Quina edat tens?" 0 120))
     (bind ?estatura (demanar_float "En metres, quant mesures?" 0.0 3.0))
     (bind ?pes (demanar_float "En quilograms, quant peses?" 30.0 300.0))
@@ -65,6 +66,24 @@
     (bind ?horesDesportSetmanals (demanar_int "Quantes hores d'esport fas a la setmana?" 0 40))
     (bind ?estatNormalEnLaFeina (demanar_opcions "En el teu lloc de treball o estudi com estas noramlment" Dret Segut))
     
+
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;DIETA;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    (printout t "Siusplau respon a les següents preguntes sobre la teva dieta" crlf)
+    
+    (bind ?apatsDiaris (demanar_int "Quants apats fas al dia?" 1 5))
+    (bind ?pica (demanar_opcions "Piques entre hores?" Si No))
+    (bind ?pecesFruita (demanar_opcions "Quantes peçes de fruita menjes al dia?" 0-1 2-3 4+))
+    (bind ?peixSetmanal (demanar_opcions "Quantes vegades menjes peix a la setmana?" 0-1 2-3 4+))
+    (bind ?fregitSetmanal (demanar_opcions "Quantes vegades menjes fregits a la setmana?" 0-1 2-3 4+))
+    (bind ?carnSetmanal (demanar_opcions "Quantes vegades menjes peix a la setmana?" 0-2 3-5 6+))
+    (bind ?sal (demanar_opcions "Com valores el teu consum de sal?" Baix Mig Alt))
+
+
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;OBJECTIUS;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    (printout t "Siusplau respon a les següents preguntes sobre el teus objectius" crlf)
+    (bind ?tipusPrograma (demanar_opcions "Quin tipus de programa vols?" 
+                        Manteniment Posarse_En_Forma Baixar_De_Pes Muscular Flexbilitat Equilibri Enfortir_Esquena))
+    (bind ?objectiuMinutsDiaris (demanar_int "Quants minuts vols entrenar al dia?" 0 500))
 )
 
 (defrule MAIN::inici 
