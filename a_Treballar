@@ -30,3 +30,50 @@ cervicals
 cardio
 
 antebraços/biceps/triceps/espatllaFrontal/deltoides/trapesis/dorsals/pectoral/abdominals/estabilitzador/lumbars/glutis/quadriceps/isquiotibials/bessons/canells/colzes/hombro/cadera/genolls/tormells/peus/cervicals/cardio
+
+
+////////////////// idea joel /7777777777777777777777
+
+el usuari diu les limitacions que te.
+
+les limitacions son objectes que tenen
+  - bloquejos de musculs
+  - grau lesio 
+
+default grau lesio invalid.
+
+els exericics tennen
+  - nom
+  - musculs que treballen
+  - grau de si es pot fer lexercici
+
+default grau de si es pot fer lexercici  apte.
+
+llavors, la idea es =
+
+1. amb les limitacions que dona lusuari fer put-limitacio i cambiar el grau de lesio
+2. borrar les limitacions que son invalides per alliverar memoria
+3. borrar els exercicis que tienen grau de lesio molt greu (pq no els pot fer)
+4. modificar el grau de si es pot fer lexercici segons les limitacions (apte, mig, baix)
+
+fins aqui has com "preparat" les dades.
+
+ara toca assignar exercicis al usuari per la rutina.
+
+com sabem el objectiu, rollo rehabilitacio, equilibri, etc 
+i sabem els minuts que vol entrenar per dia, ja podem saber amb una abstraccio
+els exercicis aprox que es fan per dia, pe rexemple 3-4 per dia.
+que si sentrena tota la semana (5 dies) seran uns 15-20 exercicis.
+
+llavors, per ferho facil, ens la pela ser molt especifics en el sentit de
+dilluns dia de cama, dimarts noseke, pq es complica molt. i ens ho podem prendre
+com escollir 15-20 exercicis i ja els distribuirem "random" a 3-4 per dia.
+la unica "restriccio" es que els objectius es cumpleixin en lo possible
+i de millor forma tenint en compte les limitacions intentant escollir les que siguin aptes primers i si no es
+posible pues escollir amb poca limitacio.
+
+llavors =
+
+1. suposem que ja tenim l'abstracico dels objectius, numero de exercicis a fer a la semana
+2. primera passada intentant escollir els X exercics que no tinguin limiacions (apte)
+3. segona passada escollint els exercicis sobrants que necesitem fer amb limitacions

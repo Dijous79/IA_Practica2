@@ -84,18 +84,8 @@
     ;;IMC = index de massa corporal pes/estatura^2
     (bind ?valorIMC (/ ?pes (* ?estatura ?estatura)))
     ;;(bind ?presioMax (demanar_int "En mmHg, quina és la teva pressiò sistòlica?" 0 250))
-    (bind ?presioMin (demanar_int "En mmHg, quina és la teva pressiò diastòlica?" 0 200))
+    ;;(bind ?presioMin (demanar_int "En mmHg, quina és la teva pressiò diastòlica?" 0 200))
     (bind ?horesDesportSetmanals (demanar_int "Quantes hores d'esport fas a la setmana?" 0 40))
-
-    (if (>= ?horesDesportSetmanals 10) then (bind ?nivellFisicPersona "moltAlta")
-        else (if (>= ?horesDesportSetmanals 6) then (bind ?nivellFisicPersona "alta")
-            else (if (> ?horesDesportSetmanals 2) then (bind ?nivellFisicPersona "moderada")
-                else (if (> ?horesDesportSetmanals 0) then (bind ?nivellFisicPersona "baixa")
-                    else (bind ?nivellFisicPersona "moltBaixa")
-                ) 
-            )
-        )
-    )
 
     ;; preguntes dieta
     ;;(printout t "Siusplau respon a les següents preguntes sobre la teva dieta" crlf)
@@ -133,6 +123,19 @@
             )
         )
     )
+
+    ;; abstraccio del nivellFisicPersona
+    (if (>= ?horesDesportSetmanals 10) then (bind ?nivellFisicPersona "moltAlta")
+        else (if (>= ?horesDesportSetmanals 6) then (bind ?nivellFisicPersona "alta")
+            else (if (> ?horesDesportSetmanals 2) then (bind ?nivellFisicPersona "moderada")
+                else (if (> ?horesDesportSetmanals 0) then (bind ?nivellFisicPersona "baixa")
+                    else (bind ?nivellFisicPersona "moltBaixa")
+                ) 
+            )
+        )
+    )
+
+    
 
     ;; falta abstraccio de mes coses....
 
