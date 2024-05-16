@@ -75,4 +75,3 @@
         (type STRING)
         (create-accessor read-write))
 )
-
