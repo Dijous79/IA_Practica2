@@ -9,19 +9,19 @@
    (export ?ALL)
 )
 
-;; Módulo para descartar ejercicios y actividades incompatibles con el paciente
+;; Módul per descartar exercicis per les limitacions
 (defmodule DESCARTAR
     (import MAIN ?ALL)
     (export ?ALL)
 )
 
-;; Genera la rutina
+;; Genera la rutina d'exercicis
 (defmodule PROCESAR
     (import MAIN ?ALL)
     (export ?ALL)
 )
 
-;; Mostra la rutina
+;; Mostra la rutina d'exercicis
 (defmodule MOSTRAR
     (import MAIN ?ALL)
     (export ?ALL)
@@ -180,6 +180,17 @@
 
 ;; ---------------------------- MODUL DESCARTAR ----------------------------
 
+;; aqui definim defrules que tinguin en compte les limitacions i ens bloquejin els exercicis que no pot fer
+
+;; aixo es del jeremy (per seguir el format)
+;; (defrule DESCARTAR::limitacionsIMC
+;;     (declare (salience 10))
+;;     (object (is-a Antecedente) (ZonaCuerpo ?z1))
+;;     ?inst <- (object (is-a Accion) (ZonaCuerpo ?z2) (Intensidad ?i))
+;;     (test (and (eq ?z1 ?z2) (eq ?i Alta)))
+;;     => (send ?inst delete)
+;; )
+
 (defrule DESCARTAR::canviProcesar
 	(declare (salience -20))
 	=>
@@ -188,6 +199,8 @@
 
 ;; ---------------------------- MODUL PROCESAR ----------------------------
 
+;; mirar del jeremy com fa el apartat de "sintesis::"
+
 (defrule PROCESAR::canviMostrar
 	(declare (salience -20))
 	=>
@@ -195,6 +208,8 @@
 )
 
 ;; ---------------------------- MODUL MOSTRAR ----------------------------
+
+;; mirar del jeremy com fa el apartat de "output::"
 
 (defrule MOSTRAR::print
    (declare (salience 10))
