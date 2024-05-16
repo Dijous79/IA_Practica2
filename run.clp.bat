@@ -2,6 +2,6 @@
 (clear)
 (load "onto.clp")
 (load "regles.clp")
-;; (load "instancies.clp")
+(load "instancies.clp")
 (reset)
 (run)
