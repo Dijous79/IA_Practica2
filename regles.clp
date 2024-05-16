@@ -31,6 +31,36 @@
 
 ;; ----------- FUNCIONS MAIN -----------
 
+(deffunction MAIN::imprimir_introduccio()
+   (printout t "######                                                             #######         " crlf)
+	(printout t "#     #  #####     ##     ####    #####     #     ####     ##         #       ##   " crlf) 
+	(printout t "#     #  #    #   #  #   #    #     #       #    #    #   #  #        #      #  #  " crlf) 
+	(printout t "######   #    #  #    #  #          #       #    #       #    #       #     #    # " crlf)
+	(printout t "#        #####   ######  #          #       #    #       ######       #     ###### " crlf) 
+	(printout t "#        #   #   #    #  #    #     #       #    #    #  #    #       #     #    # " crlf) 
+	(printout t "#        #    #  #    #   ####      #       #     ####   #    #    #######  #    # " crlf crlf crlf crlf)
+   (system "timeout /t 1 /nobreak")
+   (printout t "#######               #       #                     #####                                         " crlf)
+	(printout t "   #     #     #      # #     #    ####   #####    #     #    ####     #    #   ####   #    #     " crlf) 
+	(printout t "   #     # # # #      #  #    #   #    #    #      #     #   #    #    #    #  #    #  #    #     " crlf) 
+	(printout t "   #     #  #  #      #   #   #   #    #    #      #         #    #    #    #  #       ######     " crlf)
+	(printout t "   #     #     #      #    #  #   #    #    #      #         #    #    #    #  #       #    #     " crlf) 
+	(printout t "   #     #     #      #     # #   #    #    #      #     #   #    #    #    #  #    #  #    #     " crlf) 
+	(printout t "#######  #     #      #       #    ####     #       #####     ####      ####    ####   #    #     " crlf crlf crlf crlf)
+   (system "timeout /t 1 /nobreak")
+   (printout t "######" crlf)
+	(printout t "#     #   ####   #####    ##    #####   ####    " crlf) 
+	(printout t "#     #  #    #    #     #  #     #    #    #   " crlf) 
+	(printout t "######   #    #    #    #    #    #    #    #   " crlf)
+	(printout t "#        #    #    #    ######    #    #    #   " crlf) 
+	(printout t "#        #    #    #    #    #    #    #    #   " crlf) 
+	(printout t "#         ####     #    #    #    #     ####    " crlf crlf crlf)
+
+   (system "timeout /t 1 /nobreak")
+   (printout t crlf)
+
+)
+
 (deffunction MAIN::demanar_float(?pregunta ?min ?max)
     (printout t ?pregunta crlf)
     (printout t "Insereix un valor amb mínim un decimal sepparat per un punt (Ex 5.0)" crlf)
@@ -50,7 +80,7 @@
     (bind ?res (read))
     (while (or (not (integerp ?res)) (>= ?res ?max) (<= ?res ?min)) do
         (printout t crlf)
-        (printout t "Valor no válido, por favor inténtalo de nuevo:" crlf)
+        (printout t "Valor no valid, siusplau prova-ho de nou:" crlf)
         (printout t ?pregunta crlf)
         (bind ?res (read))
     )
@@ -163,32 +193,7 @@
    =>
    (make-instance Persona of Usuari)
 
-   (printout t "######                                                             #######         " crlf)
-	(printout t "#     #  #####     ##     ####    #####     #     ####     ##         #       ##   " crlf) 
-	(printout t "#     #  #    #   #  #   #    #     #       #    #    #   #  #        #      #  #  " crlf) 
-	(printout t "######   #    #  #    #  #          #       #    #       #    #       #     #    # " crlf)
-	(printout t "#        #####   ######  #          #       #    #       ######       #     ###### " crlf) 
-	(printout t "#        #   #   #    #  #    #     #       #    #    #  #    #       #     #    # " crlf) 
-	(printout t "#        #    #  #    #   ####      #       #     ####   #    #    #######  #    # " crlf crlf crlf crlf)
-   (system "timeout /t 1 /nobreak")
-   (printout t "#######               #       #                     ####                                         " crlf)
-	(printout t "   #     #     #      # #     #    ####   #####    #    #    ####     #    #   ####   #    #     " crlf) 
-	(printout t "   #     # # # #      #  #    #   #    #    #      #    #   #    #    #    #  #    #  #    #     " crlf) 
-	(printout t "   #     #  #  #      #   #   #   #    #    #      #        #    #    #    #  #       ######     " crlf)
-	(printout t "   #     #     #      #    #  #   #    #    #      #        #    #    #    #  #       #    #     " crlf) 
-	(printout t "   #     #     #      #     # #   #    #    #      #    #   #    #    #    #  #    #  #    #     " crlf) 
-	(printout t "#######  #     #      #       #    ####     #       ####     ####      ####    ####   #    #     " crlf crlf crlf crlf)
-   (system "timeout /t 1 /nobreak")
-   (printout t "######" crlf)
-	(printout t "#     #   ####   #####    ##    #####   ####    " crlf) 
-	(printout t "#     #  #    #    #     #  #     #    #    #   " crlf) 
-	(printout t "######   #    #    #    #    #    #    #    #   " crlf)
-	(printout t "#        #    #    #    ######    #    #    #   " crlf) 
-	(printout t "#        #    #    #    #    #    #    #    #   " crlf) 
-	(printout t "#         ####     #    #    #    #     ####    " crlf crlf crlf)
-
-   (system "timeout /t 1aa /nobreak")
-   (printout t crlf)
+   
    
    (focus RECOLLIR)
 )
@@ -214,6 +219,16 @@
 ;;     (test (and (eq ?z1 ?z2) (eq ?i Alta)))
 ;;     => (send ?inst delete)
 ;; )
+
+(defrule DESCARTAR::exercicis_sobre_lesio_grau_alt
+   (declare (salience 10))
+   (object (is-a Limitacions) (Bloquejos $?b) (GrauLesio ?g))
+   ?inst <- (object (is-a Exercici) (Que_Treballa $?t))
+   (test (and (eq ?g Alt) (member$ ?t $?b)))
+   => (send ?inst delete)
+)
+
+
 
 (defrule DESCARTAR::canviProcesar
 	(declare (salience -20))
