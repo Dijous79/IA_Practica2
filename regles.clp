@@ -157,10 +157,12 @@
 ;; ---------------------------- MODUL MAIN ----------------------------
 
 ;; MODULO MAIN
+
 (defrule MAIN::inici
    (declare (salience 10))
    =>
    (make-instance Persona of Usuari)
+<<<<<<< HEAD
 
    (printout t "######                                                             #######         " crlf)
 	(printout t "#     #  #####     ##     ####    #####     #     ####     ##         #       ##   " crlf) 
@@ -190,6 +192,11 @@
    (printout t crlf)
    
    (focus RECOLLIR)
+=======
+   (carregar_introduccio)
+   (carregar_base_dades)
+   (focus RECOLLIR_DADES)
+>>>>>>> fc4cf34 (Canvis diversos)
 )
 
 ;; ---------------------------- MODUL RECOLLIR ----------------------------
@@ -203,6 +210,7 @@
 
 ;; ---------------------------- MODUL DESCARTAR ----------------------------
 
+<<<<<<< HEAD
 ;; aqui definim defrules que tinguin en compte les limitacions i ens bloquejin els exercicis que no pot fer
 
 ;; aixo es del jeremy (per seguir el format)
@@ -236,12 +244,71 @@
 
 (defrule MOSTRAR::print
    (declare (salience 10))
+=======
+(defrule RECOLLIR_DADES::preguntes_salut
+    (declare (salience 3))
+   ?usuari <- (object (is-a Usuari))
+>>>>>>> fc4cf34 (Canvis diversos)
    =>
    (printout t "Exemple print de Exercici: " crlf)
    (printExercici [PressDeBanca])
 
+<<<<<<< HEAD
    ;; crea instancia ExerciciRutina i asigna valors
    (crearExercicisRutina [PressDeBanca] "baixa" "alt")
+=======
+    ;; Ahora haces los asserts
+    (assert (edat ?edat))
+    (assert (estatura ?estatura))
+    (assert (pes ?pes))
+    (assert (IMC ?IMC))
+    (assert (presioMax ?presioMax))
+    (assert (minutsCaminatsDiaris ?minutsCaminatsDiaris))
+    (assert (horesDesportSetmanals ?horesDesportSetmanals))
+    (assert (estatNormalEnLaFeina ?estatNormalEnLaFeina))
+)
+
+;; --------- DIETA ---------
+
+(defrule RECOLLIR_DADES::preguntes_dieta
+   (declare (salience 2))
+   ?usuari <- (object (is-a Usuari))
+   =>
+    (printout t "Siusplau respon a les següents preguntes sobre la teva dieta" crlf)
+    (bind ?apatsDiaris (demanar_int "Quants apats fas al dia?" 1 6))
+    (bind ?pica (demanar_opcions "Piques entre hores?" Si No))
+    (bind ?pecesFruita (demanar_opcions "Quantes peçes de fruita menjes al dia?" 0-1 2-3 4+))
+    (bind ?peixSetmanal (demanar_opcions "Quantes vegades menjes peix a la setmana?" 0-1 2-3 4+))
+    (bind ?fregitSetmanal (demanar_opcions "Quantes vegades menjes fregits a la setmana?" 0-1 2-3 4+))
+    (bind ?carnSetmanal (demanar_opcions "Quantes vegades menjes carn a la setmana?" 0-2 3-5 6+))
+    (bind ?sal (demanar_opcions "Com valores el teu consum de sal?" Baix Mig Alt))
+
+    ;; Ahora haces los asserts
+    (assert (apatsDiaris ?apatsDiaris))
+    (assert (pica ?pica))
+    (assert (pecesFruita ?pecesFruita))
+    (assert (peixSetmanal ?peixSetmanal))
+    (assert (fregitSetmanal ?fregitSetmanal))
+    (assert (carnSetmanal ?carnSetmanal))
+    (assert (sal ?sal))
+)
+
+;; --------- OBJECTIUS ---------
+
+(defrule RECOLLIR_DADES::preguntes_objectius
+    (declare (salience 1))
+    ?usuari <- (object (is-a Usuari))
+    =>
+    (printout t "Siusplau respon a les següents preguntes sobre els teus objectius" crlf)
+    (bind ?tipusPrograma (demanar_opcions "Quin tipus de programa vols?" 
+                        Manteniment Posarse_En_Forma Baixar_De_Pes Muscular Flexbilitat Equilibri Enfortir_Esquena))
+    (bind ?objectiuMinutsDiaris (demanar_int "Quants minuts vols entrenar al dia?" 0 500))
+
+    ;; Ahora haces los asserts
+    (assert (tipusPrograma ?tipusPrograma))
+    (assert (objectiuMinutsDiaris ?objectiuMinutsDiaris))
+)
+>>>>>>> fc4cf34 (Canvis diversos)
 
    (printout t crlf)
    (printout t "Programa finalitzat" crlf)
