@@ -5,8 +5,8 @@
 
 ;; Modul per extreure informacio del usuari i abtreure dades
 (defmodule RECOLLIR
-   (import MAIN ?ALL)
-   (export ?ALL)
+    (import MAIN ?ALL)
+    (export ?ALL)
 )
 
 ;; Módul per descartar exercicis per les limitacions
@@ -131,6 +131,21 @@
                                         (Imc ?imcAbs))
 )
 
+;; ----------- FUNCIONS DESCARTAR -----------
+
+
+
+;; ----------- FUNCIONS PROCESAR -----------
+
+
+
+;; ----------- FUNCIONS MOSTRAR -----------
+
+(deffunction MOSTRAR::printExercici (?exercici)
+    (printout t "ID del exercici: " (instance-name ?exercici) crlf)
+    (printout t "Que_Treballa: " (send ?exercici get-Que_Treballa) crlf)
+)
+
 ;; ---------------------------- MODUL MAIN ----------------------------
 
 ;; MODULO MAIN
@@ -214,5 +229,9 @@
 (defrule MOSTRAR::print
    (declare (salience 10))
    =>
-	(printout t "ACABAT ACABAT ACABAT ACABAT ACABAT ACABAT ACABAT " crlf)
+   (printout t "Exemple print de Exercici: " crlf)
+   (printExercici [PressDeBanca])
+
+   (printout t crlf)
+   (printout t "Programa finalitzat" crlf)
 )
