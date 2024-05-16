@@ -33,7 +33,7 @@
 
 (deffunction MAIN::demanar_float(?pregunta ?min ?max)
     (printout t ?pregunta crlf)
-    (printout t "Insereix un valor amb mínim un decimal sepparat per un punt (Ex 5.0)" crlf)
+    (printout t "Insereix un valor amb mínim un decimal separat per un punt (Ex 5.0)" crlf)
     (bind ?res (read))
     (while (or (not (floatp ?res)) (>= ?res ?max) (<= ?res ?min)) do
         (printout t crlf)
@@ -231,6 +231,27 @@
 ;;     (test (and (eq ?z1 ?z2) (eq ?i Alta)))
 ;;     => (send ?inst delete)
 ;; )
+(deffunction DESCARTAR::element_in_list ($?b $?t)
+    (do-for-all-facts ((?element $?b))
+        (if (member$ ?element $?t) then
+            (return TRUE)
+        )
+    )
+    (return FALSE)
+)
+
+(defrule DESCARTAR::exercicis_sobre_lesio_grau_alt
+   (declare (salience 10))
+   (object (is-a Limitacions) (Bloquejos $?b) (GrauLesio ?g))
+   ?inst <- (object (is-a Exercici) (Que_Treballa $?t))
+   (test (and (eq ?g "invalid") (element_in_list $?b $?t)))
+   => 
+   (send ?inst delete)
+   (printout t "prova" crlf)
+ )
+
+
+
 
 (defrule DESCARTAR::canviProcesar
 	(declare (salience -20))
@@ -257,9 +278,9 @@
    =>
    (bind ?exercici-instances (find-all-instances ((?i Exercici)) TRUE))
     (foreach ?instance ?exercici-instances
-        (crearExercicisRutina ?instance "baixa" "alt")
+        (printout t "Checkpoint" crlf)
     )
-   (printout t "Checkpoint" crlf)
+   
 
    ;;(bind ?exercicisR-instances (find-all-instances ((?i ExercicisRutina)) TRUE))
    ;; (foreach ?instance ?exercicisR-instances
