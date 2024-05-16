@@ -73,4 +73,71 @@
            (nomExercici "Nadar")
            (Que_Treballa  "cardiovascular" "dorsals" "pectoral" "abdominals" "biceps" "triceps" "gluteus" "quadriceps" "isquiotibials")
       )
+
+;; ------------------Limitacions------------------------------------
+
+([Tendinitis_Manguito_Rotador] of Limitacions
+         (Bloquejos  "deltoides" "hombro")
+         (GrauLesio  "greu")
+    )
+
+([Fascitis_Plantar] of Limitacions
+         (Bloquejos  "pie")
+         (GrauLesio  "leve")
+    )
+
+([Espasmo_Muscular_Cervical] of Limitacions
+         (Bloquejos  "cervicals")
+         (GrauLesio  "moderado")
+    )
+
+([Síndrome_Túnel_Carpiano] of Limitacions
+         (Bloquejos  "muñeca")
+         (GrauLesio  "moderado")
+    )
+
+([Tendinitis_Codo_Tenista] of Limitacions
+         (Bloquejos  "codo")
+         (GrauLesio  "leve")
+    )
+
+([Tendinitis_Codo_Golfista] of Limitacions
+         (Bloquejos  "codo")
+         (GrauLesio  "leve")
+    )
+
+([Contractura_Muscular_Lumbar] of Limitacions
+         (Bloquejos  "lumbars")
+         (GrauLesio  "moderado")
+    )
+
+([Espolón_Calcáneo] of Limitacions
+         (Bloquejos  "pie")
+         (GrauLesio  "leve")
+    )
+
+([Ciática] of Limitacions
+         (Bloquejos  "lumbars" "gluteus" "isquiotibials" "pierna")
+         (GrauLesio  "moderado")
+    )
+
+([Esguince_Tobillo] of Limitacions
+         (Bloquejos  "tobillo")
+         (GrauLesio  "leve")
+    )
+
+([Hombro_Congelado] of Limitacions
+         (Bloquejos  "hombro")
+         (GrauLesio  "moderado")
+    )
+
+([Síndrome_Piramidal] of Limitacions
+         (Bloquejos  "gluteus" "pierna")
+         (GrauLesio  "moderado")
+    )
+
+([Bursitis_Rodilla] of Limitacions
+         (Bloquejos  "rodilla")
+         (GrauLesio  "moderado")
+    )
 )
