@@ -85,8 +85,14 @@
     (bind ?valorIMC (/ ?pes (* ?estatura ?estatura)))
     ;;(bind ?presioMax (demanar_int "En mmHg, quina és la teva pressiò sistòlica?" 0 250))
     ;;(bind ?presioMin (demanar_int "En mmHg, quina és la teva pressiò diastòlica?" 0 200))
+    (bind ?horesDesportSetmanals (demanar_int "Quantes hores d'esport fas a la setmana?" 0 40))
+    (if (>= ?horesDesportSetmanals 10) then (bind ?intensitatPersona "moltAlta")
+        else (if (>= ?horesDesportSetmanals 5) then (bind ?intensitatPersona "alta"))
+            else (if (>= ?horesDesportSetmanals 2) then (bind ?intensitatPersona "moderada"))
+                else (if (> ?horesDesportSetmanals 0) then (bind ?intensitatPersona "baixa"))
+                    else (bind ?intensitatPersona "moltBaixa")
+    )
     ;;(bind ?minutsCaminatsDiaris (demanar_int "Aproximadament, quants minuts camines al dia?" 0 500))
-    ;;(bind ?horesDesportSetmanals (demanar_int "Quantes hores d'esport fas a la setmana?" 0 40))
     ;;(bind ?estatNormalEnLaFeina (demanar_opcions "En el teu lloc de treball o estudi com estas noramlment" Dret Segut))
 
     ;; preguntes dieta
@@ -128,7 +134,8 @@
     ;; falta abstraccio de mes coses....
 
     (make-instance Persona of Usuari    (edat $?edatAbs)
-                                        (Imc ?imcAbs))
+                                        (Imc ?imcAbs)
+                                        (IntensitatPersona ?intensitatPersona))
 )
 
 ;; ----------- FUNCIONS DESCARTAR -----------
