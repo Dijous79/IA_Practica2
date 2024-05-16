@@ -2,12 +2,15 @@
 ;;; .\onto.clp
 ;;; Translated by owl2clips
 ;;; Translated to CLIPS from ontology .\onto.ttl
-;;; :Date 16/05/2024 10:41:51
+;;; :Date 16/05/2024 13:35:22
 
 (defclass Exercici
     (is-a USER)
     (role concrete)
     (pattern-match reactive)
+    (slot nomExercici
+        (type STRING)
+        (create-accessor read-write))
     (multislot Que_Treballa
         (type STRING)
         (create-accessor read-write))
@@ -72,3 +75,4 @@
         (type STRING)
         (create-accessor read-write))
 )
+
