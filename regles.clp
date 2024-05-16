@@ -175,8 +175,29 @@
 	(declare (salience 10))
 	=> 
 	(instanciacioPersona)
-	;; (focus DESCARTAR)
+	(focus DESCARTAR)
 )
 
 ;; ---------------------------- MODUL DESCARTAR ----------------------------
 
+(defrule DESCARTAR::canviProcesar
+	(declare (salience -20))
+	=>
+	(focus PROCESAR)
+)
+
+;; ---------------------------- MODUL PROCESAR ----------------------------
+
+(defrule PROCESAR::canviMostrar
+	(declare (salience -20))
+	=>
+	(focus MOSTRAR)
+)
+
+;; ---------------------------- MODUL MOSTRAR ----------------------------
+
+(defrule MOSTRAR::print
+   (declare (salience 10))
+   =>
+	(printout t "ACABAT ACABAT ACABAT ACABAT ACABAT ACABAT ACABAT " crlf)
+)
