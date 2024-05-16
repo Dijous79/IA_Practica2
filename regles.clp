@@ -141,6 +141,14 @@
 
 ;; ----------- FUNCIONS MOSTRAR -----------
 
+;; assigna exercici a exerciciRutina
+(deffunction MOSTRAR::crearExercicisRutina (?exercici ?intensitat ?temps)
+   (make-instance ?exercici of ExercicisRutina
+                  (Que_Treballa (send ?exercici get-Que_Treballa))
+                  (IntensitatExercici ?intensitat)
+                  (TempsDedicat ?temps))
+)
+
 (deffunction MOSTRAR::printExercici (?exercici)
     (printout t "ID del exercici: " (instance-name ?exercici) crlf)
     (printout t "Que_Treballa: " (send ?exercici get-Que_Treballa) crlf)
@@ -231,6 +239,9 @@
    =>
    (printout t "Exemple print de Exercici: " crlf)
    (printExercici [PressDeBanca])
+
+   ;; crea instancia ExerciciRutina i asigna valors
+   (crearExercicisRutina [PressDeBanca] "baixa" "alt")
 
    (printout t crlf)
    (printout t "Programa finalitzat" crlf)
