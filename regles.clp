@@ -84,16 +84,18 @@
     ;;IMC = index de massa corporal pes/estatura^2
     (bind ?valorIMC (/ ?pes (* ?estatura ?estatura)))
     ;;(bind ?presioMax (demanar_int "En mmHg, quina és la teva pressiò sistòlica?" 0 250))
-    ;;(bind ?presioMin (demanar_int "En mmHg, quina és la teva pressiò diastòlica?" 0 200))
+    (bind ?presioMin (demanar_int "En mmHg, quina és la teva pressiò diastòlica?" 0 200))
     (bind ?horesDesportSetmanals (demanar_int "Quantes hores d'esport fas a la setmana?" 0 40))
-    (if (>= ?horesDesportSetmanals 10) then (bind ?intensitatPersona "moltAlta")
-        else (if (>= ?horesDesportSetmanals 5) then (bind ?intensitatPersona "alta"))
-            else (if (>= ?horesDesportSetmanals 2) then (bind ?intensitatPersona "moderada"))
-                else (if (> ?horesDesportSetmanals 0) then (bind ?intensitatPersona "baixa"))
-                    else (bind ?intensitatPersona "moltBaixa")
+
+    (if (>= ?horesDesportSetmanals 10) then (bind ?nivellFisicPersona "moltAlta")
+        else (if (>= ?horesDesportSetmanals 6) then (bind ?nivellFisicPersona "alta")
+            else (if (> ?horesDesportSetmanals 2) then (bind ?nivellFisicPersona "moderada")
+                else (if (> ?horesDesportSetmanals 0) then (bind ?nivellFisicPersona "baixa")
+                    else (bind ?nivellFisicPersona "moltBaixa")
+                ) 
+            )
+        )
     )
-    ;;(bind ?minutsCaminatsDiaris (demanar_int "Aproximadament, quants minuts camines al dia?" 0 500))
-    ;;(bind ?estatNormalEnLaFeina (demanar_opcions "En el teu lloc de treball o estudi com estas noramlment" Dret Segut))
 
     ;; preguntes dieta
     ;;(printout t "Siusplau respon a les següents preguntes sobre la teva dieta" crlf)
@@ -111,11 +113,12 @@
                         Manteniment Posarse_En_Forma Baixar_De_Pes Muscular Flexbilitat Equilibri Enfortir_Esquena))
     (bind ?objectiuMinutsDiaris (demanar_int "Quants minuts vols entrenar al dia?" 0 500))
 
+
     ;; abstraccio de l'edat
     (if (<= ?edat 12) then (bind ?edatAbs "infantil")
         else (if (<= ?edat 18) then (bind ?edatAbs "adolescent")
             else (if (<= ?edat 30) then (bind ?edatAbs "jove")
-                else (if (<= ?edat 50) then (bind ?edatAbs "adult")
+                else (if (<= ?edat 55) then (bind ?edatAbs "adult")
                     else (bind ?edatAbs "major")
                 )
             )
@@ -135,7 +138,7 @@
 
     (make-instance Persona of Usuari    (edat $?edatAbs)
                                         (Imc ?imcAbs)
-                                        (IntensitatPersona ?intensitatPersona))
+                                        (NivellFisic ?nivellFisicPersona))
 )
 
 ;; ----------- FUNCIONS DESCARTAR -----------
@@ -258,10 +261,10 @@
     )
    (printout t "Checkpoint" crlf)
 
-   (bind ?exercicisR-instances (find-all-instances ((?i ExercicisRutina)) TRUE))
-    (foreach ?instance ?exercicisR-instances
-        (printExerciciRutina ?instance)
-    )
+   ;;(bind ?exercicisR-instances (find-all-instances ((?i ExercicisRutina)) TRUE))
+   ;; (foreach ?instance ?exercicisR-instances
+    ;;    (printExerciciRutina ?instance)
+   ;; )
 
 
    (printout t crlf)
