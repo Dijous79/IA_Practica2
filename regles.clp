@@ -104,14 +104,20 @@
 )
 
 ;;funcio no testejada
-(deffunction MAIN::demanar_multiples_respostes (?pregunta $?valores-permesos)
+(deffunction MAIN::demanar_multiples_respostes (?pregunta $?opcions)
     (progn$
-        (?var ?valores-permesos)
+        (?var ?opcions)
         (lowcase ?var)
     )
     (printout t ?pregunta crlf)
-    (printout t "Introdueix l'opcio seguida per la seva gravetat separat amb espais" crlf)
-    
+    (printout t "Introdueix el nom de totes les opcions que vulguis marcar en la mateixa linea separades per espai" crlf)
+    (printout t "Opcions: " crlf)
+    (bind ?i 1)
+    (while (<= ?i (length$ ?opcions)) do
+        (bind ?opcio (nth$ ?i ?opcions))
+        (printout t ?i ". " ?opcio crlf)
+        (bind ?i (+ ?i 1))
+    )
 
     (bind ?res (readline))
     (bind ?res (explode$ ?res)) 
@@ -180,17 +186,85 @@
 	(declare (salience 10))
     ?usuari <- (object(is-a Usuari))
 	=>
+    (printout t "Benvingut a la teva rutina d'exercicis personalitzada!" crlf)
+    (printout t "Per iniciar, ens caldra una mica d'informacio sobre tu." crlf)
     
+
+    (bind ?objectiuMinutsDiaris (demanar_int "Quants minuts al dia vols dedicar a fer exercici?" 0 1440))
+    (send ?usuari put-TempsDisponible ?objectiuMinutsDiaris)
 
 	(bind ?teLimitacions (demanar_boolea "Tens alguna patologia o limitacio?"))
     (if ?teLimitacions then
-        (bind ?limitacions_posibles (create$ Tendinitis_Manguito_Rotador Fascitis_Plantar Hombro_Congelado))
-        ;;(bind ?res (demanar_multiples_respostes "Digues una limitacio i gravetat" ?limitacions_posibles))
-        ;;(bind ?limitacio (nth$ 1 ?res))
-        ;;(bind ?gravetat (nth$ 2 ?res))
-        (bind ?limitacio Hombro_Congelado)
-        (send ?usuari put-Te (create$ ?limitacio))
+        (bind ?instancies (find-all-instances ((?inst Limitacions)) TRUE))
+        (bind ?limitacions_posibles (create$))
+        (foreach ?i ?instancies
+            (bind ?nom (send ?i get-nomLimitacio))
+            (bind ?limitacions_posibles (create$ ?limitacions_posibles ?nom))        
+        )
+        (bind ?res (demanar_multiples_respostes "Digues quines d'entre les seguents opcions:" ?limitacions_posibles))
+        ;(bind ?limitacio Hombro_Congelado)
+        (send ?usuari put-Te ?res)
     )
+
+    ;; preguntes salut
+    ;;(printout t "Siusplau respon a les següents preguntes sobre la teva salut" crlf)
+    ;;(bind ?edat (demanar_int "Quina edat tens?" 0 120))
+    ;;(bind ?estatura (demanar_float "En metres, quant mesures?" 0.0 3.0))
+    ;;(bind ?pes (demanar_float "En quilograms, quant peses?" 30.0 300.0))
+    ;;IMC = index de massa corporal pes/estatura^2
+    ;;(bind ?valorIMC (/ ?pes (* ?estatura ?estatura)))
+    ;;(bind ?presioMax (demanar_int "En mmHg, quina és la teva pressiò sistòlica?" 0 250))
+    ;;(bind ?presioMin (demanar_int "En mmHg, quina és la teva pressiò diastòlica?" 0 200))
+    ;;(bind ?horesDesportSetmanals (demanar_int "Quantes hores d'esport fas a la setmana?" 0 40))
+
+    ;;(if (>= ?horesDesportSetmanals 10) then (bind ?nivellFisicPersona "moltAlta")
+    ;;    else (if (>= ?horesDesportSetmanals 6) then (bind ?nivellFisicPersona "alta")
+    ;;        else (if (> ?horesDesportSetmanals 2) then (bind ?nivellFisicPersona "moderada")
+    ;;            else (if (> ?horesDesportSetmanals 0) then (bind ?nivellFisicPersona "baixa")
+    ;;                else (bind ?nivellFisicPersona "moltBaixa")
+    ;;            ) 
+    ;;        )
+    ;;    )
+    ;;)
+
+    ;; preguntes dieta
+    ;;(printout t "Siusplau respon a les següents preguntes sobre la teva dieta" crlf)
+    ;;(bind ?apatsDiaris (demanar_int "Quants apats fas al dia?" 1 6))
+    ;;(bind ?pica (demanar_opcions "Piques entre hores?" Si No))
+    ;;(bind ?pecesFruita (demanar_opcions "Quantes peçes de fruita menjes al dia?" 0-1 2-3 4+))
+    ;;(bind ?peixSetmanal (demanar_opcions "Quantes vegades menjes peix a la setmana?" 0-1 2-3 4+))
+    ;;(bind ?fregitSetmanal (demanar_opcions "Quantes vegades menjes fregits a la setmana?" 0-1 2-3 4+))
+    ;;(bind ?carnSetmanal (demanar_opcions "Quantes vegades menjes carn a la setmana?" 0-2 3-5 6+))
+    ;;(bind ?sal (demanar_opcions "Com valores el teu consum de sal?" Baix Mig Alt))
+
+    ;; preguntes objectius
+    ;;(printout t "Siusplau respon a les següents preguntes sobre els teus objectius" crlf)
+    ;;(bind ?tipusPrograma (demanar_opcions "Quin tipus de programa vols?" 
+    ;;                    Manteniment Posarse_En_Forma Baixar_De_Pes Muscular Flexbilitat Equilibri Enfortir_Esquena))
+    ;;(bind ?objectiuMinutsDiaris (demanar_int "Quants minuts vols entrenar al dia?" 0 500))
+
+
+    ;; abstraccio de l'edat
+    ;;(if (<= ?edat 12) then (bind ?edatAbs "infantil")
+    ;;    else (if (<= ?edat 18) then (bind ?edatAbs "adolescent")
+    ;;        else (if (<= ?edat 30) then (bind ?edatAbs "jove")
+    ;;            else (if (<= ?edat 55) then (bind ?edatAbs "adult")
+    ;;                else (bind ?edatAbs "major")
+    ;;            )
+    ;;        )
+    ;;    )
+    ;;)
+
+    ;; abstraccio de l'IMC
+    ;;(if (<= ?valorIMC 18.5) then (bind ?imcAbs "baix")
+    ;;    else (if (<= ?valorIMC 24.9) then (bind ?imcAbs "normal")
+    ;;        else (if (<= ?valorIMC 29.9) then (bind ?imcAbs "sobrepes")
+    ;;            else (bind ?imcAbs "obes")
+    ;;        )
+    ;;    )
+    ;;)
+
+
     (assert (abstreure_parts_no_treballables))
 	(focus ABSTREURE)
 )
@@ -210,31 +284,25 @@
     ?usuari <- (object(is-a Usuari))
     =>
     (bind ?limitacions (send ?usuari get-Te))
-
-    (bind ?i 1)
     (bind ?aux (create$))
 
-    (while (<= ?i (length$ ?limitacions)) do
-        (bind ?limitacio_nth (nth$ ?i ?limitacions))
-        (bind ?instancia (find-all-instances ((?inst Limitacions)) (eq ?inst:nomLimitacio ?limitacio_nth)))
-        (foreach ?i ?instancia
-            (bind ?queBloqueja (send ?i get-Bloquejos))
-            (bind ?gravetat (send ?i get-GrauLesio))
-            (if (eq ?gravetat invalid) then
-            (bind ?j 1)
-                (while (<= ?j (length$ ?queBloqueja)) do
-                    (bind ?bloqueig_nth (nth$ ?j ?queBloqueja))
-                    (if(not(member$ ?bloqueig_nth ?*parts_del_cos_no_treballables*))
-                        then(bind ?*parts_del_cos_no_treballables* (create$ ?*parts_del_cos_no_treballables* ?bloqueig_nth))
-                    )
-                    (bind ?j (+ ?j 1))
+    
+    (bind ?instancies (find-all-instances ((?inst Limitacions)) (member$ ?inst:nomLimitacio ?limitacions)))
+    (foreach ?i ?instancies
+        (bind ?queBloqueja (send ?i get-Bloquejos))
+        (bind ?gravetat (send ?i get-GrauLesio))
+        (if (eq ?gravetat invalid) then
+        (bind ?j 1)
+            (while (<= ?j (length$ ?queBloqueja)) do
+                (bind ?bloqueig_nth (nth$ ?j ?queBloqueja))
+                (if(not(member$ ?bloqueig_nth ?*parts_del_cos_no_treballables*))
+                    then(bind ?*parts_del_cos_no_treballables* (create$ ?*parts_del_cos_no_treballables* ?bloqueig_nth))
                 )
+                (bind ?j (+ ?j 1))
             )
         )
-        
-        
-        (bind ?i (+ ?i 1))
-    )    
+    )
+          
     (assert (filtra_patologies))
     (retract ?fet)
     
@@ -297,21 +365,141 @@
 
 (defrule PROCESAR::fer_rutina ""
     ?usuari <- (object(is-a Usuari))
+    ;?fact <- (nombre ?value)
+    ;?minuts <- (objectiuMinutsDiaris ?value)
     =>
+    (bind ?minuts (send ?usuari get-TempsDisponible))
+    (bind ?numeroExercicis (/ ?minuts 10))
+
     (bind ?i 1)
     (bind ?aux (create$))
 
-    (while (and (<= ?i (length$ ?*exercicis*)) (< (length$ ?aux) 3)) do
-        (bind ?exercici_nth (nth$ ?i ?*exercicis*))
-        (bind ?aux (create$ ?aux ?exercici_nth))
+    (printout t crlf "Aqui tens els teus exercicis per la rutina (10 min per exercicis):" crlf)
 
+    (printout t "Dilluns:" crlf crlf)
+    
+    (while (< (length$ ?aux) ?numeroExercicis) do
+        (bind ?num (mod ?i (+ (length$ ?*exercicis*) 1)))
+        (if (eq ?num 0) then
+            (bind ?num 1)
+            (bind ?i (+ ?i 1))
+        )
+        (bind ?exercici_nth (nth$ ?num ?*exercicis*))
+        (bind ?aux (create$ ?aux ?exercici_nth))
+        (bind ?i (+ ?i 1))
+        
+    )
+    
+    (printout t (implode$ ?aux) crlf crlf)
+
+   
+    (bind ?aux (create$))
+
+    (printout t "Dimarts:" crlf crlf)
+    
+    (while (< (length$ ?aux) ?numeroExercicis) do
+        (bind ?num (mod ?i (+ (length$ ?*exercicis*) 1)))
+        (if (eq ?num 0) then
+            (bind ?num 1)
+            (bind ?i (+ ?i 1))
+        )
+        (bind ?exercici_nth (nth$ ?num ?*exercicis*))
+        (bind ?aux (create$ ?aux ?exercici_nth))
         (bind ?i (+ ?i 1))
     )
-        
-    (bind ?*exercicis* ?aux)
 
-    (printout t crlf "Exercicis per la rutina:" crlf)
-    (printout t (implode$ ?*exercicis*) crlf crlf)
+    (printout t (implode$ ?aux) crlf crlf)
+
+
+  
+    (bind ?aux (create$))
+
+    (printout t "Dimecres:" crlf crlf)
+    
+    (while (< (length$ ?aux) ?numeroExercicis) do
+        (bind ?num (mod ?i (+ (length$ ?*exercicis*) 1)))
+        (if (eq ?num 0) then
+            (bind ?num 1)
+            (bind ?i (+ ?i 1))
+        )
+        (bind ?exercici_nth (nth$ ?num ?*exercicis*))
+        (bind ?aux (create$ ?aux ?exercici_nth))
+        (bind ?i (+ ?i 1))
+    )
+
+    (printout t (implode$ ?aux) crlf crlf)
+
+   
+    (bind ?aux (create$))
+
+    (printout t "Dijous:" crlf crlf)
+    
+    (while (< (length$ ?aux) ?numeroExercicis) do
+        (bind ?num (mod ?i (+ (length$ ?*exercicis*) 1)))
+        (if (eq ?num 0) then
+            (bind ?num 1)
+            (bind ?i (+ ?i 1))
+        )
+        (bind ?exercici_nth (nth$ ?num ?*exercicis*))
+        (bind ?aux (create$ ?aux ?exercici_nth))
+        (bind ?i (+ ?i 1))
+    )
+
+    (printout t (implode$ ?aux) crlf crlf)
+
+   
+    (bind ?aux (create$))
+
+    (printout t "Divendres:" crlf crlf)
+    
+    (while (< (length$ ?aux) ?numeroExercicis) do
+        (bind ?num (mod ?i (+ (length$ ?*exercicis*) 1)))
+        (if (eq ?num 0) then
+            (bind ?num 1)
+            (bind ?i (+ ?i 1))
+        )
+        (bind ?exercici_nth (nth$ ?num ?*exercicis*))
+        (bind ?aux (create$ ?aux ?exercici_nth))
+        (bind ?i (+ ?i 1))
+    )
+
+    (printout t (implode$ ?aux) crlf crlf)
+
+    
+    (bind ?aux (create$))
+
+    (printout t "Dissabte:" crlf crlf)
+    
+    (while (< (length$ ?aux) ?numeroExercicis) do
+        (bind ?num (mod ?i (+ (length$ ?*exercicis*) 1)))
+        (if (eq ?num 0) then
+            (bind ?num 1)
+            (bind ?i (+ ?i 1))
+        )
+        (bind ?exercici_nth (nth$ ?num ?*exercicis*))
+        (bind ?aux (create$ ?aux ?exercici_nth))
+        (bind ?i (+ ?i 1))
+    )
+
+    (printout t (implode$ ?aux) crlf crlf)
+
+    
+    (bind ?aux (create$))
+
+    (printout t "Diumenge:" crlf crlf)
+    
+    (while (< (length$ ?aux) ?numeroExercicis) do
+        (bind ?num (mod ?i (+ (length$ ?*exercicis*) 1)))
+        (if (eq ?num 0) then
+            (bind ?num 1)
+            (bind ?i (+ ?i 1))
+        )
+        (bind ?exercici_nth (nth$ ?num ?*exercicis*))
+        (bind ?aux (create$ ?aux ?exercici_nth))
+        (bind ?i (+ ?i 1))
+    )
+
+    (printout t (implode$ ?aux) crlf crlf)
 
 
     (printout t "Programa finalitzat" crlf)

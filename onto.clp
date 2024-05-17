@@ -72,7 +72,7 @@
         (type STRING)
         (create-accessor read-write))
     (slot TempsDisponible
-        (type STRING)
+        (type INTEGER)
         (create-accessor read-write))
     (slot edat
         (type STRING)

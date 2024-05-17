@@ -110,7 +110,7 @@
     )
     (printout t ?pregunta crlf)
     (printout t "Introdueix l'opcio seguida per la seva gravetat separat amb espais" crlf)
-    ;;(printout t "Introdueix totes les opcions que vulguis marcar en la mateixa linea separades per espai")
+    (printout t "Introdueix totes les opcions que vulguis marcar en la mateixa linea separades per espai")
     ;;(printout t "Introduce en la misma línea y separados por espacio, alguno de los siguientes:" crlf (implode$ ?valores-permitidos) crlf)
 
     (bind ?res (readline))

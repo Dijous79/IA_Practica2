@@ -1,35 +1,35 @@
 (definstances instances
-  ([FlexionsDeBrasos] of Exercici
+  ([Flexions_De_Bracos] of Exercici
            (nomExercici  FlexionsDeBrasos )
-           (Que_Treballa   biceps   triceps   espatllaFrontal   deltoides   pectoral   estabilitzador )
+           (Que_Treballa   colzes biceps   triceps   espatllaFrontal   deltoides   pectoral   estabilitzador )
       )
 
   ([Dominades] of Exercici
            (nomExercici  Dominades )
-           (Que_Treballa   dorsals   biceps   trapesis   estabilitzador )
+           (Que_Treballa   dorsals   biceps   trapesis   estabilitzador hombro)
       )
 
-  ([ElevacionsLateralsAmbPes] of Exercici
+  ([Elevacions_Laterals_Amb_Pes] of Exercici
            (nomExercici  ElevacionsLateralsAmbPes )
            (Que_Treballa   deltoides   trapesis )
       )
 
-  ([FlexionsDeBícepsAmbPes] of Exercici
-           (nomExercici  FlexionsDeBícepsAmbPes )
-           (Que_Treballa   biceps )
+  ([Flexions_De_Biceps_Amb_Pes] of Exercici
+           (nomExercici  FlexionsDeBicepsAmbPes )
+           (Que_Treballa   biceps colzes )
       )
 
-  ([PressDeBanca] of Exercici
+  ([Press_De_Banca] of Exercici
            (nomExercici  PressDeBanca )
            (Que_Treballa   deltoides   pectoral   triceps   trapesis   estabilitzador )
       )
 
-  ([PressMilitar] of Exercici
+  ([Press_Militar] of Exercici
            (nomExercici  PressMilitar )
            (Que_Treballa   deltoides   triceps   trapesis )
       )
 
-  ([HipThrusts] of Exercici
+  ([Hip_Thrusts] of Exercici
            (nomExercici  HipThrusts )
            (Que_Treballa   glutis   quadriceps   isquiotibials )
       )
@@ -41,7 +41,7 @@
 
   ([Planchas] of Exercici
            (nomExercici  Planchas )
-           (Que_Treballa   abdominals   lumbars   trapesis   estabilitzador )
+           (Que_Treballa   colzes abdominals   lumbars   trapesis   estabilitzador )
       )
 
   ([Deadlifts] of Exercici
@@ -56,15 +56,15 @@
 
   ([Burpees] of Exercici
            (nomExercici  Burpees )
-           (Que_Treballa   deltoides   pectoral   triceps   quadriceps   isquiotibials   glutis   estabilitzador )
+           (Que_Treballa   colzes deltoides   pectoral   triceps   quadriceps   isquiotibials   glutis   estabilitzador )
       )
 
-  ([MountainClimbers] of Exercici
+  ([Mountain_Climbers] of Exercici
            (nomExercici  MountainClimbers )
            (Que_Treballa   abdominals   quadriceps   deltoides   glutis   isquiotibials   estabilitzador )
       )
 
-  ([Correr] of Exercici
+  ([Correr_En_Maquina] of Exercici
            (nomExercici  Correr )
            (Que_Treballa   cardio   quadriceps   isquiotibials   glutis   cadera   genolls   tormells   peus   cervicals )
       )
@@ -76,56 +76,56 @@
 
 ;; ------------------Limitacions------------------------------------
 
-([Tendinitis_Manguito_Rotador] of Limitacions
-         (nomLimitacio Tendinitis_Manguito_Rotador )
-         (Bloquejos  deltoides hombro )
+([Dolor_esquena] of Limitacions
+         (nomLimitacio Dolor_esquena )
+         (Bloquejos  pectoral dorsals trapesis espatllaFrontal espatllaPosterior )
          (GrauLesio   invalid )
     )
 
-([Fascitis_Plantar] of Limitacions
-          (nomLimitacio  Fascitis_Plantar )
-         (Bloquejos   peus )
+([Dolor_biceps] of Limitacions
+          (nomLimitacio  Dolor_biceps )
+         (Bloquejos   biceps )
          (GrauLesio   invalid )
     )
 
-([Espasmo_Muscular_Cervical] of Limitacions
-          (nomLimitacio  Espasmo_Muscular_Cervical )
-         (Bloquejos   cervicals )
+([Dolor_cervicals] of Limitacions
+          (nomLimitacio  Dolor_cervicals )
+         (Bloquejos   trapesis espatllaFrontal espatllaPosterior cervicals )
          (GrauLesio   invalid )
     )
 
-([Síndrome_Túnel_Carpiano] of Limitacions
-         (nomLimitacio  Síndrome_Túnel_Carpiano )
+([Sindrome_tunel_carpia] of Limitacions
+         (nomLimitacio  Sindrome_tunel_carpia )
          (Bloquejos   canells )
          (GrauLesio   invalid )
     )
 
-([Tendinitis_Codo] of Limitacions
-           (nomLimitacio  Tendinitis_Codo )
+([Tendinitis] of Limitacions
+           (nomLimitacio  Tendinitis)
          (Bloquejos   colzes )
          (GrauLesio   invalid )
     )
 
 ([Contractura_Muscular_Lumbar] of Limitacions
-           (nomLimitacio  Contractura_Muscular_Lumbar )
-         (Bloquejos   lumbars )
-         (GrauLesio   invalid )
+          (nomLimitacio  Contractura_Muscular_Lumbar )
+          (Bloquejos   lumbars )
+          (GrauLesio   invalid )
     )
 
-([Espolón_Calcáneo] of Limitacions
-               (nomLimitacio  Espolón_Calcáneo )
+([Espero_calcani] of Limitacions
+          (nomLimitacio  Espero_calcani )
          (Bloquejos   peus )
          (GrauLesio   invalid )
     )
 
-([Ciática] of Limitacions
-           (nomLimitacio  Ciática )
+([Ciatica] of Limitacions
+          (nomLimitacio  Ciatica )
          (Bloquejos   lumbars   glutis   isquiotibials   genolls   peus )
          (GrauLesio   invalid )
     )
 
-([Esguince_Tobillo] of Limitacions
-               (nomLimitacio  Esguince_Tobillo )
+([Esquinc_tormell] of Limitacions
+         (nomLimitacio  Esquinc_tormell )
          (Bloquejos   tormells )
          (GrauLesio   invalid )
     )
@@ -136,14 +136,14 @@
          (GrauLesio   invalid )
     )
 
-([Síndrome_Piramidal] of Limitacions
-         (nomLimitacio  Síndrome_Piramidal )
+([Sindrome_Piramidal] of Limitacions
+         (nomLimitacio  Sindrome_Piramidal )
          (Bloquejos   glutis   peus )
          (GrauLesio   invalid )
     )
 
-([Bursitis_Rodilla] of Limitacions
-          (nomLimitacio  Bursitis_Rodilla )
+([Bursitis_genoll] of Limitacions
+         (nomLimitacio  Bursitis_Rodilla )
          (Bloquejos   genolls )
          (GrauLesio   invalid )
     )
@@ -151,14 +151,14 @@
 ;; ------------------Objectius------------------------------------
 
 ([Millorar_la_força_del_tren_superior] of Objectiu
-(Que_Busca_Treballar  biceps   triceps   espatlla_frontal   espatlla_posterior   trapesis   dorsals   pectoral )
+(Que_Busca_Treballar  biceps   triceps   espatllaFrontal   espatllaPosterior   trapesis   dorsals   pectoral )
 )
 
 ([Tonificar_els_abdominals] of Objectiu
 (Que_Busca_Treballar  abdominals   lumbars   estabilitzador )
 )
 
-([Desenvolupar_la_força_de_les_cames] of Objectiu
+([Desenvolupar_cames] of Objectiu
 (Que_Busca_Treballar  quadriceps   isquiotibials   glutis )
 )
 
@@ -166,19 +166,19 @@
 (Que_Busca_Treballar  cervicals   cadera   genolls   tormells   quadriceps   isquiotibials   glutis )
 )
 
-([Augmentar_la_resistència_cardiovascular] of Objectiu
+([Augmentar_la_resistencia_cardiovascular] of Objectiu
 (Que_Busca_Treballar  cardio )
 )
 
-([Millorar_la_coordinació_i_l'equilibri] of Objectiu
+([Millorar_la_coordinacio_i_l'equilibri] of Objectiu
 (Que_Busca_Treballar  cervicals   tormells   quadriceps   isquiotibials   estabilitzador )
 )
 
-([Reduir_la_tensió_i_millorar_la_postura_de_l'esquena] of Objectiu
-(Que_Busca_Treballar  dorsals   lumbars   trapesis   espatlla_posterior )
+([Reduir_la_tensio_i_millorar_la_postura_de_l'esquena] of Objectiu
+(Que_Busca_Treballar  dorsals   lumbars   trapesis   espatllaPosterior )
 )
 
 ([Millorar_postura_coordinacio] of Objectiu
-         (Que_Busca_Treballar   trapesis   espatlla_frontal   espatlla_posterior )
+         (Que_Busca_Treballar   trapesis   espatllaFrontal   espatllaPosterior )
     )
 )
