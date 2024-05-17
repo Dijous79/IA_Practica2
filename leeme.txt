@@ -1,0 +1,49 @@
+Per aquesta primera entrega hem aconseguit generar un codi que tot i tenir funcionalitats molt bàsigques està
+programat mirant de que sigui relativament senzill a partir d'ara ampliar-ho per encabre tot el que ens demana
+l'enunciat.
+
+Demoment hem aconseguit filtrar els exercicis seguin un seguit de lesions/patologies que li pots dir al programa
+que tens i aquest descartara de la rutina final els exercicis incompatibles amb els musculs o articulacions afectats
+per aquesta lesio/patologia.
+
+Després, un cop te els exercicis que es poden fer per la rutina, els llista per dies donant exercicis de 10 minuts
+en funció dels minuts que s'hagin dit que es vol entrenar al dia.
+
+Un exemple de Input podria ser:
+
+40
+Si
+Esquinc_tormell Contractura_Muscular_Lumbar
+
+Output esperat:
+
+Aqui tens els teus exercicis per la rutina (10 min per exercicis):
+Dilluns:
+
+[Flexions_De_Bracos] [Dominades] [Elevacions_Laterals_Amb_Pes] [Flexions_De_Biceps_Amb_Pes]
+
+Dimarts:
+
+[Press_De_Banca] [Press_Militar] [Hip_Thrusts] [Squats]
+
+Dimecres:
+
+[Planchas] [Deadlifts] [Lunges] [Burpees]
+
+Dijous:
+
+[Mountain_Climbers] [Correr_En_Maquina] [Nadar] [Flexions_De_Bracos]
+
+Divendres:
+
+[Dominades] [Elevacions_Laterals_Amb_Pes] [Flexions_De_Biceps_Amb_Pes] [Press_De_Banca]
+
+Dissabte:
+
+[Press_Militar] [Hip_Thrusts] [Squats] [Planchas]
+
+Diumenge:
+
+[Deadlifts] [Lunges] [Burpees] [Mountain_Climbers]
+
+Programa finalitzat

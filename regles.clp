@@ -190,7 +190,7 @@
     (printout t "Per iniciar, ens caldra una mica d'informacio sobre tu." crlf)
     
 
-    (bind ?objectiuMinutsDiaris (demanar_int "Quants minuts al dia vols dedicar a fer exercici?" 0 1440))
+    (bind ?objectiuMinutsDiaris (demanar_int "Quants minuts al dia vols dedicar a fer exercici? (Indica un multiple de 10)" 0 1440))
     (send ?usuari put-TempsDisponible ?objectiuMinutsDiaris)
 
 	(bind ?teLimitacions (demanar_boolea "Tens alguna patologia o limitacio?"))
