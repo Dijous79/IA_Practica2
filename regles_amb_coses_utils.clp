@@ -30,6 +30,11 @@
     (export ?ALL)
 )
 
+;; Mostra la rutina d'exercicis
+;;(defmodule MOSTRAR
+;;    (import MAIN ?ALL)
+;;    (export ?ALL)
+;;)
 
 ;; ---------------------------- FUNCIONS ----------------------------
 
@@ -105,18 +110,103 @@
     )
     (printout t ?pregunta crlf)
     (printout t "Introdueix l'opcio seguida per la seva gravetat separat amb espais" crlf)
-    
+    ;;(printout t "Introdueix totes les opcions que vulguis marcar en la mateixa linea separades per espai")
+    ;;(printout t "Introduce en la misma línea y separados por espacio, alguno de los siguientes:" crlf (implode$ ?valores-permitidos) crlf)
 
     (bind ?res (readline))
-    (bind ?res (explode$ ?res)) 
+    (bind ?res (explode$ ?res)) ;entenc que aixo separa la resposta pels espais
     
-   
+    ;;(bind ?existeValorInvalido FALSE)
+    ;;(progn$ (?valor ?res)
+    ;;    (if (not (member$ (lowcase ?valor) ?valores-permesos))
+    ;;    then (bind ?existeValorInvalido TRUE)
+    ;;    )
+    ;;)
+    ;;(while ?existeValorInvalido do
+    ;;    (bind ?existeValorInvalido FALSE)
+    ;;    (printout t "Existe algún valor inválido, vuelve a intentarlo." crlf)
+    ;;    (bind ?respuesta (readline))
+    ;;    (bind ?res (explode$ ?respuesta))
+    ;;    (progn$ (?valor ?res)
+    ;;        (if (not (member$ (lowcase ?valor) ?valores-permitidos))
+    ;;        then (bind ?existeValorInvalido TRUE)
+    ;;        )
+    ;;    )
+    ;;)
     (printout t crlf)
     ?res
 )
 
 ;; ----------- FUNCIONS RECOLLIR -----------
 
+(deffunction RECOLLIR::instanciacioPersona()
+    ;; preguntes salut
+    ;;(printout t "Siusplau respon a les següents preguntes sobre la teva salut" crlf)
+    ;;(bind ?edat (demanar_int "Quina edat tens?" 0 120))
+    ;;(bind ?estatura (demanar_float "En metres, quant mesures?" 0.0 3.0))
+    ;;(bind ?pes (demanar_float "En quilograms, quant peses?" 30.0 300.0))
+    ;;IMC = index de massa corporal pes/estatura^2
+    ;;(bind ?valorIMC (/ ?pes (* ?estatura ?estatura)))
+    ;;(bind ?presioMax (demanar_int "En mmHg, quina és la teva pressiò sistòlica?" 0 250))
+    ;;(bind ?presioMin (demanar_int "En mmHg, quina és la teva pressiò diastòlica?" 0 200))
+    ;;(bind ?horesDesportSetmanals (demanar_int "Quantes hores d'esport fas a la setmana?" 0 40))
+
+    ;;(if (>= ?horesDesportSetmanals 10) then (bind ?nivellFisicPersona "moltAlta")
+    ;;    else (if (>= ?horesDesportSetmanals 6) then (bind ?nivellFisicPersona "alta")
+    ;;        else (if (> ?horesDesportSetmanals 2) then (bind ?nivellFisicPersona "moderada")
+    ;;            else (if (> ?horesDesportSetmanals 0) then (bind ?nivellFisicPersona "baixa")
+    ;;                else (bind ?nivellFisicPersona "moltBaixa")
+    ;;            ) 
+    ;;        )
+    ;;    )
+    ;;)
+
+    ;; preguntes dieta
+    ;;(printout t "Siusplau respon a les següents preguntes sobre la teva dieta" crlf)
+    ;;(bind ?apatsDiaris (demanar_int "Quants apats fas al dia?" 1 6))
+    ;;(bind ?pica (demanar_opcions "Piques entre hores?" Si No))
+    ;;(bind ?pecesFruita (demanar_opcions "Quantes peçes de fruita menjes al dia?" 0-1 2-3 4+))
+    ;;(bind ?peixSetmanal (demanar_opcions "Quantes vegades menjes peix a la setmana?" 0-1 2-3 4+))
+    ;;(bind ?fregitSetmanal (demanar_opcions "Quantes vegades menjes fregits a la setmana?" 0-1 2-3 4+))
+    ;;(bind ?carnSetmanal (demanar_opcions "Quantes vegades menjes carn a la setmana?" 0-2 3-5 6+))
+    ;;(bind ?sal (demanar_opcions "Com valores el teu consum de sal?" Baix Mig Alt))
+
+    ;; preguntes objectius
+    ;;(printout t "Siusplau respon a les següents preguntes sobre els teus objectius" crlf)
+    ;;(bind ?tipusPrograma (demanar_opcions "Quin tipus de programa vols?" 
+    ;;                    Manteniment Posarse_En_Forma Baixar_De_Pes Muscular Flexbilitat Equilibri Enfortir_Esquena))
+    ;;(bind ?objectiuMinutsDiaris (demanar_int "Quants minuts vols entrenar al dia?" 0 500))
+
+
+    ;; abstraccio de l'edat
+    ;;(if (<= ?edat 12) then (bind ?edatAbs "infantil")
+    ;;    else (if (<= ?edat 18) then (bind ?edatAbs "adolescent")
+    ;;        else (if (<= ?edat 30) then (bind ?edatAbs "jove")
+    ;;            else (if (<= ?edat 55) then (bind ?edatAbs "adult")
+    ;;                else (bind ?edatAbs "major")
+    ;;            )
+    ;;        )
+    ;;    )
+    ;;)
+
+    ;; abstraccio de l'IMC
+    ;;(if (<= ?valorIMC 18.5) then (bind ?imcAbs "baix")
+    ;;    else (if (<= ?valorIMC 24.9) then (bind ?imcAbs "normal")
+    ;;        else (if (<= ?valorIMC 29.9) then (bind ?imcAbs "sobrepes")
+    ;;            else (bind ?imcAbs "obes")
+    ;;        )
+    ;;    )
+    ;;)
+
+    ;; falta abstraccio de mes coses....
+
+    
+
+    (make-instance Persona of Usuari    ;;(edat $?edatAbs)
+                                        ;;(Imc ?imcAbs)
+                                        ;;(NivellFisic ?nivellFisicPersona)
+                                        )
+)
 
 ;; ----------- FUNCIONS DESCARTAR -----------
 
@@ -128,7 +218,26 @@
 
 ;; ----------- FUNCIONS MOSTRAR -----------
 
+;; assigna exercici a exerciciRutina
+;;(deffunction MOSTRAR::crearExercicisRutina (?exercici ?intensitat ?temps)
+;;   (make-instance (gensym) of ExercicisRutina
+;;                  (nomExercici (send ?exercici get-nomExercici))
+;;                  (Que_Treballa (send ?exercici get-Que_Treballa))
+;;                  (IntensitatExercici ?intensitat)
+;;                  (TempsDedicat ?temps))
+;;)
 
+;;(deffunction MOSTRAR::printExercici (?exercici)
+;;    (printout t "ID del exercici: " (send ?exercici get-nomExercici) crlf)
+;;    (printout t "Que_Treballa: " (send ?exercici get-Que_Treballa) crlf)
+;;)
+
+;;(deffunction MOSTRAR::printExerciciRutina (?exercici)
+;;    (printout t "ID del exercici: " (instance-name ?exercici) crlf)
+;;    (printout t "Que Treballa: " (send ?exercici get-Que_Treballa) crlf)
+;;    (printout t "Intensitat: "(send ?exercici get-IntensitatExercici) crlf)
+;;    (printout t "Temps Dedicat: "(send ?exercici get-TempsDedicat) crlf)
+;;)
 
 ;; ---------------------------- MODUL MAIN ----------------------------
 
@@ -162,7 +271,7 @@
 	(printout t "#        #    #    #    #    #    #    #    #   " crlf) 
 	(printout t "#         ####     #    #    #    #     ####    " crlf crlf crlf)
 
-   (system "timeout /t 1 /nobreak")
+   (system "timeout /t 1aa /nobreak")
    (printout t crlf)
    
    (focus RECOLLIR)
@@ -177,27 +286,16 @@
 	(bind ?teLimitacions (demanar_boolea "Tens alguna patologia o limitacio?"))
     (if ?teLimitacions then
         (bind ?limitacions_posibles (create$ Tendinitis_Manguito_Rotador Fascitis_Plantar Hombro_Congelado))
-        ;;(bind ?res (demanar_multiples_respostes "Digues una limitacio i gravetat" ?limitacions_posibles))
-        ;;(bind ?limitacio (nth$ 1 ?res))
-        ;;(bind ?gravetat (nth$ 2 ?res))
-        (bind ?limitacio Hombro_Congelado)
-        (modify ?usuari (Te (create$ ?limitacio)))
+        (bind ?res (demanar_multiples_respostes "Digues una limitacio i gravetat" ?limitacions_posibles))
+        (bind ?limitacio (nth$ 1 ?res))
+        (bind ?gravetat (nth$ 2 ?res))
+        (assert (Te (create$ ?limitacio)))
     )
-    (assert (abstreure_parts_no_treballables))
 	(focus ABSTREURE)
 )
 
 ;; ---------------------------- MODUL ABSTREURE ----------------------------
-
-(defrule ABSTREURE::inicializar ""
-    (declare (salience 10))
-    ?usuari <- (object(is-a Usuari))
-    =>
-    (bind ?*exercicis* (find-all-instances ((?inst Exercici)) TRUE))
-    (bind ?*copia_exercicis* ?*exercicis*)
-)
-
-(defrule ABSTREURE::abstraccio_parts_no_treballables ""
+(defrule RECOLLIR::abstraccio_parts_no_treballables ""
     ?fet <- (abstreure_parts_no_treballables)
     ?usuari <- (object(is-a Usuari))
     =>
@@ -281,6 +379,13 @@
 
 ;; ---------------------------- MODUL PROCESAR ----------------------------
 
+;; mirar del jeremy com fa el apartat de "sintesis::"
+
+;;(defrule PROCESAR::canviMostrar
+;;	(declare (salience -20))
+;;	=>
+;;	(focus MOSTRAR)
+;;)
 
 (defrule PROCESAR::fer_rutina ""
     ?usuari <- (object(is-a Usuari))
@@ -299,7 +404,37 @@
 
     (printout t crlf "Exercicis per la rutina:" crlf)
     (printout t (implode$ ?*exercicis*) crlf crlf)
+    ;;(bind ?k 1)
 
+    ;; Imprimimos la informacion de cada libro recomendado
+    ;;(while (<= ?k (length$ ?*libros*)) do
+    ;;    (bind ?libro_nth (nth$ ?k ?*libros*))
+    ;;    (imprimir_libro ?libro_nth)
+    ;;    (bind ?k (+ ?k 1))
+    ;;)
 
     (printout t "Programa finalitzat" crlf)
 )
+
+;; ---------------------------- MODUL MOSTRAR ----------------------------
+
+;; mirar del jeremy com fa el apartat de "output::"
+
+;;(defrule MOSTRAR::print
+;;   (declare (salience 10))
+;;   =>
+;;   (bind ?exercici-instances (find-all-instances ((?i Exercici)) TRUE))
+;;    (foreach ?instance ?exercici-instances
+;;        (printout t "Checkpoint" crlf)
+;;    )
+;;   
+;;
+;;   (bind ?exercicisR-instances (find-all-instances ((?i ExercicisRutina)) TRUE))
+;;    (foreach ?instance ?exercicisR-instances
+;;        (printExerciciRutina ?instance)
+;;    )
+;;
+;;
+;;   (printout t crlf)
+;;   (printout t "Programa finalitzat" crlf)
+;;)
