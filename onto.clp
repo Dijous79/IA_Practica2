@@ -32,6 +32,9 @@
     (is-a USER)
     (role concrete)
     (pattern-match reactive)
+    (slot nomLimitacio
+        (type STRING)
+        (create-accessor read-write))
     (multislot Bloquejos
         (type STRING)
         (create-accessor read-write))
@@ -54,10 +57,10 @@
     (role concrete)
     (pattern-match reactive)
     (multislot Duu_a_Terme
-        (type INSTANCE)
+        (type STRING)
         (create-accessor read-write))
     (multislot Te
-        (type INSTANCE)
+        (type STRING)
         (create-accessor read-write))
     (slot Imc
         (type STRING)

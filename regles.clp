@@ -15,18 +15,24 @@
 
 (defmodule ABSTREURE
     (import MAIN ?ALL)
+    (import RECOLLIR ?ALL)
     (export ?ALL)
 )
 
 ;; Módul per limitar exercicis per les limitacions
 (defmodule LIMITAR
     (import MAIN ?ALL)
+    (import RECOLLIR ?ALL)
+    (import ABSTREURE ?ALL)
     (export ?ALL)
 )
 
 ;; Genera la rutina d'exercicis
 (defmodule PROCESAR
     (import MAIN ?ALL)
+    (import RECOLLIR ?ALL)
+    (import ABSTREURE ?ALL)
+    (import LIMITAR ?ALL)
     (export ?ALL)
 )
 
@@ -173,7 +179,9 @@
 (defrule RECOLLIR::creacioPersona
 	(declare (salience 10))
     ?usuari <- (object(is-a Usuari))
-	=> 
+	=>
+    
+
 	(bind ?teLimitacions (demanar_boolea "Tens alguna patologia o limitacio?"))
     (if ?teLimitacions then
         (bind ?limitacions_posibles (create$ Tendinitis_Manguito_Rotador Fascitis_Plantar Hombro_Congelado))
@@ -181,7 +189,7 @@
         ;;(bind ?limitacio (nth$ 1 ?res))
         ;;(bind ?gravetat (nth$ 2 ?res))
         (bind ?limitacio Hombro_Congelado)
-        (modify ?usuari (Te (create$ ?limitacio)))
+        (send ?usuari put-Te (create$ ?limitacio))
     )
     (assert (abstreure_parts_no_treballables))
 	(focus ABSTREURE)
@@ -208,20 +216,25 @@
 
     (while (<= ?i (length$ ?limitacions)) do
         (bind ?limitacio_nth (nth$ ?i ?limitacions))
-        (bind ?queBloqueja (send ?limitacio_nth get-Bloquejos))
-        (bind ?gravetat (send ?limitacio_nth get-GrauLesio))
-        (if (eq ?gravetat "invalid") then
+        (bind ?instancia (find-all-instances ((?inst Limitacions)) (eq ?inst:nomLimitacio ?limitacio_nth)))
+        (foreach ?i ?instancia
+            (bind ?queBloqueja (send ?i get-Bloquejos))
+            (bind ?gravetat (send ?i get-GrauLesio))
+            (if (eq ?gravetat invalid) then
             (bind ?j 1)
-            (while (<= ?j (length$ ?queBloqueja)) do
-                (bind ?bloqueig_nth (nth$ ?j ?queBloqueja))
-                (if(not(member$ ?bloqueig_nth ?*parts_del_cos_no_treballables*))
-                    then(bind ?*parts_del_cos_no_treballables* (create$ ?*parts_del_cos_no_treballables* ?bloqueig_nth))
+                (while (<= ?j (length$ ?queBloqueja)) do
+                    (bind ?bloqueig_nth (nth$ ?j ?queBloqueja))
+                    (if(not(member$ ?bloqueig_nth ?*parts_del_cos_no_treballables*))
+                        then(bind ?*parts_del_cos_no_treballables* (create$ ?*parts_del_cos_no_treballables* ?bloqueig_nth))
+                    )
+                    (bind ?j (+ ?j 1))
                 )
-                (bind ?j (+ ?j 1))
             )
         )
+        
+        
         (bind ?i (+ ?i 1))
-    )
+    )    
     (assert (filtra_patologies))
     (retract ?fet)
     
@@ -244,11 +257,11 @@
     (bind ?trobat FALSE)
     (foreach ?element ?llista1
         (if (member$ ?element ?llista2) then
-        (bind ?found TRUE)
+        (bind ?trobat TRUE)
         (break)
         )
     )
-    ?found
+    ?trobat
 )
 
 (defrule LIMITAR::exercicis_sobre_lesio_grau_alt ""
