@@ -47,6 +47,9 @@
     (is-a USER)
     (role concrete)
     (pattern-match reactive)
+    (slot nomObjectiu
+        (type STRING)
+        (create-accessor read-write))
     (multislot Que_Busca_Treballar
         (type STRING)
         (create-accessor read-write))
@@ -59,9 +62,12 @@
     (multislot Duu_a_Terme
         (type STRING)
         (create-accessor read-write))
-    (multislot Te
+    (multislot TeLimitacions
         (type STRING)
         (create-accessor read-write))
+    (multislot TeObjectius
+        (type STRING)
+        (create-accessor read-write))    
     (slot Imc
         (type STRING)
         (create-accessor read-write))

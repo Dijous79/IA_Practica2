@@ -3,6 +3,7 @@
 (defglobal ?*exercicis* = (create$ ""))
 (defglobal ?*copia_exercicis* = (create$ ""))
 (defglobal ?*parts_del_cos_no_treballables* = (create$))
+(defglobal ?*parts_del_cos_prioritaries* = (create$))
 
 ;; MODULS
 (defmodule MAIN (export ?ALL))
@@ -203,69 +204,24 @@
         )
         (bind ?res (demanar_multiples_respostes "Digues quines d'entre les seguents opcions:" ?limitacions_posibles))
         ;(bind ?limitacio Hombro_Congelado)
-        (send ?usuari put-Te ?res)
+        (send ?usuari put-TeLimitacions ?res)
+        (assert (abstreure_parts_no_treballables))
     )
 
-    ;; preguntes salut
-    ;;(printout t "Siusplau respon a les següents preguntes sobre la teva salut" crlf)
-    ;;(bind ?edat (demanar_int "Quina edat tens?" 0 120))
-    ;;(bind ?estatura (demanar_float "En metres, quant mesures?" 0.0 3.0))
-    ;;(bind ?pes (demanar_float "En quilograms, quant peses?" 30.0 300.0))
-    ;;IMC = index de massa corporal pes/estatura^2
-    ;;(bind ?valorIMC (/ ?pes (* ?estatura ?estatura)))
-    ;;(bind ?presioMax (demanar_int "En mmHg, quina és la teva pressiò sistòlica?" 0 250))
-    ;;(bind ?presioMin (demanar_int "En mmHg, quina és la teva pressiò diastòlica?" 0 200))
-    ;;(bind ?horesDesportSetmanals (demanar_int "Quantes hores d'esport fas a la setmana?" 0 40))
+    (printout t "Inidcans els teus objectius" crlf)
+    (bind ?instancies (find-all-instances ((?inst Objectiu)) TRUE))
+    (bind ?objectius_posibles (create$))
+    (foreach ?i ?instancies
+        (bind ?nom (send ?i get-nomObjectiu))
+        (bind ?objectius_posibles (create$ ?objectius_posibles ?nom))        
+    )
+    (bind ?res (demanar_multiples_respostes "Digues quines d'entre les seguents opcions:" ?objectius_posibles))
+    
+    (send ?usuari put-TeObjectius ?res)
+    (assert (abstreure_parts_es_volen_treballar))
+    
 
-    ;;(if (>= ?horesDesportSetmanals 10) then (bind ?nivellFisicPersona "moltAlta")
-    ;;    else (if (>= ?horesDesportSetmanals 6) then (bind ?nivellFisicPersona "alta")
-    ;;        else (if (> ?horesDesportSetmanals 2) then (bind ?nivellFisicPersona "moderada")
-    ;;            else (if (> ?horesDesportSetmanals 0) then (bind ?nivellFisicPersona "baixa")
-    ;;                else (bind ?nivellFisicPersona "moltBaixa")
-    ;;            ) 
-    ;;        )
-    ;;    )
-    ;;)
-
-    ;; preguntes dieta
-    ;;(printout t "Siusplau respon a les següents preguntes sobre la teva dieta" crlf)
-    ;;(bind ?apatsDiaris (demanar_int "Quants apats fas al dia?" 1 6))
-    ;;(bind ?pica (demanar_opcions "Piques entre hores?" Si No))
-    ;;(bind ?pecesFruita (demanar_opcions "Quantes peçes de fruita menjes al dia?" 0-1 2-3 4+))
-    ;;(bind ?peixSetmanal (demanar_opcions "Quantes vegades menjes peix a la setmana?" 0-1 2-3 4+))
-    ;;(bind ?fregitSetmanal (demanar_opcions "Quantes vegades menjes fregits a la setmana?" 0-1 2-3 4+))
-    ;;(bind ?carnSetmanal (demanar_opcions "Quantes vegades menjes carn a la setmana?" 0-2 3-5 6+))
-    ;;(bind ?sal (demanar_opcions "Com valores el teu consum de sal?" Baix Mig Alt))
-
-    ;; preguntes objectius
-    ;;(printout t "Siusplau respon a les següents preguntes sobre els teus objectius" crlf)
-    ;;(bind ?tipusPrograma (demanar_opcions "Quin tipus de programa vols?" 
-    ;;                    Manteniment Posarse_En_Forma Baixar_De_Pes Muscular Flexbilitat Equilibri Enfortir_Esquena))
-    ;;(bind ?objectiuMinutsDiaris (demanar_int "Quants minuts vols entrenar al dia?" 0 500))
-
-
-    ;; abstraccio de l'edat
-    ;;(if (<= ?edat 12) then (bind ?edatAbs "infantil")
-    ;;    else (if (<= ?edat 18) then (bind ?edatAbs "adolescent")
-    ;;        else (if (<= ?edat 30) then (bind ?edatAbs "jove")
-    ;;            else (if (<= ?edat 55) then (bind ?edatAbs "adult")
-    ;;                else (bind ?edatAbs "major")
-    ;;            )
-    ;;        )
-    ;;    )
-    ;;)
-
-    ;; abstraccio de l'IMC
-    ;;(if (<= ?valorIMC 18.5) then (bind ?imcAbs "baix")
-    ;;    else (if (<= ?valorIMC 24.9) then (bind ?imcAbs "normal")
-    ;;        else (if (<= ?valorIMC 29.9) then (bind ?imcAbs "sobrepes")
-    ;;            else (bind ?imcAbs "obes")
-    ;;        )
-    ;;    )
-    ;;)
-
-
-    (assert (abstreure_parts_no_treballables))
+    
 	(focus ABSTREURE)
 )
 
@@ -283,7 +239,7 @@
     ?fet <- (abstreure_parts_no_treballables)
     ?usuari <- (object(is-a Usuari))
     =>
-    (bind ?limitacions (send ?usuari get-Te))
+    (bind ?limitacions (send ?usuari get-TeLimitacions))
     (bind ?aux (create$))
 
     
@@ -306,6 +262,33 @@
     (assert (filtra_patologies))
     (retract ?fet)
     
+)
+
+(defrule abstraccio_parts_es_volen_treballar ""
+    ?fet <- (abstreure_parts_es_volen_treballar)
+    ?usuari <- (object(is-a Usuari))
+    =>
+    (bind ?objectius (send ?usuari get-TeObjectius))
+    (bind ?aux (create$))
+
+    
+    (bind ?instancies (find-all-instances ((?inst Objectiu)) (member$ ?inst:nomObjectiu ?objectius)))
+    (foreach ?i ?instancies
+        (bind ?queBusca (send ?i get-Que_Busca_Treballar))
+        (bind ?j 1)
+        (while (<= ?j (length$ ?queBusca)) do
+            (bind ?busca_nth (nth$ ?j ?queBusca))
+            (if(not(member$ ?busca_nth ?*parts_del_cos_prioritaries*))
+                then(bind ?*parts_del_cos_prioritaries* (create$ ?*parts_del_cos_prioritaries* ?busca_nth))
+            )
+            (bind ?j (+ ?j 1))
+        )
+        
+    )
+          
+    (assert (filtra_prioritats))
+    (retract ?fet)
+
 )
 
 (defrule ABSTREURE::finalizar_abstraccion ""
@@ -353,6 +336,26 @@
     (retract ?fet)
 )
 
+(defrule LIMITAR::exercicis_sobre_objectiu ""
+    ?fet <- (filtra_prioritats)
+    ?usuari <- (object(is-a Usuari))
+    =>
+
+    (bind ?i 1)
+    (bind ?aux (create$))
+
+    (while (<= ?i (length$ ?*exercicis*)) do
+        (bind ?exercici_nth (nth$ ?i ?*exercicis*))
+        (bind ?queTreballa (send ?exercici_nth get-Que_Treballa))
+        (if (tenen_element_en_comu ?*parts_del_cos_prioritaries* ?queTreballa)
+            then (bind ?aux (create$ ?aux ?exercici_nth)))
+        (bind ?i (+ ?i 1))
+    )   
+
+    (bind ?*exercicis* ?aux)
+
+    (retract ?fet)
+)
 
 (defrule LIMITAR::canviProcesar
 	(declare (salience -20))

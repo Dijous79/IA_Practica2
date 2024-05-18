@@ -150,35 +150,43 @@
 
 ;; ------------------Objectius------------------------------------
 
-([Millorar_la_força_del_tren_superior] of Objectiu
+([Millorar_la_forca_del_tren_superior] of Objectiu
+(nomObjectiu  Millorar_la_forca_del_tren_superior )
 (Que_Busca_Treballar  biceps   triceps   espatllaFrontal   espatllaPosterior   trapesis   dorsals   pectoral )
 )
 
 ([Tonificar_els_abdominals] of Objectiu
+(nomObjectiu  Tonificar_els_abdominals )
 (Que_Busca_Treballar  abdominals   lumbars   estabilitzador )
 )
 
 ([Desenvolupar_cames] of Objectiu
+(nomObjectiu  Desenvolupar_cames )
 (Que_Busca_Treballar  quadriceps   isquiotibials   glutis )
 )
 
 ([Millorar_la_flexibilitat_i_la_mobilitat] of Objectiu
+(nomObjectiu  Millorar_la_flexibilitat_i_la_mobilitat )
 (Que_Busca_Treballar  cervicals   cadera   genolls   tormells   quadriceps   isquiotibials   glutis )
 )
 
 ([Augmentar_la_resistencia_cardiovascular] of Objectiu
+(nomObjectiu  Augmentar_la_resistencia_cardiovascular )
 (Que_Busca_Treballar  cardio )
 )
 
 ([Millorar_la_coordinacio_i_l'equilibri] of Objectiu
+(nomObjectiu  Millorar_la_coordinacio_i_l'equilibri )
 (Que_Busca_Treballar  cervicals   tormells   quadriceps   isquiotibials   estabilitzador )
 )
 
 ([Reduir_la_tensio_i_millorar_la_postura_de_l'esquena] of Objectiu
+(nomObjectiu  Reduir_la_tensio_i_millorar_la_postura_de_l'esquena )
 (Que_Busca_Treballar  dorsals   lumbars   trapesis   espatllaPosterior )
 )
 
 ([Millorar_postura_coordinacio] of Objectiu
+(nomObjectiu  Millorar_postura_coordinacio )
          (Que_Busca_Treballar   trapesis   espatllaFrontal   espatllaPosterior )
     )
 )
