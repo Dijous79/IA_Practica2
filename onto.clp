@@ -11,7 +11,7 @@
     (slot nomExercici
         (type STRING)
         (create-accessor read-write))
-    (multislot Que_Treballa
+    (multislot QueTreballa
         (type STRING)
         (create-accessor read-write))
     (multislot Repeticions
@@ -20,6 +20,10 @@
     (multislot TempsDedicat
         (type STRING)
         (create-accessor read-write))
+    (slot Tipus
+        (type STRING)
+        (create-accessor read-write)
+    )
 )
 
 (defclass ExercicisRutina

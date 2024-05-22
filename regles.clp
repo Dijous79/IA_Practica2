@@ -4,9 +4,9 @@
 (defglobal ?*copia_exercicis* = (create$ ""))
 (defglobal ?*parts_del_cos_no_treballables* = (create$))
 (defglobal ?*parts_del_cos_prioritaries* = (create$))
-(defglobal ?*etapa_vital*)
-(defglobal ?*composicio_corporal*)
-(defglobal ?*presioSanguinea*)
+(defglobal ?*etapa_vital* = menor)
+(defglobal ?*composicio_corporal* = infrapes)
+(defglobal ?*presioSanguinea* = normal)
 (defglobal ?*intensitats_acceptables* = (create$ si si si))
 
 ;; MODULS
@@ -195,7 +195,7 @@
     (printout t "Per iniciar, ens caldra una mica d'informacio sobre tu." crlf)
 
     (bind ?edat (demanar_int "Quina edat tens?" 0 120))
-    (send ?usuari put-Edat ?edat)
+    (send ?usuari put-edat ?edat)
 
     (bind ?estatura (demanar_float "En metres, quant mesures?" 0.0 3.0))
     (bind ?pes (demanar_float "En quilograms, quant peses?" 30.0 300.0))
@@ -335,7 +335,8 @@
     (if (and (<= ?presioSanguinea 90) (<= ?presioSanguinea2 60))
         then (bind ?*presioSanguinea* hipotensio)
              (bind ?*parts_del_cos_prioritaries* (create$ cardio))
-             (bind ?*intensitats_acceptables* (replace$ ?*intensitats_acceptables 2 3 no))
+             (bind ?*intensitats_acceptables* (create$ yes yes yes)) ;; Initialize the variable
+             (bind ?*intensitats_acceptables* (replace$ ?*intensitats_acceptables* 2 2 no))
              (assert (problema_tensio))
     else
         (if (and (<= ?presioSanguinea 120) (<= ?presioSanguinea2 80)) then
@@ -343,7 +344,7 @@
         else
             (if (and (<= ?presioSanguinea 129) (<= ?presioSanguinea2 80)) then
                 (bind ?*presioSanguinea* elevada)
-                (bind ?*intensitats_acceptables* (replace$ ?*intensitats_acceptables 3 3 no))
+                (bind ?*intensitats_acceptables* (replace$ ?*intensitats_acceptables* 3 3 no))
             else
                 (if (and (<= ?presioSanguinea 139) (<= ?presioSanguinea2 89)) then
                     (bind ?*presioSanguinea* hipertensio1)
@@ -354,7 +355,7 @@
                         (printout t "Error en la pressio sanguinea, el comportament del programa es pot veure compromes" crlf)
                     )
                 )
-                (bind ?*intensitats_acceptables* (replace$ ?*intensitats_acceptables 2 3 no))
+                (bind ?*intensitats_acceptables* (replace$ ?*intensitats_acceptables* 2 3 no))
             )
             (bind ?*parts_del_cos_prioritaries* (create$ cardio))
             (assert (problema_tensio))
@@ -444,8 +445,6 @@
     ?trobat
 )
 
-
-
 (defrule LIMITAR::exercicis_sobre_lesio_grau_alt ""
     ?fet <- (filtra_patologies)
     ?usuari <- (object(is-a Usuari))
@@ -456,7 +455,7 @@
 
     (while (<= ?i (length$ ?*exercicis*)) do
         (bind ?exercici_nth (nth$ ?i ?*exercicis*))
-        (bind ?queTreball (send ?exercici_nth get-Que_Treballa))
+        (bind ?queTreball (send ?exercici_nth get-QueTreballa))
         (if (not(tenen_element_en_comu ?*parts_del_cos_no_treballables* ?queTreball))
             then (bind ?aux (create$ ?aux ?exercici_nth)))
         (bind ?i (+ ?i 1))
@@ -477,7 +476,7 @@
 
     (while (<= ?i (length$ ?*exercicis*)) do
         (bind ?exercici_nth (nth$ ?i ?*exercicis*))
-        (bind ?queTreballa (send ?exercici_nth get-Que_Treballa))
+        (bind ?queTreballa (send ?exercici_nth get-QueTreballa))
         (if (tenen_element_en_comu ?*parts_del_cos_prioritaries* ?queTreballa)
             then (bind ?aux (create$ ?aux ?exercici_nth)))
         (bind ?i (+ ?i 1))
@@ -504,16 +503,16 @@
     ;?minuts <- (objectiuMinutsDiaris ?value)
     =>
     (bind ?minuts (send ?usuari get-TempsDisponible))
-    (bind ?numeroExercicis (/ ?minuts 10))
+    (bind ?minutsOcupats 0)
 
     (bind ?i 1)
     (bind ?aux (create$))
 
-    (printout t crlf "Aqui tens els teus exercicis per la rutina (10 min per exercicis):" crlf)
+    (printout t crlf "Aqui tens els teus exercicis per la rutina:" crlf)
 
     (printout t "Dilluns:" crlf crlf)
     
-    (while (< (length$ ?aux) ?numeroExercicis) do
+    (while (< ?minutsOcupats ?minuts) do
         (bind ?num (mod ?i (+ (length$ ?*exercicis*) 1)))
         (if (eq ?num 0) then
             (bind ?num 1)
@@ -528,114 +527,6 @@
     (printout t (implode$ ?aux) crlf crlf)
 
    
-    (bind ?aux (create$))
-
-    (printout t "Dimarts:" crlf crlf)
-    
-    (while (< (length$ ?aux) ?numeroExercicis) do
-        (bind ?num (mod ?i (+ (length$ ?*exercicis*) 1)))
-        (if (eq ?num 0) then
-            (bind ?num 1)
-            (bind ?i (+ ?i 1))
-        )
-        (bind ?exercici_nth (nth$ ?num ?*exercicis*))
-        (bind ?aux (create$ ?aux ?exercici_nth))
-        (bind ?i (+ ?i 1))
-    )
-
-    (printout t (implode$ ?aux) crlf crlf)
-
-
-  
-    (bind ?aux (create$))
-
-    (printout t "Dimecres:" crlf crlf)
-    
-    (while (< (length$ ?aux) ?numeroExercicis) do
-        (bind ?num (mod ?i (+ (length$ ?*exercicis*) 1)))
-        (if (eq ?num 0) then
-            (bind ?num 1)
-            (bind ?i (+ ?i 1))
-        )
-        (bind ?exercici_nth (nth$ ?num ?*exercicis*))
-        (bind ?aux (create$ ?aux ?exercici_nth))
-        (bind ?i (+ ?i 1))
-    )
-
-    (printout t (implode$ ?aux) crlf crlf)
-
-   
-    (bind ?aux (create$))
-
-    (printout t "Dijous:" crlf crlf)
-    
-    (while (< (length$ ?aux) ?numeroExercicis) do
-        (bind ?num (mod ?i (+ (length$ ?*exercicis*) 1)))
-        (if (eq ?num 0) then
-            (bind ?num 1)
-            (bind ?i (+ ?i 1))
-        )
-        (bind ?exercici_nth (nth$ ?num ?*exercicis*))
-        (bind ?aux (create$ ?aux ?exercici_nth))
-        (bind ?i (+ ?i 1))
-    )
-
-    (printout t (implode$ ?aux) crlf crlf)
-
-   
-    (bind ?aux (create$))
-
-    (printout t "Divendres:" crlf crlf)
-    
-    (while (< (length$ ?aux) ?numeroExercicis) do
-        (bind ?num (mod ?i (+ (length$ ?*exercicis*) 1)))
-        (if (eq ?num 0) then
-            (bind ?num 1)
-            (bind ?i (+ ?i 1))
-        )
-        (bind ?exercici_nth (nth$ ?num ?*exercicis*))
-        (bind ?aux (create$ ?aux ?exercici_nth))
-        (bind ?i (+ ?i 1))
-    )
-
-    (printout t (implode$ ?aux) crlf crlf)
-
-    
-    (bind ?aux (create$))
-
-    (printout t "Dissabte:" crlf crlf)
-    
-    (while (< (length$ ?aux) ?numeroExercicis) do
-        (bind ?num (mod ?i (+ (length$ ?*exercicis*) 1)))
-        (if (eq ?num 0) then
-            (bind ?num 1)
-            (bind ?i (+ ?i 1))
-        )
-        (bind ?exercici_nth (nth$ ?num ?*exercicis*))
-        (bind ?aux (create$ ?aux ?exercici_nth))
-        (bind ?i (+ ?i 1))
-    )
-
-    (printout t (implode$ ?aux) crlf crlf)
-
-    
-    (bind ?aux (create$))
-
-    (printout t "Diumenge:" crlf crlf)
-    
-    (while (< (length$ ?aux) ?numeroExercicis) do
-        (bind ?num (mod ?i (+ (length$ ?*exercicis*) 1)))
-        (if (eq ?num 0) then
-            (bind ?num 1)
-            (bind ?i (+ ?i 1))
-        )
-        (bind ?exercici_nth (nth$ ?num ?*exercicis*))
-        (bind ?aux (create$ ?aux ?exercici_nth))
-        (bind ?i (+ ?i 1))
-    )
-
-    (printout t (implode$ ?aux) crlf crlf)
-
 
     (printout t "Programa finalitzat" crlf)
 )

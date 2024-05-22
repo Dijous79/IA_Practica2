@@ -1,7 +1,7 @@
-(definstances instances
-  ([Flexions_De_Bracos] of Exercici
+([Flexions_De_Bracos] of Exercici
            (nomExercici  FlexionsDeBrasos )
            (Que_Treballa   colzes biceps   triceps   espatllaFrontal   deltoides   pectoral   estabilitzador )
+           (Tipus forsa)
            (repeticions  5 10 20)
            (temps 3 7 10)
 )
@@ -9,146 +9,149 @@
 ([Dominades] of Exercici
            (nomExercici  Dominades )
            (Que_Treballa   dorsals   biceps   trapesis   estabilitzador hombro)
+           (Tipus forsa)
            (repeticions 5 10 15)
-           (TempsDedicat 3 7 10)
+           (temps 3 7 10)
 )
 
 ([Elevacions_Laterals_Amb_Pes] of Exercici
            (nomExercici  ElevacionsLateralsAmbPes )
            (Que_Treballa   deltoides   trapesis )
-           (intensitat baixa)
-           (repeticions  12)
-           (TempsDedicat 8)
+           (Tipus forsa)
+           (repeticions  8 12 20)
+           (temps 5 8 12)
 )
 
 ([Flexions_De_Biceps_Amb_Pes] of Exercici
            (nomExercici  FlexionsDeBicepsAmbPes )
            (Que_Treballa   biceps colzes )
-           (intensitat alta)
-           (repeticions  15)
-           (TempsDedicat 10)
+           (Tipus forsa)
+           (repeticions  10 15 20)
+           (temps 5 10 15)
 )
 
 ([Press_De_Banca] of Exercici
            (nomExercici  PressDeBanca )
            (Que_Treballa   deltoides   pectoral   triceps   trapesis   estabilitzador )
-           (intensitat mitja)
-           (repeticions  12)
-           (TempsDedicat 10)
+           (Tipus forsa)
+           (repeticions  8 12 15)
+           (temps 5 10 15)
 )
 
 ([Press_Militar] of Exercici
            (nomExercici  PressMilitar )
            (Que_Treballa   deltoides   triceps   trapesis )
-           (intensitat alta)
-           (repeticions  10)
-           (TempsDedicat 10)
+           (Tipus forsa)
+           (repeticions  5 10 15)
+           (temps 5 10 15)
 )
 
 ([Hip_Thrusts] of Exercici
            (nomExercici  HipThrusts )
            (Que_Treballa   glutis   quadriceps   isquiotibials )
-           (intensitat baixa)
-           (repeticions  15)
-           (TempsDedicat 10)
+           (Tipus forsa)
+           (repeticions  10 15 20)
+           (temps 5 10 15)
 )
 
 ([Squats] of Exercici
            (nomExercici  Squats )
            (Que_Treballa   quadriceps   glutis   isquiotibials   trapesis   estabilitzador )
-           (intensitat mitja)
-           (repeticions  15)
-           (TempsDedicat 12)
+           (Tipus forsa)
+           (repeticions  10 15 20)
+           (temps 8 12 16)
 )
 
 ([Planchas] of Exercici
            (nomExercici  Planchas )
            (Que_Treballa   colzes abdominals   lumbars   trapesis   estabilitzador )
-           (intensitat baixa)
-           (repeticions  1)
-           (TempsDedicat 3)
+           (Tipus resistencia)
+           (repeticions  1 1 1)
+           (temps 3 5 10)
 )
 
 ([Deadlifts] of Exercici
            (nomExercici  Deadlifts )
            (Que_Treballa   dorsals   glutis   isquiotibials   trapesis   estabilitzador )
-           (intensitat mitja)
-           (repeticions  12)
-           (TempsDedicat 10)
+           (Tipus forsa)
+           (repeticions  8 12 15)
+           (temps 5 10 15)
 )
 
 ([Lunges] of Exercici
            (nomExercici  Lunges )
            (Que_Treballa   quadriceps   glutis   isquiotibials   estabilitzador )
-           (intensitat mitja)
-           (repeticions  12)
-           (TempsDedicat 10)
+           (Tipus forsa)
+           (repeticions  8 12 15)
+           (temps 5 10 15)
 )
 
 ([Burpees] of Exercici
            (nomExercici  Burpees )
            (Que_Treballa   colzes deltoides   pectoral   triceps   quadriceps   isquiotibials   glutis   estabilitzador )
-           (intensitat alta)
-           (repeticions  10)
-           (TempsDedicat 8)
+           (Tipus explosivitat)
+           (repeticions  5 10 15)
+           (temps 4 8 12)
 )
 
 ([Mountain_Climbers] of Exercici
            (nomExercici  MountainClimbers )
            (Que_Treballa   abdominals   quadriceps   deltoides   glutis   isquiotibials   estabilitzador )
-           (intensitat alta)
-           (repeticions  20)
-           (TempsDedicat 5)
+           (Tipus resistencia)
+           (repeticions  10 20 30)
+           (temps 3 5 7)
 )
 
 ;;------------------------Cardio-----------------------------------
 ([Correr_En_Maquina] of Exercici
            (nomExercici  Correr )
            (Que_Treballa   cardio   quadriceps   isquiotibials   glutis   cadera   genolls   tormells   peus   cervicals )
-           (intensitat mitja)
-           (repeticions  1)
-           (TempsDedicat 20)
+           (Tipus cardio)
+           (repeticions  1 1 1)
+           (temps 20 30 40)
 )
 
 ([Lateral_Toe_Tabs] of Exercici
            (nomExercici  Lateral_Toe_Tabs )
            (Que_Treballa   cardio   quadriceps   isquiotibials   glutis   cadera   genolls   tormells   peus)
-           (intensitat alta)
-           (repeticions  30)
-           (TempsDedicat 5)
+           (Tipus cardio)
+           (repeticions  20 30 40)
+           (temps 5 7 10)
 )
 
 ([Bicicleta_Estatica] of Exercici
            (nomExercici  Bicicleta_Estatica )
            (Que_Treballa   cardio   quadriceps   isquiotibials   glutis   genolls   tormells   peus   dorsals )
-           (intensitat mitja)
-           (repeticions  1)
-           (TempsDedicat 20)
+           (Tipus cardio)
+           (repeticions  1 1 1)
+           (temps 20 30 40)
 )
 
 ([Caminar] of Exercici
            (nomExercici  Caminar )
            (Que_Treballa   cardio   quadriceps   isquiotibials   glutis   cadera   genolls   tormells   peus )
-           (intensitat baixa)
-           (repeticions  1)
-           (TempsDedicat 30)
+           (Tipus cardio)
+           (repeticions  1 1 1)
+           (temps 30 45 60)
 )   
 
 ([Nadar] of Exercici
            (nomExercici  Nadar )
            (Que_Treballa   cardio   dorsals   pectoral   abdominals   biceps   triceps   glutis   quadriceps   isquiotibials )
-           (intensitat baixa)
-           (repeticions  1)
-           (TempsDedicat 20)
+           (Tipus cardio)
+           (repeticions  1 1 1)
+           (temps 20 30 40)
 )
 
 ([Aquagym] of Exercici
            (nomExercici Aquagym )
            (Que_Treballa   cardio   dorsals   pectoral   abdominals   biceps   triceps   glutis   quadriceps   isquiotibials )
-           (intensitat baixa)
-           (repeticions  1)
-           (TempsDedicat 30)
+           (Tipus cardio)
+           (repeticions  1 1 1)
+           (temps 30 45 60)
 )
+
+
 
 ;; ------------------Limitacions------------------------------------
 
