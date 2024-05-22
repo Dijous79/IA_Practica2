@@ -194,16 +194,23 @@
     (printout t "Benvingut a la teva rutina d'exercicis personalitzada!" crlf)
     (printout t "Per iniciar, ens caldra una mica d'informacio sobre tu." crlf)
 
-    (bind ?edat (demanar_int "Quina edat tens?" 0 120))
-    (send ?usuari put-edat ?edat)
+    ;;(bind ?edat (demanar_int "Quina edat tens?" 0 120))
+    (bind ?edat 21)
+    
+    (send ?usuari put-Edat ?edat)
 
-    (bind ?estatura (demanar_float "En metres, quant mesures?" 0.0 3.0))
-    (bind ?pes (demanar_float "En quilograms, quant peses?" 30.0 300.0))
+    ;;(bind ?estatura (demanar_float "En metres, quant mesures?" 0.0 3.0))
+    ;;(bind ?pes (demanar_float "En quilograms, quant peses?" 30.0 300.0))
+    
     ;;IMC = index de massa corporal pes/estatura^2
-    (bind ?valorIMC (/ ?pes (* ?estatura ?estatura)))
+    ;(bind ?valorIMC (/ ?pes (* ?estatura ?estatura)))
+    (bind ?valorIMC 24.0)
     (send ?usuari put-Imc ?valorIMC)
-    (bind ?presioMax (demanar_int "En mmHg, quina és la teva pressiò sistòlica?" 10 180))
-    (bind ?presioMin (demanar_int "En mmHg, quina és la teva pressiò diastòlica?" 0 ?presioMax))
+    ;(bind ?presioMax (demanar_int "En mmHg, quina és la teva pressiò sistòlica?" 10 180))
+    ;(bind ?presioMin (demanar_int "En mmHg, quina és la teva pressiò diastòlica?" 0 ?presioMax))
+    (bind ?presioMax 100)
+    (bind ?presioMin 90)
+    
     (send ?usuari put-PresioSistolica ?presioMax)
     (send ?usuari put-PresioDiastolica ?presioMin)
     
@@ -212,7 +219,7 @@
 
     (bind ?horesEsportSemanals 0)
     (bind ?horesEsportSemanals (demanar_int "Quantes hores d'esport fas a la setmana?" 0 100))
-    (send ?usuari put-horesEsportSemanals ?horesEsportSemanals)
+    (send ?usuari put-HoresEsportSemanals ?horesEsportSemanals)
 
     (if (<= ?horesEsportSemanals 2) then
         (printout t "En el teu dia a dia..." crlf)
@@ -237,7 +244,7 @@
             (bind ?minutsCaminatsDiaris (+ ?minutsCaminatsDiaris 180))
         )
 
-        (send ?usuari put-minutsCaminatsDiaris ?minutsCaminatsDiaris)
+        (send ?usuari put-MinutsCaminatsDiaris ?minutsCaminatsDiaris)
         
         (bind ?res (demanar_boolea "T'encarregues d'algunes de les tasques de la casa?"))
         (if ?res then
@@ -292,42 +299,44 @@
     (bind ?*copia_exercicis* ?*exercicis*)
 )
 
-(defrule ABSTREURE::abstaccio_activitat ""
+(defrule ABSTREURE::abstraccio_activitat ""
     (declare (salience 3))
-    ?usuri <- (object(is- Usuari))
+    ?usuari <- (object(is-a Usuari))
     =>
-    (bind ?hores (send ?usuari get-horesEsportSemanals))
+    (bind ?hores (send ?usuari get-HoresEsportSemanals))
     (if (and (< ?hores 7) (>= ?hores 3)) then
-        (replace$ ?*intensitats_acceptables 3 3 no)
-    )
-    else (
-        (bind ?minuts (send ?usuari get-minutsCaminatsDiaris))
-        if ((>= ?minuts 180) then
-            (replace$ ?*intensitats_acceptables 3 3 no)
+        (bind ?*intensitats_acceptables* (replace$ ?*intensitats_acceptables* 3 3 no))
+    
+    else 
+        (bind ?minuts (send ?usuari get-MinutsCaminatsDiaris))
+        (if (>= ?minuts 180) then
+            (bind ?*intensitats_acceptables* (replace$ ?*intensitats_acceptables* 3 3 no))
+        
+        else 
+            (bind ?*intensitats_acceptables* (replace$ ?*intensitats_acceptables* 2 3 no))
         )
-        else (replace$ ?*intensitats_acceptables 2 3 no)
     )
 
 )
 
-(defrule ABSTREURE::abstraccio_edad ""
+(defrule ABSTREURE::abstraccio_edat ""
     (declare (salience 2))
     ?usuari <- (object(is-a Usuari))
     =>
-    (bind ?edad (send ?usuari get-Edat))
-    (if (<= ?edad 18) then
+    (bind ?edat (send ?usuari get-Edat))
+    (if (<= ?edat 18) then
         (bind ?*etapa_vital* menor)
-        (replace$ ?*intensitats_acceptables 3 3 no)
+        (replace$ ?*intensitats_acceptables* 3 3 no)
     else
-        (if (<= ?edad 35) then
+        (if (<= ?edat 35) then
             (bind ?*etapa_vital* adult_jove)
-            (replace$ ?*intensitats_acceptables 2 2 si)
+            (replace$ ?*intensitats_acceptables* 2 2 si)
         else
-            (if (<= ?edad 65) then
+            (if (<= ?edat 65) then
                 (bind ?*etapa_vital* adult)
             else
                 (bind ?*etapa_vital* tercera_edat)
-                (replace$ ?*intensitats_acceptables 3 3 no)
+                (replace$ ?*intensitats_acceptables* 3 3 no)
             )
         )
     )
@@ -361,8 +370,7 @@
     (if (and (<= ?presioSanguinea 90) (<= ?presioSanguinea2 60))
         then (bind ?*presioSanguinea* hipotensio)
              (bind ?*parts_del_cos_prioritaries* (create$ cardio))
-             (bind ?*intensitats_acceptables* (create$ yes yes yes)) ;; Initialize the variable
-             (bind ?*intensitats_acceptables* (replace$ ?*intensitats_acceptables* 2 2 no))
+             (bind ?*intensitats_acceptables* (replace$ ?*intensitats_acceptables* 2 3 no))
              (assert (problema_tensio))
     else
         (if (and (<= ?presioSanguinea 120) (<= ?presioSanguinea2 80)) then
@@ -495,6 +503,7 @@
 
 (defrule LIMITAR::exercicis_sobre_objectiu ""
     ?usuari <- (object(is-a Usuari))
+    ?fet <- (no_es_dona_mai)
     =>
 
     (bind ?i 1)
@@ -523,6 +532,12 @@
 ;; ---------------------------- MODUL PROCESAR ----------------------------
 
 
+(deffunction PROCESAR::printExercici (?exercici ?intensitat)
+    (printout t "ID del exercici: " (send ?exercici get-nomExercici) crlf)
+    (printout t "Repeticions: " (nth$ ?intensitat (send ?exercici get-Repeticions)) crlf)
+    (printout t "Temps: " (nth$ ?intensitat (send ?exercici get-TempsDedicat)) crlf)
+)
+
 (defrule PROCESAR::fer_rutina ""
     ?usuari <- (object(is-a Usuari))
     ;?fact <- (nombre ?value)
@@ -531,27 +546,75 @@
     (bind ?minuts (send ?usuari get-TempsDisponible))
     (bind ?minutsOcupats 0)
 
+    (bind ?intensitat 1)
+    (if (eq (nth$ 2 ?*intensitats_acceptables*) si ) then
+        (bind ?intensitat 2)
+    )
+    (if (eq (nth$ 3 ?*intensitats_acceptables*) si ) then
+        (bind ?intensitat 3)
+    )
+
     (bind ?i 1)
-    (bind ?aux (create$))
+    (bind ?punter 1)
+    (bind ?llistaExercicis (create$))
+    (bind ?llistaIntensitats (create$))
 
     (printout t crlf "Aqui tens els teus exercicis per la rutina:" crlf)
 
     (printout t "Dilluns:" crlf crlf)
     
-    (while (< ?minutsOcupats ?minuts) do
-        (bind ?num (mod ?i (+ (length$ ?*exercicis*) 1)))
+    (while (and (< ?minutsOcupats ?minuts) (<= ?i (length$ ?*exercicis*))) do
+        (bind ?j (+ ?i ?punter))
+        (bind ?num (mod ?j (+ (length$ ?*exercicis*) 1)))
         (if (eq ?num 0) then
             (bind ?num 1)
-            (bind ?i (+ ?i 1))
+            (bind ?punter (+ ?punter 1))
         )
         (bind ?exercici_nth (nth$ ?num ?*exercicis*))
-        (bind ?aux (create$ ?aux ?exercici_nth))
+        (bind ?temps (nth$ ?intensitat (send ?exercici_nth get-TempsDedicat)))
+
+        (if (<= (+ ?minutsOcupats ?temps) ?minuts) then
+            (bind ?minutsOcupats (+ ?minutsOcupats ?temps))
+            (bind ?llistaExercicis (create$ ?llistaExercicis ?exercici_nth))
+            (bind ?llistaIntensitats (create$ ?llistaIntensitats ?intensitat))
+        )
         (bind ?i (+ ?i 1))
+    )
+
+    (while (and (> (- ?minuts ?minutsOcupats) 7) (> ?intensitat 1))
+        (bind ?intensitat (- ?intensitat 1))
+        (bind ?i 1)
         
+        (while (and (< ?minutsOcupats ?minuts) (<= ?i (length$ ?*exercicis*))) do
+            (bind ?j (+ ?i ?punter))
+            (bind ?num (mod ?j (+ (length$ ?*exercicis*) 1)))
+            (if (eq ?num 0) then
+                (bind ?num 1)
+                (bind ?punter (+ ?punter 1))
+            )
+            (bind ?exercici_nth (nth$ ?num ?*exercicis*))
+            (bind ?temps (nth$ ?intensitat (send ?exercici_nth get-TempsDedicat)))
+
+            (if (<= (+ ?minutsOcupats ?temps) ?minuts) then
+                (bind ?minutsOcupats (+ ?minutsOcupats ?temps))
+                (bind ?llistaExercicis (create$ ?llistaExercicis ?exercici_nth))
+                (bind ?llistaIntensitats (create$ ?llistaIntensitats ?intensitat))
+            )
+            (bind ?i (+ ?i 1))
+        )
+    
     )
     
-    (printout t (implode$ ?aux) crlf crlf)
+    (printout t (implode$ ?llistaExercicis) crlf crlf)
+    
+    (bind ?i 1)
 
+    (while (<= ?i (length$ ?llistaExercicis)) do
+        (bind ?exercici_nth (nth$ ?i ?llistaExercicis))
+        (bind ?intensitat_nth (nth$ ?i ?llistaIntensitats))
+        (printExercici ?exercici_nth ?intensitat_nth)
+        (bind ?i (+ ?i 1))
+    )
    
 
     (printout t "Programa finalitzat" crlf)

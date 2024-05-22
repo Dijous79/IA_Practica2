@@ -93,22 +93,22 @@
     (slot TempsDisponible
         (type INTEGER)
         (create-accessor read-write))
-    (slot edat
+    (slot Edat
         (type INTEGER)
         (create-accessor read-write))
-    (slot presioSistoclica
+    (slot PresioSistolica
         (type INTEGER)
         (create-accessor read-write))
-    (slot presioDiastolica
+    (slot PresioDiastolica
         (type INTEGER)
         (create-accessor read-write))
-    (slot minutsCaminatsDiaris
+    (slot MinutsCaminatsDiaris
         (type INTEGER)
         (create-accessor read-write)) 
-    (slot horesEsportSemanals
+    (slot HoresEsportSemanals
         (type INTEGER)
         (create-accessor read-write)) 
-    (multislot tasquesDomestiques
+    (multislot TasquesDomestiques
         (type STRING)
         (create-accessor read-write))
 

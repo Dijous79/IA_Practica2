@@ -1,154 +1,156 @@
+(definstances instances
+
 ([Flexions_De_Bracos] of Exercici
            (nomExercici  FlexionsDeBrasos )
-           (Que_Treballa   colzes biceps   triceps   espatllaFrontal   deltoides   pectoral   estabilitzador )
+           (QueTreballa   colzes biceps   triceps   espatllaFrontal   deltoides   pectoral   estabilitzador )
            (Tipus forsa)
-           (repeticions  5 10 20)
-           (temps 3 7 10)
+           (Repeticions  5 10 20)
+           (TempsDedicat 3 7 10)
 )
 
 ([Dominades] of Exercici
            (nomExercici  Dominades )
-           (Que_Treballa   dorsals   biceps   trapesis   estabilitzador hombro)
+           (QueTreballa   dorsals   biceps   trapesis   estabilitzador hombro)
            (Tipus forsa)
-           (repeticions 5 10 15)
-           (temps 3 7 10)
+           (Repeticions 5 10 15)
+           (TempsDedicat 3 7 10)
 )
 
 ([Elevacions_Laterals_Amb_Pes] of Exercici
            (nomExercici  ElevacionsLateralsAmbPes )
-           (Que_Treballa   deltoides   trapesis )
+           (QueTreballa   deltoides   trapesis )
            (Tipus forsa)
-           (repeticions  8 12 20)
-           (temps 5 8 12)
+           (Repeticions  8 12 20)
+           (TempsDedicat 5 8 12)
 )
 
 ([Flexions_De_Biceps_Amb_Pes] of Exercici
            (nomExercici  FlexionsDeBicepsAmbPes )
-           (Que_Treballa   biceps colzes )
+           (QueTreballa   biceps colzes )
            (Tipus forsa)
-           (repeticions  10 15 20)
-           (temps 5 10 15)
+           (Repeticions  10 15 20)
+           (TempsDedicat 5 10 15)
 )
 
 ([Press_De_Banca] of Exercici
            (nomExercici  PressDeBanca )
-           (Que_Treballa   deltoides   pectoral   triceps   trapesis   estabilitzador )
+           (QueTreballa   deltoides   pectoral   triceps   trapesis   estabilitzador )
            (Tipus forsa)
-           (repeticions  8 12 15)
-           (temps 5 10 15)
+           (Repeticions  8 12 15)
+           (TempsDedicat 5 10 15)
 )
 
 ([Press_Militar] of Exercici
            (nomExercici  PressMilitar )
-           (Que_Treballa   deltoides   triceps   trapesis )
+           (QueTreballa   deltoides   triceps   trapesis )
            (Tipus forsa)
-           (repeticions  5 10 15)
-           (temps 5 10 15)
+           (Repeticions  5 10 15)
+           (TempsDedicat 5 10 15)
 )
 
 ([Hip_Thrusts] of Exercici
            (nomExercici  HipThrusts )
-           (Que_Treballa   glutis   quadriceps   isquiotibials )
+           (QueTreballa   glutis   quadriceps   isquiotibials )
            (Tipus forsa)
-           (repeticions  10 15 20)
-           (temps 5 10 15)
+           (Repeticions  10 15 20)
+           (TempsDedicat 5 10 15)
 )
 
 ([Squats] of Exercici
            (nomExercici  Squats )
-           (Que_Treballa   quadriceps   glutis   isquiotibials   trapesis   estabilitzador )
+           (QueTreballa   quadriceps   glutis   isquiotibials   trapesis   estabilitzador )
            (Tipus forsa)
-           (repeticions  10 15 20)
-           (temps 8 12 16)
+           (Repeticions  10 15 20)
+           (TempsDedicat 8 12 16)
 )
 
 ([Planchas] of Exercici
            (nomExercici  Planchas )
-           (Que_Treballa   colzes abdominals   lumbars   trapesis   estabilitzador )
+           (QueTreballa   colzes abdominals   lumbars   trapesis   estabilitzador )
            (Tipus resistencia)
-           (repeticions  1 1 1)
-           (temps 3 5 10)
+           (Repeticions  1 1 1)
+           (TempsDedicat 3 5 10)
 )
 
 ([Deadlifts] of Exercici
            (nomExercici  Deadlifts )
-           (Que_Treballa   dorsals   glutis   isquiotibials   trapesis   estabilitzador )
+           (QueTreballa   dorsals   glutis   isquiotibials   trapesis   estabilitzador )
            (Tipus forsa)
-           (repeticions  8 12 15)
-           (temps 5 10 15)
+           (Repeticions  8 12 15)
+           (TempsDedicat 5 10 15)
 )
 
 ([Lunges] of Exercici
            (nomExercici  Lunges )
-           (Que_Treballa   quadriceps   glutis   isquiotibials   estabilitzador )
+           (QueTreballa   quadriceps   glutis   isquiotibials   estabilitzador )
            (Tipus forsa)
-           (repeticions  8 12 15)
-           (temps 5 10 15)
+           (Repeticions  8 12 15)
+           (TempsDedicat 5 10 15)
 )
 
 ([Burpees] of Exercici
            (nomExercici  Burpees )
-           (Que_Treballa   colzes deltoides   pectoral   triceps   quadriceps   isquiotibials   glutis   estabilitzador )
+           (QueTreballa   colzes deltoides   pectoral   triceps   quadriceps   isquiotibials   glutis   estabilitzador )
            (Tipus explosivitat)
-           (repeticions  5 10 15)
-           (temps 4 8 12)
+           (Repeticions  5 10 15)
+           (TempsDedicat 4 8 12)
 )
 
 ([Mountain_Climbers] of Exercici
            (nomExercici  MountainClimbers )
-           (Que_Treballa   abdominals   quadriceps   deltoides   glutis   isquiotibials   estabilitzador )
+           (QueTreballa   abdominals   quadriceps   deltoides   glutis   isquiotibials   estabilitzador )
            (Tipus resistencia)
-           (repeticions  10 20 30)
-           (temps 3 5 7)
+           (Repeticions  10 20 30)
+           (TempsDedicat 3 5 7)
 )
 
 ;;------------------------Cardio-----------------------------------
 ([Correr_En_Maquina] of Exercici
            (nomExercici  Correr )
-           (Que_Treballa   cardio   quadriceps   isquiotibials   glutis   cadera   genolls   tormells   peus   cervicals )
+           (QueTreballa   cardio   quadriceps   isquiotibials   glutis   cadera   genolls   tormells   peus   cervicals )
            (Tipus cardio)
-           (repeticions  1 1 1)
-           (temps 20 30 40)
+           (Repeticions  1 1 1)
+           (TempsDedicat 7 15 30)
 )
 
 ([Lateral_Toe_Tabs] of Exercici
            (nomExercici  Lateral_Toe_Tabs )
-           (Que_Treballa   cardio   quadriceps   isquiotibials   glutis   cadera   genolls   tormells   peus)
+           (QueTreballa   cardio   quadriceps   isquiotibials   glutis   cadera   genolls   tormells   peus)
            (Tipus cardio)
-           (repeticions  20 30 40)
-           (temps 5 7 10)
+           (Repeticions  20 30 40)
+           (TempsDedicat 5 7 10)
 )
 
 ([Bicicleta_Estatica] of Exercici
            (nomExercici  Bicicleta_Estatica )
-           (Que_Treballa   cardio   quadriceps   isquiotibials   glutis   genolls   tormells   peus   dorsals )
+           (QueTreballa   cardio   quadriceps   isquiotibials   glutis   genolls   tormells   peus   dorsals )
            (Tipus cardio)
-           (repeticions  1 1 1)
-           (temps 20 30 40)
+           (Repeticions  1 1 1)
+           (TempsDedicat 7 15 30)
 )
 
 ([Caminar] of Exercici
            (nomExercici  Caminar )
-           (Que_Treballa   cardio   quadriceps   isquiotibials   glutis   cadera   genolls   tormells   peus )
+           (QueTreballa   cardio   quadriceps   isquiotibials   glutis   cadera   genolls   tormells   peus )
            (Tipus cardio)
-           (repeticions  1 1 1)
-           (temps 30 45 60)
+           (Repeticions  1 1 1)
+           (TempsDedicat 7 15 30)
 )   
 
 ([Nadar] of Exercici
            (nomExercici  Nadar )
-           (Que_Treballa   cardio   dorsals   pectoral   abdominals   biceps   triceps   glutis   quadriceps   isquiotibials )
+           (QueTreballa   cardio   dorsals   pectoral   abdominals   biceps   triceps   glutis   quadriceps   isquiotibials )
            (Tipus cardio)
-           (repeticions  1 1 1)
-           (temps 20 30 40)
+           (Repeticions  3 5 10)
+           (TempsDedicat 8 12 17)
 )
 
 ([Aquagym] of Exercici
            (nomExercici Aquagym )
-           (Que_Treballa   cardio   dorsals   pectoral   abdominals   biceps   triceps   glutis   quadriceps   isquiotibials )
+           (QueTreballa   cardio   dorsals   pectoral   abdominals   biceps   triceps   glutis   quadriceps   isquiotibials )
            (Tipus cardio)
-           (repeticions  1 1 1)
-           (temps 30 45 60)
+           (Repeticions  1 1 1)
+           (TempsDedicat 7 15 30)
 )
 
 
@@ -210,7 +212,7 @@
     )
 
 ([Hombro_Congelado] of Limitacions
-           (nomLimitacio  Hombro_Congelado )
+         (nomLimitacio  Hombro_Congelado )
          (Bloquejos   hombro )
          (GrauLesio   invalid )
     )
