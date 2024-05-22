@@ -210,37 +210,42 @@
     ;;(bind ?estatDeForma (demanar_opcions "Com et descriuries en termes de forma fisica?" Alta Mitja Baixa))
     ;;(send ?usuari put-EstatDeForma ?estatDeForma)
 
-    (printout t "En el teu dia a dia..." crlf)
-    (bind ?minutsCaminatsDiaris 0)
-    (bind ?res (demanar_boolea "Tens mascota a la que passejes?"))
-    (if ?res then
-        (bind ?minutsCaminatsDiaris (+ ?minutsCaminatsDiaris (demanar_int "Quants minuts camines al dia amb la teva mascota?" 0 1440)))
-    )
-    
-    (bind ?res (demanar_boolea "Camines per anar a treballar?"))
-    (if ?res then
-        (bind ?minutsCaminatsDiaris (+ ?minutsCaminatsDiaris (demanar_int "Quants minuts camines al dia per anar a treballar?" 0 1440)))
-    )
+    (bind ?horesEsportSemanals 0)
+    (bind ?horesEsportSemanals (demanar_int "Quantes hores d'esport fas a la setmana?" 0 100))
+    (send ?usuari put-horesEsportSemanals ?horesEsportSemanals)
 
-    (bind ?res (demanar_boolea "Vas fer la compra?"))
-    (if ?res then
-        (bind ?minutsCaminatsDiaris (+ ?minutsCaminatsDiaris (/ (demanar_int "Quants minuts camines per fer la compra? (afageix anada i tornada si la fas caminant)" 0 1440) 5 )))
-    )
+    (if (<= ?horesEsportSemanals 2) then
+        (printout t "En el teu dia a dia..." crlf)
+        (bind ?minutsCaminatsDiaris 0)    
+        (bind ?res (demanar_boolea "Tens mascota a la que passejes?"))
+        (if ?res then
+            (bind ?minutsCaminatsDiaris (+ ?minutsCaminatsDiaris (demanar_int "Quants minuts camines al dia amb la teva mascota?" 0 1440)))
+        )
+        
+        (bind ?res (demanar_boolea "Camines per anar a treballar?"))
+        (if ?res then
+            (bind ?minutsCaminatsDiaris (+ ?minutsCaminatsDiaris (demanar_int "Quants minuts camines al dia per anar a treballar?" 0 1440)))
+        )
 
-    (bind ?res (demanar_boolea "Treballes de peu?"))
-    (if ?res then
-        (bind ?minutsCaminatsDiaris (+ ?minutsCaminatsDiaris 60))
-    )
+        (bind ?res (demanar_boolea "Vas fer la compra?"))
+        (if ?res then
+            (bind ?minutsCaminatsDiaris (+ ?minutsCaminatsDiaris (/ (demanar_int "Quants minuts camines per fer la compra? (afageix anada i tornada si la fas caminant)" 0 1440) 5 )))
+        )
 
-    (send ?usuari put-MinutsCaminatsDiaris ?minutsCaminatsDiaris)
-    
-    (bind ?res (demanar_boolea "T'encarregues d'algunes de les tasques de la casa?"))
-    (if ?res then
-        (bind ?tasquesDomestiques (demanar_opcions "D'entre aquestes quines tasques de la casa fas de forma recorrent?" Planxar Escombrar Aspirar Fregar_el_terra Estendre_la_roba Cuinar Rentar_plats Fregar_lavabos))
-        (send ?usuari put-TasquesDomestiques ?tasquesDomestiques)
-        (assert (abstreure_tasques_domestiques))
-    )
+        (bind ?res (demanar_boolea "Treballes de peu?"))
+        (if ?res then
+            (bind ?minutsCaminatsDiaris (+ ?minutsCaminatsDiaris 180))
+        )
 
+        (send ?usuari put-minutsCaminatsDiaris ?minutsCaminatsDiaris)
+        
+        (bind ?res (demanar_boolea "T'encarregues d'algunes de les tasques de la casa?"))
+        (if ?res then
+            (bind ?tasquesDomestiques (demanar_opcions "D'entre aquestes quines tasques de la casa fas de forma recorrent?" Planxar Escombrar Aspirar Fregar_el_terra Estendre_la_roba Cuinar Rentar_plats Fregar_lavabos))
+            (send ?usuari put-TasquesDomestiques ?tasquesDomestiques)
+            (assert (abstreure_tasques_domestiques))
+        )
+    )
     
 
     (bind ?objectiuMinutsDiaris (demanar_int "Quants minuts al dia vols dedicar a fer exercici? (Indica un multiple de 10)" 0 1440))
@@ -287,21 +292,42 @@
     (bind ?*copia_exercicis* ?*exercicis*)
 )
 
+(defrule ABSTREURE::abstaccio_activitat ""
+    (declare (salience 3))
+    ?usuri <- (object(is- Usuari))
+    =>
+    (bind ?hores (send ?usuari get-horesEsportSemanals))
+    (if (and (< ?hores 7) (>= ?hores 3)) then
+        (replace$ ?*intensitats_acceptables 3 3 no)
+    )
+    else (
+        (bind ?minuts (send ?usuari get-minutsCaminatsDiaris))
+        if ((>= ?minuts 180) then
+            (replace$ ?*intensitats_acceptables 3 3 no)
+        )
+        else (replace$ ?*intensitats_acceptables 2 3 no)
+    )
+
+)
+
 (defrule ABSTREURE::abstraccio_edad ""
-    
+    (declare (salience 2))
     ?usuari <- (object(is-a Usuari))
     =>
     (bind ?edad (send ?usuari get-Edat))
     (if (<= ?edad 18) then
         (bind ?*etapa_vital* menor)
+        (replace$ ?*intensitats_acceptables 3 3 no)
     else
-        (if (<= ?edad 40) then
+        (if (<= ?edad 35) then
             (bind ?*etapa_vital* adult_jove)
+            (replace$ ?*intensitats_acceptables 2 2 si)
         else
             (if (<= ?edad 65) then
                 (bind ?*etapa_vital* adult)
             else
                 (bind ?*etapa_vital* tercera_edat)
+                (replace$ ?*intensitats_acceptables 3 3 no)
             )
         )
     )
@@ -327,7 +353,7 @@
 )
 
 (defrule ABSTREURE::abstraccio_pressio ""
-    (declare (salience 5))
+    (declare (salience 1))
     ?usuari <- (object(is-a Usuari))
     =>
     (bind ?presioSanguinea (send ?usuari get-PresioSistolica))
