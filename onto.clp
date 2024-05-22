@@ -101,6 +101,9 @@
     (slot minutsCaminatsDiaris
         (type INTEGER)
         (create-accessor read-write)) 
+    (slot horesEsportSemanals
+        (type INTEGER)
+        (create-accessor read-write)) 
     (multislot tasquesDomestiques
         (type STRING)
         (create-accessor read-write))
