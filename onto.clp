@@ -20,25 +20,10 @@
     (multislot TempsDedicat
         (type STRING)
         (create-accessor read-write))
-    (slot Tipus
+    (slot Classe
         (type STRING)
         (create-accessor read-write)
     )
-)
-
-(defclass ExercicisRutina
-    (is-a Exercici)
-    (role concrete)
-    (pattern-match reactive)
-    (slot nomExercici
-        (type STRING)
-        (create-accessor read-write))
-    (slot IntensitatExercici
-        (type STRING)
-        (create-accessor read-write))
-    (slot TempsDedicat
-        (type STRING)
-        (create-accessor read-write))
 )
 
 (defclass Limitacions
@@ -60,10 +45,13 @@
     (is-a USER)
     (role concrete)
     (pattern-match reactive)
-    (slot nomObjectiu
+    (slot NomObjectiu
         (type STRING)
         (create-accessor read-write))
-    (multislot Que_Busca_Treballar
+    (multislot PartsDelCosObjectiu
+        (type STRING)
+        (create-accessor read-write))
+    (multislot ClassesObjectiu
         (type STRING)
         (create-accessor read-write))
 )
@@ -110,6 +98,12 @@
         (create-accessor read-write)) 
     (multislot TasquesDomestiques
         (type STRING)
+        (create-accessor read-write))
+    (multislot ClassesTreballades
+        (type STRING)
+        (create-accessor read-write))
+    (slot MenjarsAmbProteina
+        (type INTEGER)
         (create-accessor read-write))
 
 )
