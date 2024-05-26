@@ -225,22 +225,22 @@
     (printout t "Benvingut a la teva rutina d'exercicis personalitzada!" crlf)
     (printout t "Per iniciar, ens caldra una mica d'informacio sobre tu." crlf)
 
-    ;;(bind ?edat (demanar_int "Quina edat tens?" 0 120))
-    (bind ?edat 21)
+    (bind ?edat (demanar_int "Quina edat tens?" 0 120))
+    ;(bind ?edat 21)
     
     (send ?usuari put-Edat ?edat)
 
-    ;;(bind ?estatura (demanar_float "En metres, quant mesures?" 0.0 3.0))
-    ;;(bind ?pes (demanar_float "En quilograms, quant peses?" 30.0 300.0))
+    (bind ?estatura (demanar_float "En metres, quant mesures?" 0.0 3.0))
+    (bind ?pes (demanar_float "En quilograms, quant peses?" 30.0 300.0))
     
-    ;;IMC = index de massa corporal pes/estatura^2
-    ;(bind ?valorIMC (/ ?pes (* ?estatura ?estatura)))
-    (bind ?valorIMC 24.0)
+    ;IMC = index de massa corporal pes/estatura^2
+    (bind ?valorIMC (/ ?pes (* ?estatura ?estatura)))
+    ;(bind ?valorIMC 24.0)
     (send ?usuari put-Imc ?valorIMC)
-    ;(bind ?presioMax (demanar_int "En mmHg, quina és la teva pressiò sistòlica?" 10 180))
-    ;(bind ?presioMin (demanar_int "En mmHg, quina és la teva pressiò diastòlica?" 0 ?presioMax))
-    (bind ?presioMax 100)
-    (bind ?presioMin 90)
+    (bind ?presioMax (demanar_int "En mmHg, quina és la teva pressiò sistòlica?" 10 180))
+    (bind ?presioMin (demanar_int "En mmHg, quina és la teva pressiò diastòlica?" 0 ?presioMax))
+    ;(bind ?presioMax 100)
+    ;(bind ?presioMin 90)
     
     (send ?usuari put-PresioSistolica ?presioMax)
     (send ?usuari put-PresioDiastolica ?presioMin)
@@ -267,7 +267,7 @@
             (bind ?minutsCaminatsDiaris (+ ?minutsCaminatsDiaris (demanar_int "Quants minuts camines al dia per anar a treballar?" 0 1440)))
         )
 
-        (bind ?res (demanar_boolea "Vas fer la compra?"))
+        (bind ?res (demanar_boolea "Vas a fer la compra?"))
         (if ?res then
             (bind ?minutsCaminatsDiaris (+ ?minutsCaminatsDiaris (/ (demanar_int "Quants minuts camines per fer la compra? (afageix anada i tornada si la fas caminant)" 0 1440) 5 )))
         )
@@ -777,8 +777,8 @@
     (bind ?minuts (send ?usuari get-TempsDisponible))
     
 
-    (bind ?punter 1)
-    (bind ?punterAux 1)
+    (bind ?punter 0)
+    (bind ?punterAux 0)
     (bind ?k 1)
     (bind ?diesDeLaSetmana (create$ Dilluns Dimarts Dimecres Dijous Divendres Dissabte Diumenge))
 
@@ -799,7 +799,6 @@
             (bind ?num (mod ?j (+ (length$ ?*exercicis*) 1)))
             (if (eq ?num 0) then
                 (bind ?num 1)
-                (bind ?punter (+ ?punter 1))
             )
             (bind ?exercici_nth (nth$ ?num ?*exercicis*))
             (bind ?intensitat (convertir_intensitat_a_int (nth$ (convertir_classe_a_index (send ?exercici_nth get-Classe)) ?*intensitats_per_classe*)))
@@ -812,7 +811,7 @@
             )
             (bind ?i (+ ?i 1))
         )
-        (bind ?punter ?i)
+        (bind ?punter (+ ?i ?punter))
 
         (bind ?i 1)
         (while (and (< ?minutsOcupats ?minuts) (<= ?i (length$ ?*exercicis_extra*))) do
