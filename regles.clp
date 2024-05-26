@@ -137,7 +137,7 @@
         (case forsa        then (return 2))
         (case resistencia then (return 3))
         (case explosivitat then (return 4))
-        (case flexivilitat then (return 5))
+        (case flexibilitat then (return 5))
         (case equilibri    then (return 6))
     )
 )
@@ -150,6 +150,17 @@
     )
 )
 
+(deffunction MAIN::tenen_element_en_comu (?llista1 ?llista2)
+    (bind ?trobat FALSE)
+    (foreach ?element ?llista1
+        (if (member$ ?element ?llista2) then
+            (bind ?trobat TRUE)
+            (break)
+        )
+    )
+    ?trobat
+)
+
 
 ;; ----------- FUNCIONS RECOLLIR -----------
 
@@ -160,11 +171,12 @@
 
 ;; ----------- FUNCIONS PROCESAR -----------
 
-
-
-;; ----------- FUNCIONS MOSTRAR -----------
-
-
+(deffunction PROCESAR::print_exercici (?exercici ?intensitat)
+    (printout t "ID del exercici: " (send ?exercici get-NomExercici) crlf)
+    (printout t "Repeticions: " (nth$ ?intensitat (send ?exercici get-Repeticions)) crlf)
+    (printout t "Temps: " (nth$ ?intensitat (send ?exercici get-TempsDedicat)) crlf)
+    (printout t "Calories consumides: " (nth$ ?intensitat (send ?exercici get-Calories)) crlf)
+)
 
 ;; ---------------------------- MODUL MAIN ----------------------------
 
@@ -181,7 +193,7 @@
 	(printout t "#        #####   ######  #          #       #    #       ######       #     ###### " crlf) 
 	(printout t "#        #   #   #    #  #    #     #       #    #    #  #    #       #     #    # " crlf) 
 	(printout t "#        #    #  #    #   ####      #       #     ####   #    #    #######  #    # " crlf crlf crlf crlf)
-    (system "timeout /t 1 /nobreak")
+    ;(system "timeout /t 1 /nobreak")
     (printout t "####### #             #       #                     ####                                         " crlf)
 	(printout t "   #   # #     #      # #     #    ####   #####    #    #    ####     #    #   ####   #    #     " crlf) 
 	(printout t "   #     # # # #      #  #    #   #    #    #      #    #   #    #    #    #  #    #  #    #     " crlf) 
@@ -189,7 +201,7 @@
 	(printout t "   #     #     #      #    #  #   #    #    #      #        #    #    #    #  #       #    #     " crlf) 
 	(printout t "   #     #     #      #     # #   #    #    #      #    #   #    #    #    #  #    #  #    #     " crlf) 
 	(printout t "#######  #     #      #       #    ####     #       ####     ####      ####    ####   #    #     " crlf crlf crlf crlf)
-    (system "timeout /t 1 /nobreak")
+    ;(system "timeout /t 1 /nobreak")
     (printout t "######" crlf)
 	(printout t "#     #   ####   #####    ##    #####   ####    " crlf) 
 	(printout t "#     #  #    #    #     #  #     #    #    #   " crlf) 
@@ -198,7 +210,7 @@
 	(printout t "#        #    #    #    #    #    #    #    #   " crlf) 
 	(printout t "#         ####     #    #    #    #     ####    " crlf crlf crlf)
 
-   (system "timeout /t 1 /nobreak")
+   ;(system "timeout /t 1 /nobreak")
    (printout t crlf)
    
    (focus RECOLLIR)
@@ -206,7 +218,7 @@
 
 ;; ---------------------------- MODUL RECOLLIR ----------------------------
 
-(defrule RECOLLIR::creacioPersona
+(defrule RECOLLIR::inici "Donem la benviguda a l'usuari"
 	(declare (salience 10))
     ?usuari <- (object(is-a Usuari))
 	=>
@@ -233,11 +245,14 @@
     (send ?usuari put-PresioSistolica ?presioMax)
     (send ?usuari put-PresioDiastolica ?presioMin)
     
-    ;;(bind ?estatDeForma (demanar_opcions "Com et descriuries en termes de forma fisica?" Alta Mitja Baixa))
-    ;;(send ?usuari put-EstatDeForma ?estatDeForma)
-
-    (bind ?horesEsportSemanals (demanar_int "Quantes hores d'esport fas a la setmana?" 0 100))
-    (send ?usuari put-HoresEsportSemanals ?horesEsportSemanals)
+    (bind ?res (demanar_boolea "Practiques algun esport?"))
+    (if ?res then
+        (bind ?horesEsportSemanals (demanar_int "Quantes hores d'esport fas a la setmana?" 0 100))
+        (send ?usuari put-HoresEsportSemanals ?horesEsportSemanals)
+    else
+        (bind ?horesEsportSemanals 0)
+        (send ?usuari put-HoresEsportSemanals ?horesEsportSemanals)
+    )
 
     (if (<= ?horesEsportSemanals 2) then
         (printout t "En el teu dia a dia..." crlf)
@@ -257,22 +272,37 @@
             (bind ?minutsCaminatsDiaris (+ ?minutsCaminatsDiaris (/ (demanar_int "Quants minuts camines per fer la compra? (afageix anada i tornada si la fas caminant)" 0 1440) 5 )))
         )
 
-        (bind ?res (demanar_boolea "Treballes de peu?"))
+        (send ?usuari put-MinutsCaminatsDiaris ?minutsCaminatsDiaris)
+
+        ;                       c f r e fl eq
+        (bind ?tasques (create$ 0 0 0 0 0 0))
+        
+        (printout t "D'entre els seguents grups de tasques de la casa, quantes en fas setmanalment?" crlf)
+        (printout t "Si p.e. escombres dos cops suma 2 en el seu respectiu grup" crlf)
+        (bind ?tasques (replace$ ?tasques 1 1 (demanar_int "Escombrar Fregar Passar_aspiradora Netejar_Finestres Rentar_cotxe Netejar_bany Rentar_roba" 0 50)))
+        (bind ?tasques (replace$ ?tasques 2 2 (demanar_int "Moure_mobles Apujar_caixes Jardineria Carregar_boses_de_la_Compra Planxar" 0 50)))
+        
+        
+        (bind ?res (demanar_boolea "Treballes d'algo que inclogui aixecar/moure objectes pesats?"))
         (if ?res then
-            (bind ?minutsCaminatsDiaris (+ ?minutsCaminatsDiaris 180))
+            (bind ?tasques (replace$ ?tasques 2 2 (+ (nth$ 2 ?tasques) 5)))
         )
 
-        (send ?usuari put-MinutsCaminatsDiaris ?minutsCaminatsDiaris)
-        
-        (bind ?res (demanar_boolea "T'encarregues d'algunes de les tasques de la casa?"))
+        (bind ?res (demanar_boolea "Treballes de peu?"))
         (if ?res then
-            (bind ?tasquesDomestiques (demanar_multiples_respostes "D'entre aquestes quines tasques de la casa fas de forma recorrent?" Planxar Escombrar Aspirar Fregar_el_terra Estendre_la_roba Cuinar Rentar_plats Fregar_lavabos))
-            (send ?usuari put-TasquesDomestiques ?tasquesDomestiques)
-            (assert (abstreure_tasques_domestiques))
+            (bind ?tasques (replace$ ?tasques 1 1 (+ (nth$ 1 ?tasques) 5)))
         )
+
+        (bind ?res (demanar_boolea "Treballes d'algo que inclogui molts desplaçaments amb bicicleta o caminant?"))
+        (if ?res then
+            (bind ?tasques (replace$ ?tasques 1 1 (+ (nth$ 1 ?tasques) 5)))
+        )
+
+        (send ?usuari put-Tasques ?tasques)
     else
         (bind ?opcionsClasse (create$ cardio forsa resistencia explosivitat flexibilitat equilibri))
         (bind ?classesTreballades (demanar_multiples_respostes "En el teu esport que treballes d'entre les seguents opcions?" ?opcionsClasse))
+        (send ?usuari put-ClassesTreballades ?classesTreballades)
     )
     
 
@@ -291,13 +321,13 @@
     
     (send ?usuari put-MenjarsAmbProteina ?menjarsAmbProteina)
 
-    (bind ?menjarsAmbCarbohidrats)
+    (bind ?menjarsAmbCarbohidrats 0)
     (bind ?menjarsAmbCarbohidrats (+ ?menjarsAmbCarbohidrats (demanar_int "Quants cops menjes pasta i/o arros a la setmana?" 0 20)))
-    (bind ?menjarsAmbCarbohidrats (+ ?menjarsAmbCarbohidrats (demanar_int "Quants cops menjes pa i/o pastes a la setmana?" 0)))
+    (bind ?menjarsAmbCarbohidrats (+ ?menjarsAmbCarbohidrats (demanar_int "Quants cops menjes pa i/o pastes a la setmana?" 0 20)))
     (send ?usuari put-MenjarsAmbCarbohidrats ?menjarsAmbCarbohidrats)
 
 
-    (bind ?objectiuMinutsDiaris (demanar_int "Quants minuts al dia vols dedicar a fer exercici? (Indica un multiple de 10)" 0 1440))
+    (bind ?objectiuMinutsDiaris (demanar_int "Quants minuts al dia vols dedicar a fer exercici?" 0 1440))
     (send ?usuari put-TempsDisponible ?objectiuMinutsDiaris)
 
 	(bind ?teLimitacions (demanar_boolea "Tens alguna patologia o limitacio?"))
@@ -408,6 +438,7 @@
     =>
     (bind ?classesTreballades (send ?usuari get-ClassesTreballades))
     (bind ?hores (send ?usuari get-HoresEsportSemanals))
+    (bind ?tasques (send ?usuari get-Tasques))
     (if (> ?hores 5 ) then
         (progn$ (?var ?classesTreballades)
             (bind ?*intensitats_per_classe* (replace$ ?*intensitats_per_classe* (convertir_classe_a_index ?var) (convertir_classe_a_index ?var) alta))
@@ -420,10 +451,12 @@
         )
         (bind ?*classes_prioritaries* ?aux)
         else
+        
         (if (and (<= ?hores 5) (>= ?hores 3)) then
             (progn$ (?var ?classesTreballades)
                 (bind ?*intensitats_per_classe* (replace$ ?*intensitats_per_classe* (convertir_classe_a_index ?var) (convertir_classe_a_index ?var) mitja))
             )
+            (bind ?aux (create$))
             (progn$ (?var ?*classes_prioritaries*)
                 (if (not(member$ ?var ?classesTreballades)) then
                     (bind ?aux (create$ ?aux ?var))
@@ -438,6 +471,15 @@
                 (bind ?*intensitats_per_classe* (replace$ ?*intensitats_per_classe* 1 1 baixa))
             )
         )
+    )
+    (bind ?i 1)
+    (while (<= ?i (length$ ?tasques)) do
+        (bind ?tasca_nth (nth$ ?i ?tasques))
+        (if (and (>= ?tasca_nth 5) (eq (nth$ ?i ?*intensitats_per_classe*) baixa))
+            then
+            (bind ?*intensitats_per_classe* (replace$ ?*intensitats_per_classe* ?i ?i mitja))
+        )
+        (bind ?i (+ ?i 1))
     )
 )
 
@@ -586,16 +628,7 @@
 ;; aqui definim defrules que tinguin en compte les limitacions i ens bloquejin els exercicis que no pot fer
 
 
-(deffunction MAIN::tenen_element_en_comu (?llista1 ?llista2)
-    (bind ?trobat FALSE)
-    (foreach ?element ?llista1
-        (if (member$ ?element ?llista2) then
-            (bind ?trobat TRUE)
-            (break)
-        )
-    )
-    ?trobat
-)
+
 
 (defrule LIMITAR::exercicis_sobre_lesio_grau_alt ""
     (declare (salience 10))
@@ -609,8 +642,8 @@
     (while (<= ?i (length$ ?*exercicis*)) do
         (bind ?exercici_nth (nth$ ?i ?*exercicis*))
         (bind ?queTreball (send ?exercici_nth get-QueTreballa))
-        (bind ?inidcacions (send ?exercici_nth get-Indicacions))
-        (if (or (not(tenen_element_en_comu ?*parts_del_cos_no_treballables* ?queTreball) (tenen_element_en_comu$ ?indicacions ?*marc_de_caracteristiques*)))
+        (bind ?indicacions (send ?exercici_nth get-Indicacions))
+        (if (or (not(tenen_element_en_comu ?*parts_del_cos_no_treballables* ?queTreball)) (tenen_element_en_comu ?indicacions ?*marc_de_caracteristiques*))
             then (bind ?aux (create$ ?aux ?exercici_nth)))
         (bind ?i (+ ?i 1))
     )   
@@ -702,7 +735,7 @@
     (bind ?i 1)
     (bind ?aux (create$))
     (while (<= ?i (length$ ?*exercicis*)) do
-        (bind ?exercici_nth (nth$ ?num ?*exercicis*))
+        (bind ?exercici_nth (nth$ ?i ?*exercicis*))
         (bind ?intensitat (convertir_intensitat_a_int (nth$ (convertir_classe_a_index (send ?exercici_nth get-Classe)) ?*intensitats_per_classe*)))
         (bind ?temps (nth$ ?intensitat (send ?exercici_nth get-TempsDedicat)))
         (if (> ?temps 0)
@@ -716,7 +749,7 @@
     (bind ?i 1)
     (bind ?aux (create$))
     (while (<= ?i (length$ ?*exercicis_extra*)) do
-        (bind ?exercici_nth (nth$ ?num ?*exercicis_extra*))
+        (bind ?exercici_nth (nth$ ?i ?*exercicis_extra*))
         (bind ?intensitat (convertir_intensitat_a_int (nth$ (convertir_classe_a_index (send ?exercici_nth get-Classe)) ?*intensitats_per_classe*)))
         (bind ?temps (nth$ ?intensitat (send ?exercici_nth get-TempsDedicat)))
         (if (> ?temps 0)
@@ -736,28 +769,21 @@
 
 ;; ---------------------------- MODUL PROCESAR ----------------------------
 
-
-(deffunction PROCESAR::printExercici (?exercici ?intensitat)
-    (printout t "ID del exercici: " (send ?exercici get-NomExercici) crlf)
-    (printout t "Repeticions: " (nth$ ?intensitat (send ?exercici get-Repeticions)) crlf)
-    (printout t "Temps: " (nth$ ?intensitat (send ?exercici get-TempsDedicat)) crlf)
-)
-
 (defrule PROCESAR::fer_rutina ""
     ?usuari <- (object(is-a Usuari))
     ;?fact <- (nombre ?value)
     ;?minuts <- (objectiuMinutsDiaris ?value)
     =>
     (bind ?minuts (send ?usuari get-TempsDisponible))
-    (bind ?minutsOcupats 0)
+    
 
     (bind ?punter 1)
     (bind ?punterAux 1)
-    (bind ?j 1)
+    (bind ?k 1)
     (bind ?diesDeLaSetmana (create$ Dilluns Dimarts Dimecres Dijous Divendres Dissabte Diumenge))
 
-    (while (<= ?j (length$ ?diesDeLaSetmana)) do
-        
+    (while (<= ?k (length$ ?diesDeLaSetmana)) do
+        (bind ?minutsOcupats 0)
         
 
         (bind ?llistaExercicis (create$))
@@ -765,8 +791,9 @@
 
         (printout t crlf "Aqui tens els teus exercicis per la rutina:" crlf)
 
-        (printout t (nth$ ?j ?diesDeLaSetmana) ":" crlf crlf)
+        (printout t (nth$ ?k ?diesDeLaSetmana) ":" crlf crlf)
         (bind ?i 1)
+
         (while (and (< ?minutsOcupats ?minuts) (<= ?i (length$ ?*exercicis*))) do
             (bind ?j (+ ?i ?punter))
             (bind ?num (mod ?j (+ (length$ ?*exercicis*) 1)))
@@ -785,7 +812,7 @@
             )
             (bind ?i (+ ?i 1))
         )
-
+        (bind ?punter ?i)
 
         (bind ?i 1)
         (while (and (< ?minutsOcupats ?minuts) (<= ?i (length$ ?*exercicis_extra*))) do
@@ -806,7 +833,7 @@
             )
             (bind ?i (+ ?i 1))
         )
-        
+        (bind ?punterAux ?i)
         
         (printout t (implode$ ?llistaExercicis) crlf crlf)
         
@@ -815,11 +842,11 @@
         (while (<= ?i (length$ ?llistaExercicis)) do
             (bind ?exercici_nth (nth$ ?i ?llistaExercicis))
             (bind ?intensitat_nth (nth$ ?i ?llistaIntensitats))
-            (printExercici ?exercici_nth ?intensitat_nth)
+            (print_exercici ?exercici_nth ?intensitat_nth)
             (bind ?i (+ ?i 1))
         )
 
-        (bind ?j (+ ?j 1))
+        (bind ?k (+ ?k 1))
     )
     (printout t "Programa finalitzat" crlf)
 )

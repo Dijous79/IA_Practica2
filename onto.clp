@@ -24,7 +24,7 @@
         (type STRING)
         (create-accessor read-write)
     )
-    (slot Calories
+    (multislot Calories
         (type INTEGER)
         (create-accessor read-write))
     (multislot Contraindicacions
@@ -105,8 +105,8 @@
     (slot HoresEsportSemanals
         (type INTEGER)
         (create-accessor read-write)) 
-    (multislot TasquesDomestiques
-        (type STRING)
+    (multislot Tasques
+        (type INTEGER)
         (create-accessor read-write))
     (multislot ClassesTreballades
         (type STRING)
