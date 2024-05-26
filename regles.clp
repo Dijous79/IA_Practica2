@@ -1,12 +1,13 @@
 ;; VARIABLES GLOBALS
 
 (defglobal ?*exercicis* = (create$ ""))
-(defglobal ?*copia_exercicis* = (create$ ""))
+(defglobal ?*exercicis_extra* = (create$ ""))
 (defglobal ?*parts_del_cos_no_treballables* = (create$))
 (defglobal ?*classes_prioritaries* = (create$))
 (defglobal ?*parts_del_cos_prioritaries* = (create$))
 ;                                               card  forsa res   expl  flex  equilibri
 (defglobal ?*intensitats_per_classe* = (create$ baixa baixa baixa baixa baixa baixa))
+(defglobal ?*marc_de_caracteristiques* = (create$))
 
 ;; MODULS
 (defmodule MAIN (export ?ALL))
@@ -134,7 +135,7 @@
     (switch ?classe
         (case cardio       then (return 1))
         (case forsa        then (return 2))
-        (case resisitencia then (return 3))
+        (case resistencia then (return 3))
         (case explosivitat then (return 4))
         (case flexivilitat then (return 5))
         (case equilibri    then (return 6))
@@ -149,16 +150,6 @@
     )
 )
 
-;(deffunction MAIN::convertir_index_a_classe(?i)
-;    (switch ?i
-;        (case 1 then (return cardio))
-;        (case 2 then (return forsa))
-;        (case 3 then (return resisitencia))
-;        (case 4 then (return explosivitat))
-;        (case 5 then (return flexivilitat))
-;        (case 6 then (return equilibri))
-;    )
-;)
 
 ;; ----------- FUNCIONS RECOLLIR -----------
 
@@ -191,8 +182,8 @@
 	(printout t "#        #   #   #    #  #    #     #       #    #    #  #    #       #     #    # " crlf) 
 	(printout t "#        #    #  #    #   ####      #       #     ####   #    #    #######  #    # " crlf crlf crlf crlf)
     (system "timeout /t 1 /nobreak")
-    (printout t "#######               #       #                     ####                                         " crlf)
-	(printout t "   #     #     #      # #     #    ####   #####    #    #    ####     #    #   ####   #    #     " crlf) 
+    (printout t "####### #             #       #                     ####                                         " crlf)
+	(printout t "   #   # #     #      # #     #    ####   #####    #    #    ####     #    #   ####   #    #     " crlf) 
 	(printout t "   #     # # # #      #  #    #   #    #    #      #    #   #    #    #    #  #    #  #    #     " crlf) 
 	(printout t "   #     #  #  #      #   #   #   #    #    #      #        #    #    #    #  #       ######     " crlf)
 	(printout t "   #     #     #      #    #  #   #    #    #      #        #    #    #    #  #       #    #     " crlf) 
@@ -275,13 +266,13 @@
         
         (bind ?res (demanar_boolea "T'encarregues d'algunes de les tasques de la casa?"))
         (if ?res then
-            (bind ?tasquesDomestiques (demanar_opcions "D'entre aquestes quines tasques de la casa fas de forma recorrent?" Planxar Escombrar Aspirar Fregar_el_terra Estendre_la_roba Cuinar Rentar_plats Fregar_lavabos))
+            (bind ?tasquesDomestiques (demanar_multiples_respostes "D'entre aquestes quines tasques de la casa fas de forma recorrent?" Planxar Escombrar Aspirar Fregar_el_terra Estendre_la_roba Cuinar Rentar_plats Fregar_lavabos))
             (send ?usuari put-TasquesDomestiques ?tasquesDomestiques)
             (assert (abstreure_tasques_domestiques))
         )
     else
         (bind ?opcionsClasse (create$ cardio forsa resistencia explosivitat flexibilitat equilibri))
-        (bind ?classesTreballades (demanar_opcions "En el teu esport que treballes d'entre les seguents opcions?" ?opcionsClasse))
+        (bind ?classesTreballades (demanar_multiples_respostes "En el teu esport que treballes d'entre les seguents opcions?" ?opcionsClasse))
     )
     
 
@@ -300,6 +291,12 @@
     
     (send ?usuari put-MenjarsAmbProteina ?menjarsAmbProteina)
 
+    (bind ?menjarsAmbCarbohidrats)
+    (bind ?menjarsAmbCarbohidrats (+ ?menjarsAmbCarbohidrats (demanar_int "Quants cops menjes pasta i/o arros a la setmana?" 0 20)))
+    (bind ?menjarsAmbCarbohidrats (+ ?menjarsAmbCarbohidrats (demanar_int "Quants cops menjes pa i/o pastes a la setmana?" 0)))
+    (send ?usuari put-MenjarsAmbCarbohidrats ?menjarsAmbCarbohidrats)
+
+
     (bind ?objectiuMinutsDiaris (demanar_int "Quants minuts al dia vols dedicar a fer exercici? (Indica un multiple de 10)" 0 1440))
     (send ?usuari put-TempsDisponible ?objectiuMinutsDiaris)
 
@@ -308,7 +305,7 @@
         (bind ?instancies (find-all-instances ((?inst Limitacions)) TRUE))
         (bind ?limitacions_posibles (create$))
         (foreach ?i ?instancies
-            (bind ?nom (send ?i get-nomLimitacio))
+            (bind ?nom (send ?i get-NomLimitacio))
             (bind ?limitacions_posibles (create$ ?limitacions_posibles ?nom))        
         )
         (bind ?res (demanar_multiples_respostes "Digues quines d'entre les seguents opcions:" ?limitacions_posibles))
@@ -321,7 +318,7 @@
     (bind ?instancies (find-all-instances ((?inst Objectiu)) TRUE))
     (bind ?objectius_posibles (create$))
     (foreach ?i ?instancies
-        (bind ?nom (send ?i get-nomObjectiu))
+        (bind ?nom (send ?i get-NomObjectiu))
         (bind ?objectius_posibles (create$ ?objectius_posibles ?nom))        
     )
     (bind ?res (demanar_multiples_respostes "Digues quines d'entre les seguents opcions:" ?objectius_posibles))
@@ -341,7 +338,6 @@
     ?usuari <- (object(is-a Usuari))
     =>
     (bind ?*exercicis* (find-all-instances ((?inst Exercici)) TRUE))
-    (bind ?*copia_exercicis* ?*exercicis*)
 )
 
 (defrule ABSTREURE::abstraccio_objectius ""
@@ -353,7 +349,7 @@
     (bind ?aux (create$))
 
     
-    (bind ?instancies (find-all-instances ((?inst Objectiu)) (member$ ?inst:nomObjectiu ?objectius)))
+    (bind ?instancies (find-all-instances ((?inst Objectiu)) (member$ ?inst:NomObjectiu ?objectius)))
     (foreach ?i ?instancies
         (bind ?partsDelCosObjectiu (send ?i get-PartsDelCosObjectiu))
         (bind ?j 1)
@@ -386,6 +382,7 @@
     (bind ?edat (send ?usuari get-Edat))
     (if (<= ?edat 11) then
         (bind ?*intensitats_per_classe* (create$ baixa baixa baixa baixa baixa baixa))
+        (bind ?*marc_de_caracteristiques* (create$ ?*marc_de_caracteristiques* infant))
     else
         (if (<= ?edat 17) then
             (bind ?*intensitats_per_classe* (create$ mitja mitja mitja mitja mitja mitja))
@@ -397,6 +394,8 @@
                     (bind ?*intensitats_per_classe* (create$ mitja mitja mitja mitja mitja mitja))
                 else
                     (bind ?*intensitats_per_classe* (create$ baixa baixa baixa baixa baixa baixa))
+                    (bind ?*marc_de_caracteristiques* (create$ ?*marc_de_caracteristiques* avi))
+
                 )
             )
         )
@@ -413,35 +412,31 @@
         (progn$ (?var ?classesTreballades)
             (bind ?*intensitats_per_classe* (replace$ ?*intensitats_per_classe* (convertir_classe_a_index ?var) (convertir_classe_a_index ?var) alta))
         )
-        (if (< ?*classes_prioritaries* 1) then
-            (bind ?*classes_prioritaries* (create$ cardio forsa resistencia explosivitat flexibilitat equilibri))
-            (progn$ (?var ?classesTreballades)
-                (if (member$ ?var ?*classes_prioritaries*) then
-                    (bind ?*classes_prioritaries* (delete-member$ ?*classes_prioritaries* (convertir_classe_a_index ?var)))
-                )
+        (bind ?aux (create$))
+        (progn$ (?var ?*classes_prioritaries*)
+            (if (not(member$ ?var ?classesTreballades)) then
+                (bind ?aux (create$ ?aux ?var))
             )
         )
+        (bind ?*classes_prioritaries* ?aux)
         else
         (if (and (<= ?hores 5) (>= ?hores 3)) then
             (progn$ (?var ?classesTreballades)
                 (bind ?*intensitats_per_classe* (replace$ ?*intensitats_per_classe* (convertir_classe_a_index ?var) (convertir_classe_a_index ?var) mitja))
             )
-            (if (< ?*classes_prioritaries* 1) then
-                (bind ?*classes_prioritaries* (create$ cardio forsa resistencia explosivitat flexibilitat equilibri))
-                (progn$ (?var ?classesTreballades)
-                    (if (member$ ?var ?*classes_prioritaries*) then
-                        (bind ?*classes_prioritaries* (delete-member$ ?*classes_prioritaries* (convertir_classe_a_index ?var)))
-                    )
+            (progn$ (?var ?*classes_prioritaries*)
+                (if (not(member$ ?var ?classesTreballades)) then
+                    (bind ?aux (create$ ?aux ?var))
                 )
             )
+            (bind ?*classes_prioritaries* ?aux)
         else 
             (bind ?minuts (send ?usuari get-MinutsCaminatsDiaris))
-            (if (>= ?minuts 180) then
-                (bind ?*classes_prioritaries* (create$ forsa resistencia explosivitat flexibilitat equilibri))
+            (if (and (>= ?minuts 180) (eq (nth$ 1 ?*intensitats_per_classe*) baixa))then
                 (bind ?*intensitats_per_classe* (replace$ ?*intensitats_per_classe* 1 1 mitja))
-            )
             else
-                (bind ?*intensitats_per_classe* (create$ baixa baixa baixa baixa baixa baixa))
+                (bind ?*intensitats_per_classe* (replace$ ?*intensitats_per_classe* 1 1 baixa))
+            )
         )
     )
 )
@@ -460,6 +455,16 @@
         )
         (bind ?*intensitats_per_classe* (replace$ ?*intensitats_per_classe* 2 2 alta))
     )
+
+    (bind ?menjarsAmbCarbohidrats (send ?usuari get-MenjarsAmbCarbohidrats))
+    (if (>= ?menjarsAmbCarbohidrats 10) then
+        (if (eq (nth$ 3 ?*intensitats_per_classe*) baixa) then
+            (bind ?*intensitats_per_classe* (replace$ ?*intensitats_per_classe* 1 1 mitja))
+        else
+            (bind ?*intensitats_per_classe* (replace$ ?*intensitats_per_classe* 1 1 alta))
+        )
+        (bind ?*intensitats_per_classe* (replace$ ?*intensitats_per_classe* 1 1 alta))
+    )
 )
 
 
@@ -471,6 +476,7 @@
     (bind ?imc (send ?usuari get-Imc))
     (if (> ?imc 29.9) then
         (bind ?*intensitats_per_classe* (create$ baixa baixa baixa baixa baixa baixa))
+        (bind ?*marc_de_caracteristiques* (create$ ?*marc_de_caracteristiques* obesitat))
     else
         (if (or (< ?imc 18.5) (> ?imc 24.9)) then
             (bind ?i 1)
@@ -480,6 +486,9 @@
                     then (bind ?*intensitats_per_classe* (replace$ ?*intensitats_per_classe* ?i ?i mitja))
                 )
                 (bind ?i (+ ?i 1))
+            )
+            (if (> ?imc 24.9) then
+                (bind ?*marc_de_caracteristiques* (create$ ?*marc_de_caracteristiques* sobrepes))
             )
         )
     )
@@ -501,7 +510,7 @@
                 )
                 (bind ?i (+ ?i 1))
             )
-            (assert (problema_tensio))
+            (bind ?*marc_de_caracteristiques* (create$ ?*marc_de_caracteristiques* hipotensio))
     else
         (if (and (<= ?presioSanguinea 120) (<= ?presioSanguinea2 80)) then ;normal
             
@@ -524,9 +533,9 @@
                         )
                         (bind ?i (+ ?i 1))
                     )
+                    (bind ?*marc_de_caracteristiques* (create$ ?*marc_de_caracteristiques* hipertensio))
                 )
             (bind ?*classes_prioritaries* (create$ ?*classes_prioritaries* cardio))
-            (assert (problema_tensio))
             )
         )
     )
@@ -581,8 +590,8 @@
     (bind ?trobat FALSE)
     (foreach ?element ?llista1
         (if (member$ ?element ?llista2) then
-        (bind ?trobat TRUE)
-        (break)
+            (bind ?trobat TRUE)
+            (break)
         )
     )
     ?trobat
@@ -600,23 +609,44 @@
     (while (<= ?i (length$ ?*exercicis*)) do
         (bind ?exercici_nth (nth$ ?i ?*exercicis*))
         (bind ?queTreball (send ?exercici_nth get-QueTreballa))
-        (if (not(tenen_element_en_comu ?*parts_del_cos_no_treballables* ?queTreball))
+        (bind ?inidcacions (send ?exercici_nth get-Indicacions))
+        (if (or (not(tenen_element_en_comu ?*parts_del_cos_no_treballables* ?queTreball) (tenen_element_en_comu$ ?indicacions ?*marc_de_caracteristiques*)))
             then (bind ?aux (create$ ?aux ?exercici_nth)))
         (bind ?i (+ ?i 1))
     )   
 
     (bind ?*exercicis* ?aux)
-    (bind ?*copia_exercicis* ?aux)
+    
 
     (retract ?fet)
 )
 
-(defrule LIMITAR::exercicis_sobre_objectiu ""
+(defrule LIMITAR::exercicis_contraindicats ""
+    (declare (salience 10))
+    ?usuari <- (object(is-a Usuari))
+    =>
+    (bind ?i 1)
+    (bind ?aux (create$))
+
+    (while (<= ?i (length$ ?*exercicis*)) do
+        (bind ?exercici_nth (nth$ ?i ?*exercicis*))
+        (bind ?contraindicacions (send ?exercici_nth get-Contraindicacions))
+        (if (not(tenen_element_en_comu ?*marc_de_caracteristiques* ?contraindicacions))
+            then (bind ?aux (create$ ?aux ?exercici_nth))
+        )
+        (bind ?i (+ ?i 1))
+    )   
+
+    (bind ?*exercicis* ?aux)
+) 
+
+(defrule LIMITAR::exercicis_sobre_objectiu "" 
     ?usuari <- (object(is-a Usuari))
     =>
 
     (bind ?i 1)
     (bind ?aux (create$))
+    (bind ?aux2 (create$))
     (if (and (> (length$ ?*parts_del_cos_prioritaries*) 0) (> (length$ ?*classes_prioritaries*) 0))
     then
         (while (<= ?i (length$ ?*exercicis*)) do
@@ -624,11 +654,12 @@
             (bind ?queTreballa (send ?exercici_nth get-QueTreballa))
             (bind ?classe (send ?exercici_nth get-Classe))
             (if (and (tenen_element_en_comu ?*parts_del_cos_prioritaries* ?queTreballa) (member$ ?classe ?*classes_prioritaries*))
-                then (bind ?aux (create$ ?aux ?exercici_nth)))
+                then (bind ?aux (create$ ?aux ?exercici_nth))
+            else
+                (bind ?aux2 (create$ ?aux2 ?exercici_nth))
+            )
             (bind ?i (+ ?i 1))
         )   
-
-        (bind ?*exercicis* ?aux)
     else
         (if (> (length$ ?*parts_del_cos_prioritaries*) 0)
             then
@@ -637,11 +668,12 @@
                 (bind ?queTreballa (send ?exercici_nth get-QueTreballa))
                 (if (tenen_element_en_comu ?*parts_del_cos_prioritaries* ?queTreballa)
                     then (bind ?aux (create$ ?aux ?exercici_nth))
+                else
+                    (bind ?aux2 (create$ ?aux2 ?exercici_nth))
                 )
                 (bind ?i (+ ?i 1))
             )   
 
-            (bind ?*exercicis* ?aux)
         else
             (if (> (length$ ?*classes_prioritaries*) 0)
                 then
@@ -650,17 +682,51 @@
                     (bind ?classe (send ?exercici_nth get-Classe))
                     (if (member$ ?classe ?*classes_prioritaries*)
                         then (bind ?aux (create$ ?aux ?exercici_nth))
+                    else
+                        (bind ?aux2 (create$ ?aux2 ?exercici_nth))
                     )
                     (bind ?i (+ ?i 1))
                 )   
 
-                (bind ?*exercicis* ?aux)
             )
         )
     )
+    
+    (bind ?*exercicis* ?aux)
+    (bind ?*exercicis_extra* ?aux2)    
 )
 
+(defrule LIMITAR::exercicis_innecessaris ""
+    ?usuari <- (object(is-a Usuari))
+    =>
+    (bind ?i 1)
+    (bind ?aux (create$))
+    (while (<= ?i (length$ ?*exercicis*)) do
+        (bind ?exercici_nth (nth$ ?num ?*exercicis*))
+        (bind ?intensitat (convertir_intensitat_a_int (nth$ (convertir_classe_a_index (send ?exercici_nth get-Classe)) ?*intensitats_per_classe*)))
+        (bind ?temps (nth$ ?intensitat (send ?exercici_nth get-TempsDedicat)))
+        (if (> ?temps 0)
+            then (bind ?aux (create$ ?aux ?exercici_nth))
+        )
+        (bind ?i (+ ?i 1))
+    )   
 
+    (bind ?*exercicis* ?aux)
+    
+    (bind ?i 1)
+    (bind ?aux (create$))
+    (while (<= ?i (length$ ?*exercicis_extra*)) do
+        (bind ?exercici_nth (nth$ ?num ?*exercicis_extra*))
+        (bind ?intensitat (convertir_intensitat_a_int (nth$ (convertir_classe_a_index (send ?exercici_nth get-Classe)) ?*intensitats_per_classe*)))
+        (bind ?temps (nth$ ?intensitat (send ?exercici_nth get-TempsDedicat)))
+        (if (> ?temps 0)
+            then (bind ?aux (create$ ?aux ?exercici_nth))
+        )
+        (bind ?i (+ ?i 1))
+    )
+
+    (bind ?*exercicis_extra* ?aux)
+)
 
 (defrule LIMITAR::canviProcesar
 	(declare (salience -20))
@@ -672,7 +738,7 @@
 
 
 (deffunction PROCESAR::printExercici (?exercici ?intensitat)
-    (printout t "ID del exercici: " (send ?exercici get-nomExercici) crlf)
+    (printout t "ID del exercici: " (send ?exercici get-NomExercici) crlf)
     (printout t "Repeticions: " (nth$ ?intensitat (send ?exercici get-Repeticions)) crlf)
     (printout t "Temps: " (nth$ ?intensitat (send ?exercici get-TempsDedicat)) crlf)
 )
@@ -685,46 +751,75 @@
     (bind ?minuts (send ?usuari get-TempsDisponible))
     (bind ?minutsOcupats 0)
 
-    (bind ?i 1)
     (bind ?punter 1)
-    (bind ?llistaExercicis (create$))
-    (bind ?llistaIntensitats (create$))
+    (bind ?punterAux 1)
+    (bind ?j 1)
+    (bind ?diesDeLaSetmana (create$ Dilluns Dimarts Dimecres Dijous Divendres Dissabte Diumenge))
 
-    (printout t crlf "Aqui tens els teus exercicis per la rutina:" crlf)
+    (while (<= ?j (length$ ?diesDeLaSetmana)) do
+        
+        
 
-    (printout t "Dilluns:" crlf crlf)
-    
-    (while (and (< ?minutsOcupats ?minuts) (<= ?i (length$ ?*exercicis*))) do
-        (bind ?j (+ ?i ?punter))
-        (bind ?num (mod ?j (+ (length$ ?*exercicis*) 1)))
-        (if (eq ?num 0) then
-            (bind ?num 1)
-            (bind ?punter (+ ?punter 1))
+        (bind ?llistaExercicis (create$))
+        (bind ?llistaIntensitats (create$))
+
+        (printout t crlf "Aqui tens els teus exercicis per la rutina:" crlf)
+
+        (printout t (nth$ ?j ?diesDeLaSetmana) ":" crlf crlf)
+        (bind ?i 1)
+        (while (and (< ?minutsOcupats ?minuts) (<= ?i (length$ ?*exercicis*))) do
+            (bind ?j (+ ?i ?punter))
+            (bind ?num (mod ?j (+ (length$ ?*exercicis*) 1)))
+            (if (eq ?num 0) then
+                (bind ?num 1)
+                (bind ?punter (+ ?punter 1))
+            )
+            (bind ?exercici_nth (nth$ ?num ?*exercicis*))
+            (bind ?intensitat (convertir_intensitat_a_int (nth$ (convertir_classe_a_index (send ?exercici_nth get-Classe)) ?*intensitats_per_classe*)))
+            (bind ?temps (nth$ ?intensitat (send ?exercici_nth get-TempsDedicat)))
+
+            (if (<= (+ ?minutsOcupats ?temps) ?minuts) then
+                (bind ?minutsOcupats (+ ?minutsOcupats ?temps))
+                (bind ?llistaExercicis (create$ ?llistaExercicis ?exercici_nth))
+                (bind ?llistaIntensitats (create$ ?llistaIntensitats ?intensitat))
+            )
+            (bind ?i (+ ?i 1))
         )
-        (bind ?exercici_nth (nth$ ?num ?*exercicis*))
-        (bind ?intensitat (convertir_intensitat_a_int (nth$ (convertir_classe_a_index (send ?exercici_nth get-Classe)) ?*intensitats_per_classe*)))
-        (bind ?temps (nth$ ?intensitat (send ?exercici_nth get-TempsDedicat)))
 
-        (if (<= (+ ?minutsOcupats ?temps) ?minuts) then
-            (bind ?minutsOcupats (+ ?minutsOcupats ?temps))
-            (bind ?llistaExercicis (create$ ?llistaExercicis ?exercici_nth))
-            (bind ?llistaIntensitats (create$ ?llistaIntensitats ?intensitat))
+
+        (bind ?i 1)
+        (while (and (< ?minutsOcupats ?minuts) (<= ?i (length$ ?*exercicis_extra*))) do
+            (bind ?j (+ ?i ?punterAux))
+            (bind ?num (mod ?j (+ (length$ ?*exercicis_extra*) 1)))
+            (if (eq ?num 0) then
+                (bind ?num 1)
+                (bind ?punterAux (+ ?punterAux 1))
+            )
+            (bind ?exercici_nth (nth$ ?num ?*exercicis_extra*))
+            (bind ?intensitat (convertir_intensitat_a_int (nth$ (convertir_classe_a_index (send ?exercici_nth get-Classe)) ?*intensitats_per_classe*)))
+            (bind ?temps (nth$ ?intensitat (send ?exercici_nth get-TempsDedicat)))
+
+            (if (<= (+ ?minutsOcupats ?temps) ?minuts) then
+                (bind ?minutsOcupats (+ ?minutsOcupats ?temps))
+                (bind ?llistaExercicis (create$ ?llistaExercicis ?exercici_nth))
+                (bind ?llistaIntensitats (create$ ?llistaIntensitats ?intensitat))
+            )
+            (bind ?i (+ ?i 1))
         )
-        (bind ?i (+ ?i 1))
-    )
-    
-    
-    (printout t (implode$ ?llistaExercicis) crlf crlf)
-    
-    (bind ?i 1)
+        
+        
+        (printout t (implode$ ?llistaExercicis) crlf crlf)
+        
+        (bind ?i 1)
 
-    (while (<= ?i (length$ ?llistaExercicis)) do
-        (bind ?exercici_nth (nth$ ?i ?llistaExercicis))
-        (bind ?intensitat_nth (nth$ ?i ?llistaIntensitats))
-        (printExercici ?exercici_nth ?intensitat_nth)
-        (bind ?i (+ ?i 1))
-    )
-   
+        (while (<= ?i (length$ ?llistaExercicis)) do
+            (bind ?exercici_nth (nth$ ?i ?llistaExercicis))
+            (bind ?intensitat_nth (nth$ ?i ?llistaIntensitats))
+            (printExercici ?exercici_nth ?intensitat_nth)
+            (bind ?i (+ ?i 1))
+        )
 
+        (bind ?j (+ ?j 1))
+    )
     (printout t "Programa finalitzat" crlf)
 )

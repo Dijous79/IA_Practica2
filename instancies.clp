@@ -1,230 +1,299 @@
 (definstances instances
 
 ([Flexions_De_Bracos] of Exercici
-           (nomExercici  FlexionsDeBrasos )
+           (NomExercici  FlexionsDeBrasos )
            (QueTreballa   colzes biceps   triceps   espatllaFrontal   deltoides   pectoral   estabilitzador )
            (Classe forsa)
            (Repeticions  5 10 20)
            (TempsDedicat 3 7 10)
+           (Calories 5 10 15)
+           (Contraindicacions Dolor_esquena)
+           (Indicacions Millorar_la_forsa_del_tren_superior)
 )
 
 ([Dominades] of Exercici
-           (nomExercici  Dominades )
+           (NomExercici  Dominades )
            (QueTreballa   dorsals   biceps   trapesis   estabilitzador hombro)
            (Classe forsa)
            (Repeticions 5 10 15)
            (TempsDedicat 3 7 10)
+           (Calories 5 10 15)
+           (Contraindicacions Dolor_esquena)
+           (Indicacions Millorar_la_forsa_del_tren_superior)
 )
 
 ([Elevacions_Laterals_Amb_Pes] of Exercici
-           (nomExercici  ElevacionsLateralsAmbPes )
+           (NomExercici  ElevacionsLateralsAmbPes )
            (QueTreballa   deltoides   trapesis )
            (Classe forsa)
            (Repeticions  8 12 20)
            (TempsDedicat 5 8 12)
+           (Calories 5 10 15)
+           (Contraindicacions Dolor_esquena)
+           (Indicacions Millorar_la_forsa_del_tren_superior)
 )
 
 ([Flexions_De_Biceps_Amb_Pes] of Exercici
-           (nomExercici  FlexionsDeBicepsAmbPes )
+           (NomExercici  FlexionsDeBicepsAmbPes )
            (QueTreballa   biceps colzes )
            (Classe forsa)
            (Repeticions  10 15 20)
            (TempsDedicat 5 10 15)
+           (Calories 5 10 15)
+           (Contraindicacions Dolor_esquena)
+           (Indicacions Millorar_la_forsa_del_tren_superior)
 )
 
 ([Press_De_Banca] of Exercici
-           (nomExercici  PressDeBanca )
+           (NomExercici  PressDeBanca )
            (QueTreballa   deltoides   pectoral   triceps   trapesis   estabilitzador )
            (Classe forsa)
            (Repeticions  8 12 15)
            (TempsDedicat 5 10 15)
+           (Calories 5 10 15)
+           (Contraindicacions Dolor_esquena)
+           (Indicacions Millorar_la_forsa_del_tren_superior)
 )
 
 ([Press_Militar] of Exercici
-           (nomExercici  PressMilitar )
+           (NomExercici  PressMilitar )
            (QueTreballa   deltoides   triceps   trapesis )
            (Classe forsa)
            (Repeticions  5 10 15)
            (TempsDedicat 5 10 15)
+           (Calories 5 10 15)
+           (Contraindicacions Dolor_esquena)
+           (Indicacions Millorar_la_forsa_del_tren_superior)
 )
 
 ([Hip_Thrusts] of Exercici
-           (nomExercici  HipThrusts )
+           (NomExercici  HipThrusts )
            (QueTreballa   glutis   quadriceps   isquiotibials )
            (Classe forsa)
            (Repeticions  10 15 20)
            (TempsDedicat 5 10 15)
+           (Calories 5 10 15)
+           (Contraindicacions Dolor_esquena)
+           (Indicacions Millorar_la_forsa_del_tren_superior)
 )
 
 ([Squats] of Exercici
-           (nomExercici  Squats )
+           (NomExercici  Squats )
            (QueTreballa   quadriceps   glutis   isquiotibials   trapesis   estabilitzador )
            (Classe forsa)
            (Repeticions  10 15 20)
            (TempsDedicat 8 12 16)
+           (Calories 5 10 15)
+           (Contraindicacions Dolor_esquena)
+           (Indicacions Millorar_la_forsa_del_tren_superior)
 )
 
 ([Planchas] of Exercici
-           (nomExercici  Planchas )
+           (NomExercici  Planchas )
            (QueTreballa   colzes abdominals   lumbars   trapesis   estabilitzador )
            (Classe resistencia)
            (Repeticions  1 1 1)
            (TempsDedicat 3 5 10)
+           (Calories 5 10 15)
+           (Contraindicacions Dolor_esquena)
+           (Indicacions Millorar_la_forsa_del_tren_superior)
 )
 
 ([Deadlifts] of Exercici
-           (nomExercici  Deadlifts )
+           (NomExercici  Deadlifts )
            (QueTreballa   dorsals   glutis   isquiotibials   trapesis   estabilitzador )
            (Classe forsa)
            (Repeticions  8 12 15)
            (TempsDedicat 5 10 15)
+           (Calories 5 10 15)
+           (Contraindicacions Dolor_esquena)
+           (Indicacions Millorar_la_forsa_del_tren_superior)
 )
 
 ([Lunges] of Exercici
-           (nomExercici  Lunges )
+           (NomExercici  Lunges )
            (QueTreballa   quadriceps   glutis   isquiotibials   estabilitzador )
            (Classe forsa)
            (Repeticions  8 12 15)
            (TempsDedicat 5 10 15)
+           (Calories 5 10 15)
+           (Contraindicacions Dolor_esquena)
+           (Indicacions Millorar_la_forsa_del_tren_superior)
 )
 
 ([Burpees] of Exercici
-           (nomExercici  Burpees )
+           (NomExercici  Burpees )
            (QueTreballa   colzes deltoides   pectoral   triceps   quadriceps   isquiotibials   glutis   estabilitzador )
            (Classe explosivitat)
            (Repeticions  5 10 15)
            (TempsDedicat 4 8 12)
+           (Calories 5 10 15)
+           (Contraindicacions Dolor_esquena)
+           (Indicacions Millorar_la_forsa_del_tren_superior)
 )
 
 ([Mountain_Climbers] of Exercici
-           (nomExercici  MountainClimbers )
+           (NomExercici  MountainClimbers )
            (QueTreballa   abdominals   quadriceps   deltoides   glutis   isquiotibials   estabilitzador )
            (Classe resistencia)
            (Repeticions  10 20 30)
            (TempsDedicat 3 5 7)
+           (Calories 5 10 15)
+           (Contraindicacions Dolor_esquena)
+           (Indicacions Millorar_la_forsa_del_tren_superior)
 )
 
 ;;------------------------Cardio-----------------------------------
 ([Correr_En_Maquina] of Exercici
-           (nomExercici  Correr )
+           (NomExercici  Correr )
            (QueTreballa   quadriceps   isquiotibials   glutis   cadera   genolls   tormells   peus   cervicals )
            (Classe cardio)
            (Repeticions  1 1 1)
            (TempsDedicat 7 15 30)
+           (Calories 5 10 15)
+           (Contraindicacions Dolor_esquena)
+           (Indicacions Millorar_la_forsa_del_tren_superior)
 )
 
 ([Lateral_Toe_Tabs] of Exercici
-           (nomExercici  Lateral_Toe_Tabs )
+           (NomExercici  Lateral_Toe_Tabs )
            (QueTreballa   quadriceps   isquiotibials   glutis   cadera   genolls   tormells   peus)
            (Classe cardio)
            (Repeticions  20 30 40)
            (TempsDedicat 5 7 10)
+           (Calories 5 10 15)
+           (Contraindicacions Dolor_esquena)
+           (Indicacions Millorar_la_forsa_del_tren_superior)
 )
 
 ([Bicicleta_Estatica] of Exercici
-           (nomExercici  Bicicleta_Estatica )
+           (NomExercici  Bicicleta_Estatica )
            (QueTreballa   quadriceps   isquiotibials   glutis   genolls   tormells   peus   dorsals )
            (Classe cardio)
            (Repeticions  1 1 1)
            (TempsDedicat 7 15 30)
+           (Calories 5 10 15)
+           (Contraindicacions Dolor_esquena)
+           (Indicacions Millorar_la_forsa_del_tren_superior)
 )
 
 ([Caminar] of Exercici
-           (nomExercici  Caminar )
+           (NomExercici  Caminar )
            (QueTreballa   quadriceps   isquiotibials   glutis   cadera   genolls   tormells   peus )
            (Classe cardio)
            (Repeticions  1 1 1)
            (TempsDedicat 7 15 30)
+           (Calories 5 10 15)
+           (Contraindicacions Dolor_esquena)
+           (Indicacions Millorar_la_forsa_del_tren_superior)
 )   
 
 ([Nadar] of Exercici
-           (nomExercici  Nadar )
+           (NomExercici  Nadar )
            (QueTreballa   dorsals   pectoral   abdominals   biceps   triceps   glutis   quadriceps   isquiotibials )
            (Classe cardio)
            (Repeticions  3 5 10)
            (TempsDedicat 8 12 17)
+           (Calories 5 10 15)
+           (Contraindicacions Dolor_esquena)
+           (Indicacions Millorar_la_forsa_del_tren_superior)
 )
 
 ([Aquagym] of Exercici
-           (nomExercici Aquagym )
+           (NomExercici Aquagym )
            (QueTreballa   dorsals   pectoral   abdominals   biceps   triceps   glutis   quadriceps   isquiotibials )
            (Classe cardio)
            (Repeticions  1 1 1)
            (TempsDedicat 7 15 30)
+           (Calories 5 10 15)
+           (Contraindicacions Dolor_esquena)
+           (Indicacions Millorar_la_forsa_del_tren_superior)
 )
 
+;;-------------------Especialment indicats--------------------------
 
+([Rotacions_tronc] of Exercici
+            (NomExercici  RotacionsTronc )
+            (QueTreballa   abdominals   lumbars   trapesis   estabilitzador )
+            (Classe forsa)
+            (Repeticions  10 -1 -1)
+            (TempsDedicat 5 -1 -1)
+            (Calories 5 -1 -1)
+            (Contraindicacions )
+            (Indicacions Dolor_esquena)
+
+)
 
 ;; ------------------Limitacions------------------------------------
 
 ([Dolor_esquena] of Limitacions
-         (nomLimitacio Dolor_esquena )
+         (NomLimitacio Dolor_esquena )
          (Bloquejos  pectoral dorsals trapesis espatllaFrontal espatllaPosterior )
          (GrauLesio   invalid )
     )
 
 ([Dolor_biceps] of Limitacions
-          (nomLimitacio  Dolor_biceps )
+         (NomLimitacio  Dolor_biceps )
          (Bloquejos   biceps )
          (GrauLesio   invalid )
     )
 
 ([Dolor_cervicals] of Limitacions
-          (nomLimitacio  Dolor_cervicals )
+          (NomLimitacio  Dolor_cervicals )
          (Bloquejos   trapesis espatllaFrontal espatllaPosterior cervicals )
          (GrauLesio   invalid )
     )
 
 ([Sindrome_tunel_carpia] of Limitacions
-         (nomLimitacio  Sindrome_tunel_carpia )
+         (NomLimitacio  Sindrome_tunel_carpia )
          (Bloquejos   canells )
          (GrauLesio   invalid )
     )
 
 ([Tendinitis] of Limitacions
-           (nomLimitacio  Tendinitis)
+           (NomLimitacio  Tendinitis)
          (Bloquejos   colzes )
          (GrauLesio   invalid )
     )
 
 ([Contractura_Muscular_Lumbar] of Limitacions
-          (nomLimitacio  Contractura_Muscular_Lumbar )
+          (NomLimitacio  Contractura_Muscular_Lumbar )
           (Bloquejos   lumbars )
           (GrauLesio   invalid )
     )
 
 ([Espero_calcani] of Limitacions
-          (nomLimitacio  Espero_calcani )
+          (NomLimitacio  Espero_calcani )
          (Bloquejos   peus )
          (GrauLesio   invalid )
     )
 
 ([Ciatica] of Limitacions
-          (nomLimitacio  Ciatica )
+          (NomLimitacio  Ciatica )
          (Bloquejos   lumbars   glutis   isquiotibials   genolls   peus )
          (GrauLesio   invalid )
     )
 
 ([Esquinc_tormell] of Limitacions
-         (nomLimitacio  Esquinc_tormell )
+         (NomLimitacio  Esquinc_tormell )
          (Bloquejos   tormells )
          (GrauLesio   invalid )
     )
 
 ([Hombro_Congelado] of Limitacions
-         (nomLimitacio  Hombro_Congelado )
+         (NomLimitacio  Hombro_Congelado )
          (Bloquejos   hombro )
          (GrauLesio   invalid )
     )
 
 ([Sindrome_Piramidal] of Limitacions
-         (nomLimitacio  Sindrome_Piramidal )
+         (NomLimitacio  Sindrome_Piramidal )
          (Bloquejos   glutis   peus )
          (GrauLesio   invalid )
     )
 
 ([Bursitis_genoll] of Limitacions
-         (nomLimitacio  Bursitis_Rodilla )
+         (NomLimitacio  Bursitis_Rodilla )
          (Bloquejos   genolls )
          (GrauLesio   invalid )
     )

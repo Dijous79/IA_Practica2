@@ -8,7 +8,7 @@
     (is-a USER)
     (role concrete)
     (pattern-match reactive)
-    (slot nomExercici
+    (slot NomExercici
         (type STRING)
         (create-accessor read-write))
     (multislot QueTreballa
@@ -24,13 +24,22 @@
         (type STRING)
         (create-accessor read-write)
     )
+    (slot Calories
+        (type INTEGER)
+        (create-accessor read-write))
+    (multislot Contraindicacions
+        (type STRING)
+        (create-accessor read-write))
+    (multislot Indicacions
+        (type STRING)
+        (create-accessor read-write))
 )
 
 (defclass Limitacions
     (is-a USER)
     (role concrete)
     (pattern-match reactive)
-    (slot nomLimitacio
+    (slot NomLimitacio
         (type STRING)
         (create-accessor read-write))
     (multislot Bloquejos
@@ -103,6 +112,9 @@
         (type STRING)
         (create-accessor read-write))
     (slot MenjarsAmbProteina
+        (type INTEGER)
+        (create-accessor read-write))
+    (slot MenjarsAmbCarbohidrats
         (type INTEGER)
         (create-accessor read-write))
 
