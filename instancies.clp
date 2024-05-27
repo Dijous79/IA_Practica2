@@ -258,7 +258,7 @@
 
 ([Ioga] of Exercici
             (NomExercici Ioga )
-            (QueTreballa estabilitzador)
+            (QueTreballa estabilitzador triceps trapesis abdominals lumbars glutis quadriceps isquiotibials hombro cadera genolls cervicals)
             (Classe flexibilitat)
             (Repeticions 1 1 1)
             (TempsDedicat 10 20 30)
@@ -269,7 +269,7 @@
 
 ([Pilates] of Exercici
             (NomExercici Pilates )
-            (QueTreballa estabilitzador )
+            (QueTreballa estabilitzador abdominals lumbars dorsals pectoral trapesis triceps biceps glutis quadriceps isquiotibials bessons)
             (Classe flexibilitat)
             (Repeticions 1 1 1)
             (TempsDedicat 10 20 30)
@@ -308,17 +308,6 @@
             (Repeticions 10 15 20)
             (TempsDedicat 5 10 15)
             (Calories 25 40 60)
-            (Contraindicacions )
-            (Indicacions )
-)
-
-([Tai_Chi] of Exercici
-            (NomExercici TaiChi )
-            (QueTreballa equilibri  estabilitzador)
-            (Classe equilibri)
-            (Repeticions 1 1 1)
-            (TempsDedicat 10 20 30)
-            (Calories 20 40 60)
             (Contraindicacions )
             (Indicacions )
 )
