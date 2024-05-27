@@ -347,7 +347,7 @@
         (assert (abstreure_parts_no_treballables))
     )
 
-    (printout t "Inidcans els teus objectius" crlf)
+    (printout t "Indicans els teus objectius" crlf)
     (bind ?instancies (find-all-instances ((?inst Objectiu)) TRUE))
     (bind ?objectius_posibles (create$))
     (foreach ?i ?instancies
@@ -636,7 +636,7 @@
         (bind ?exercici_nth (nth$ ?i ?*exercicis*))
         (bind ?queTreball (send ?exercici_nth get-QueTreballa))
         (bind ?indicacions (send ?exercici_nth get-Indicacions))
-        (if (or (not(tenen_element_en_comu ?*parts_del_cos_no_treballables* ?queTreball)) (tenen_element_en_comu ?indicacions ?*marc_de_caracteristiques*) (tenen_element_en_comu ?indicacions ?limitacions))
+        (if (or (and (not(tenen_element_en_comu ?*parts_del_cos_no_treballables* ?queTreball)) (tenen_element_en_comu ?indicacions ?limitacions)) (tenen_element_en_comu ?indicacions ?*marc_de_caracteristiques*) )
             then (bind ?aux (create$ ?aux ?exercici_nth)))
         (bind ?i (+ ?i 1))
     )   

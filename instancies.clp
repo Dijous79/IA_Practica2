@@ -252,41 +252,41 @@
             (Repeticions 1 1 1)
             (TempsDedicat 2 5 7)
             (Calories 5 10 15)
-            (Contraindicacions Dolor_esquena)
+            (Contraindicacions )
             (Indicacions )
 )
 
 ([Ioga] of Exercici
             (NomExercici Ioga )
-            (QueTreballa equilibri estabilitzador)
+            (QueTreballa estabilitzador)
             (Classe flexibilitat)
             (Repeticions 1 1 1)
             (TempsDedicat 10 20 30)
             (Calories 30 60 100)
-            (Contraindicacions Problemes_cardiovasculars)
+            (Contraindicacions )
             (Indicacions )
 )
 
 ([Pilates] of Exercici
             (NomExercici Pilates )
-            (QueTreballa estabilitzador equilibri)
+            (QueTreballa estabilitzador )
             (Classe flexibilitat)
             (Repeticions 1 1 1)
             (TempsDedicat 10 20 30)
             (Calories 25 50 80)
-            (Contraindicacions Dolor_esquena)
+            (Contraindicacions )
             (Indicacions )
 )
 
 ;-------------------------Equilibri----------------------------------------------
 ([Estocades_Amb_Equilibri] of Exercici
             (NomExercici EstocadesAmbEquilibri )
-            (QueTreballa quadriceps glutis isquiotibials estabilitzador)
+            (QueTreballa quadriceps glutis genolls isquiotibials estabilitzador)
             (Classe equilibri)
             (Repeticions 8 12 15)
             (TempsDedicat 5 10 15)
             (Calories 20 35 50)
-            (Contraindicacions Dolor_genolls)
+            (Contraindicacions)
             (Indicacions )
 )
 
