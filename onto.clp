@@ -66,9 +66,6 @@
     (is-a USER)
     (role concrete)
     (pattern-match reactive)
-    (multislot Duu_a_Terme
-        (type STRING)
-        (create-accessor read-write))
     (multislot TeLimitacions
         (type STRING)
         (create-accessor read-write))
@@ -90,10 +87,10 @@
     (slot Edat
         (type INTEGER)
         (create-accessor read-write))
-    (slot PresioSistolica
+    (slot PressioSistolica
         (type INTEGER)
         (create-accessor read-write))
-    (slot PresioDiastolica
+    (slot PressioDiastolica
         (type INTEGER)
         (create-accessor read-write))
     (slot MinutsCaminatsDiaris

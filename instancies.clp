@@ -2,7 +2,7 @@
 
 ([Flexions_De_Bracos] of Exercici
            (NomExercici  FlexionsDeBrasos )
-           (QueTreballa   colzes biceps   triceps   espatllaFrontal   deltoides   pectoral   estabilitzador )
+           (QueTreballa colzes biceps triceps espatllaFrontal deltoides pectoral estabilitzador )
            (Classe forsa)
            (Repeticions  5 10 20)
            (TempsDedicat 3 7 10)
@@ -13,67 +13,45 @@
 
 ([Dominades] of Exercici
            (NomExercici  Dominades )
-           (QueTreballa   dorsals   biceps   trapesis   estabilitzador hombro)
+           (QueTreballa dorsals biceps trapesis estabilitzador hombro)
            (Classe forsa)
            (Repeticions 5 10 15)
            (TempsDedicat 3 7 10)
            (Calories 20 40 60)
            (Contraindicacions obesitat)
-           (Indicacions Millorar_la_forsa_del_tren_superior)
+           (Indicacions )
 )
 
 ([Elevacions_Laterals_Amb_Pes] of Exercici
-           (NomExercici  ElevacionsLateralsAmbPes )
-           (QueTreballa   deltoides   trapesis )
+           (NomExercici ElevacionsLateralsAmbPes )
+           (QueTreballa deltoides trapesis )
            (Classe forsa)
            (Repeticions  8 12 20)
            (TempsDedicat 5 8 12)
            (Calories 25 40 65)
            (Contraindicacions )
-           (Indicacions Millorar_la_forsa_del_tren_superior)
-)
-
-([Flexions_De_Biceps_Amb_Pes] of Exercici
-           (NomExercici  FlexionsDeBicepsAmbPes )
-           (QueTreballa   biceps colzes )
-           (Classe forsa)
-           (Repeticions  10 15 20)
-           (TempsDedicat 5 10 15)
-           (Calories 20 30 40)
-           (Contraindicacions sobrepes obesitat)
            (Indicacions )
 )
 
 ([Press_De_Banca] of Exercici
            (NomExercici  PressDeBanca )
-           (QueTreballa   deltoides   pectoral   triceps   trapesis   estabilitzador )
+           (QueTreballa deltoides pectoral triceps trapesis estabilitzador )
            (Classe forsa)
            (Repeticions  8 12 15)
            (TempsDedicat 5 10 15)
            (Calories 30 50 70)
-           (Contraindicacions )
+           (Contraindicacions infant)
            (Indicacions )
 )
 
 ([Press_Militar] of Exercici
            (NomExercici  PressMilitar )
-           (QueTreballa   deltoides   triceps   trapesis )
+           (QueTreballa   deltoides triceps trapesis )
            (Classe forsa)
            (Repeticions  5 10 15)
            (TempsDedicat 5 10 15)
            (Calories 25 40 55)
-           (Contraindicacions Dolor_esquena)
-           (Indicacions )
-)
-
-([Hip_Thrusts] of Exercici
-           (NomExercici  HipThrusts )
-           (QueTreballa   glutis   quadriceps   isquiotibials )
-           (Classe forsa)
-           (Repeticions  10 15 20)
-           (TempsDedicat 5 10 15)
-           (Calories 30 50 70)
-           (Contraindicacions Dolor_esquena)
+           (Contraindicacions infant)
            (Indicacions )
 )
 
@@ -84,18 +62,18 @@
            (Repeticions  10 15 20)
            (TempsDedicat 8 12 16)
            (Calories 40 60 80)
-           (Contraindicacions Dolor_esquena)
+           (Contraindicacions avi)
            (Indicacions )
 )
 
-([Planchas] of Exercici
-           (NomExercici  Planchas )
+([Planxas] of Exercici
+           (NomExercici  Planxas )
            (QueTreballa   colzes abdominals   lumbars   trapesis   estabilitzador )
            (Classe resistencia)
            (Repeticions  1 1 1)
            (TempsDedicat 3 5 10)
            (Calories 15 25 35)
-           (Contraindicacions Dolor_esquena)
+           (Contraindicacions obesitat sobrepes)
            (Indicacions )
 )
 
@@ -106,7 +84,7 @@
            (Repeticions  8 12 15)
            (TempsDedicat 5 10 15)
            (Calories 35 55 75)
-           (Contraindicacions Dolor_esquena)
+           (Contraindicacions infant avi)
            (Indicacions )
 )
 
@@ -117,7 +95,7 @@
            (Repeticions  8 12 15)
            (TempsDedicat 5 10 15)
            (Calories 25 40 55)
-           (Contraindicacions Dolor_esquena)
+           (Contraindicacions )
            (Indicacions )
 )
 
@@ -128,7 +106,7 @@
            (Repeticions  5 10 15)
            (TempsDedicat 4 8 12)
            (Calories 30 50 70)
-           (Contraindicacions sobrepes obesitat)
+           (Contraindicacions sobrepes obesitat avi hipotensio)
            (Indicacions )
 )
 
@@ -139,7 +117,7 @@
            (Repeticions  10 20 30)
            (TempsDedicat 3 5 7)
            (Calories 20 30 40)
-           (Contraindicacions )
+           (Contraindicacions avi hipotensio)
            (Indicacions )
 )
 
@@ -151,8 +129,8 @@
            (Repeticions  1 1 1)
            (TempsDedicat 7 15 30)
            (Calories 70 150 300)
-           (Contraindicacions Dolor_esquena)
-           (Indicacions Millorar_la_forsa_del_tren_superior)
+           (Contraindicacions )
+           (Indicacions )
 )
 
 ([Lateral_Toe_Tabs] of Exercici
@@ -162,8 +140,8 @@
            (Repeticions  20 30 40)
            (TempsDedicat 5 7 10)
            (Calories 25 40 55)
-           (Contraindicacions Dolor_esquena)
-           (Indicacions Millorar_la_forsa_del_tren_superior)
+           (Contraindicacions )
+           (Indicacions )
 )
 
 ([Bicicleta_Estatica] of Exercici
@@ -173,8 +151,8 @@
            (Repeticions  1 1 1)
            (TempsDedicat 7 15 30)
            (Calories 50 100 200)
-           (Contraindicacions Dolor_esquena)
-           (Indicacions Millorar_la_forsa_del_tren_superior)
+           (Contraindicacions )
+           (Indicacions )
 )
 
 ([Caminar] of Exercici
@@ -184,8 +162,8 @@
            (Repeticions  1 1 1)
            (TempsDedicat 7 15 30)
            (Calories 25 50 100)
-           (Contraindicacions Dolor_esquena)
-           (Indicacions Millorar_la_forsa_del_tren_superior)
+           (Contraindicacions )
+           (Indicacions hipertensio)
 )   
 
 ([Nadar] of Exercici
@@ -195,8 +173,8 @@
            (Repeticions  3 5 10)
            (TempsDedicat 8 12 17)
            (Calories 60 100 150)
-           (Contraindicacions Dolor_esquena)
-           (Indicacions Millorar_la_forsa_del_tren_superior)
+           (Contraindicacions )
+           (Indicacions )
 )
 
 ([Aquagym] of Exercici
@@ -206,8 +184,143 @@
            (Repeticions  1 1 1)
            (TempsDedicat 7 15 30)
            (Calories 30 60 120)
-           (Contraindicacions Dolor_esquena)
-           (Indicacions Millorar_la_forsa_del_tren_superior)
+           (Contraindicacions )
+           (Indicacions Dolor_esquena Dolor_genolls)
+)
+
+;---------------------------Explosivitat------------------------------------------
+([Sprints] of Exercici
+            (NomExercici Sprints )
+            (QueTreballa quadriceps isquiotibials glutis cadera genolls tormells peus)
+            (Classe explosivitat)
+            (Repeticions 1 1 1)
+            (TempsDedicat 5 10 15)
+            (Calories 60 100 150)
+            (Contraindicacions hipertensio hipotensio)
+            (Indicacions )
+)
+
+([Box_Jumps] of Exercici
+            (NomExercici Box_Jumps )
+            (QueTreballa quadriceps glutis isquiotibials estabilitzador genolls)
+            (Classe explosivitat)
+            (Repeticions 5 10 15)
+            (TempsDedicat 3 5 7)
+            (Calories 30 50 70)
+            (Contraindicacions hipertensio hipotensio)
+            (Indicacions )
+)
+
+([Kettlebell_Swings] of Exercici
+            (NomExercici Kettlebell_Swings )
+            (QueTreballa quadriceps glutis isquiotibials estabilitzador dorsals)
+            (Classe explosivitat)
+            (Repeticions 10 15 20)
+            (TempsDedicat 4 7 10)
+            (Calories 25 40 60)
+            (Contraindicacions hipertensio)
+            (Indicacions )
+)
+
+([Plyometric_Pushups] of Exercici
+            (NomExercici Plyometric_Pushups )
+            (QueTreballa pectoral triceps deltoides estabilitzador colzes)
+            (Classe explosivitat)
+            (Repeticions 5 10 15)
+            (TempsDedicat 3 5 7)
+            (Calories 20 35 50)
+            (Contraindicacions hipertensio hipotensio)
+            (Indicacions )
+)
+
+;--------------------------Flexibilitat-----------------------------------
+([Estiraments_Quadriceps] of Exercici
+            (NomExercici EstiramentsQuàdriceps )
+            (QueTreballa quadriceps)
+            (Classe flexibilitat)
+            (Repeticions 1 1 1)
+            (TempsDedicat 2 5 7)
+            (Calories 5 10 15)
+            (Contraindicacions )
+            (Indicacions )
+)
+
+([Estiraments_Isquiotibials] of Exercici
+            (NomExercici EstiramentsIsquiotibials )
+            (QueTreballa isquiotibials)
+            (Classe flexibilitat)
+            (Repeticions 1 1 1)
+            (TempsDedicat 2 5 7)
+            (Calories 5 10 15)
+            (Contraindicacions Dolor_esquena)
+            (Indicacions )
+)
+
+([Ioga] of Exercici
+            (NomExercici Ioga )
+            (QueTreballa equilibri estabilitzador)
+            (Classe flexibilitat)
+            (Repeticions 1 1 1)
+            (TempsDedicat 10 20 30)
+            (Calories 30 60 100)
+            (Contraindicacions Problemes_cardiovasculars)
+            (Indicacions )
+)
+
+([Pilates] of Exercici
+            (NomExercici Pilates )
+            (QueTreballa estabilitzador equilibri)
+            (Classe flexibilitat)
+            (Repeticions 1 1 1)
+            (TempsDedicat 10 20 30)
+            (Calories 25 50 80)
+            (Contraindicacions Dolor_esquena)
+            (Indicacions )
+)
+
+;-------------------------Equilibri----------------------------------------------
+([Estocades_Amb_Equilibri] of Exercici
+            (NomExercici EstocadesAmbEquilibri )
+            (QueTreballa quadriceps glutis isquiotibials estabilitzador)
+            (Classe equilibri)
+            (Repeticions 8 12 15)
+            (TempsDedicat 5 10 15)
+            (Calories 20 35 50)
+            (Contraindicacions Dolor_genolls)
+            (Indicacions )
+)
+
+([Planxa_Lateral] of Exercici
+            (NomExercici PlanxaLateral )
+            (QueTreballa abdominals estabilitzador)
+            (Classe equilibri)
+            (Repeticions 1 1 1)
+            (TempsDedicat 3 5 7)
+            (Calories 10 20 30)
+            (Contraindicacions )
+            (Indicacions )
+)
+
+([Equilibri_Amb_Bosch_Ball] of Exercici
+            (NomExercici EquilibriAmbBoschBall )
+            (QueTreballa estabilitzador equilibri quadriceps isquiotibials)
+            (Classe equilibri)
+            (Repeticions 10 15 20)
+            (TempsDedicat 5 10 15)
+            (Calories 25 40 60)
+            (Contraindicacions )
+            (Indicacions )
+)
+
+([Tai_Chi] of Exercici
+            (NomExercici TaiChi )
+            (QueTreballa equilibri  estabilitzador)
+            (Classe equilibri)
+            (Repeticions 1 1 1)
+            (TempsDedicat 10 20 30)
+            (Calories 20 40 60)
+            (Contraindicacions )
+            (Indicacions )
 )
 
 ;;-------------------Especialment indicats--------------------------
@@ -216,9 +329,9 @@
             (NomExercici  RotacionsTronc )
             (QueTreballa   abdominals   lumbars   trapesis   estabilitzador )
             (Classe forsa)
-            (Repeticions  10 -1 -1)
-            (TempsDedicat 5 -1 -1)
-            (Calories 20 -1 -1)
+            (Repeticions  10 10 10)
+            (TempsDedicat 5 5 5)
+            (Calories 20 20 20)
             (Contraindicacions )
             (Indicacions Dolor_esquena)
 )
@@ -231,9 +344,9 @@
          (Bloquejos  pectoral dorsals trapesis espatllaFrontal espatllaPosterior )
     )
 
-([Dolor_biceps] of Limitacions
-         (NomLimitacio  Dolor_biceps )
-         (Bloquejos   biceps )
+([Dolor_genolls] of Limitacions
+         (NomLimitacio  Dolor_genolls )
+         (Bloquejos   genolls )
     )
 
 ([Dolor_cervicals] of Limitacions

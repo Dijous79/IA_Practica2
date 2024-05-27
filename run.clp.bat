@@ -4,4 +4,4 @@
 (load "regles.clp")
 (load "instancies.clp")
 (reset)
-(run 1)
+(run)
