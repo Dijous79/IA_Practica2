@@ -46,7 +46,7 @@
 
 ([Press_Militar] of Exercici
            (NomExercici  PressMilitar )
-           (QueTreballa   deltoides triceps trapesis )
+           (QueTreballa deltoides triceps trapesis )
            (Classe forsa)
            (Repeticions  5 10 15)
            (TempsDedicat 5 10 15)
@@ -57,7 +57,7 @@
 
 ([Squats] of Exercici
            (NomExercici  Squats )
-           (QueTreballa   quadriceps   glutis   isquiotibials   trapesis   estabilitzador )
+           (QueTreballa quadriceps glutis isquiotibials trapesis estabilitzador )
            (Classe forsa)
            (Repeticions  10 15 20)
            (TempsDedicat 8 12 16)
@@ -68,8 +68,8 @@
 
 ([Planxas] of Exercici
            (NomExercici  Planxas )
-           (QueTreballa   colzes abdominals   lumbars   trapesis   estabilitzador )
-           (Classe resistencia)
+           (QueTreballa colzes abdominals lumbars trapesis estabilitzador )
+           (Classe forsa)
            (Repeticions  1 1 1)
            (TempsDedicat 3 5 10)
            (Calories 15 25 35)
@@ -79,7 +79,7 @@
 
 ([Deadlifts] of Exercici
            (NomExercici  Deadlifts )
-           (QueTreballa   dorsals   glutis   isquiotibials   trapesis   estabilitzador )
+           (QueTreballa dorsals glutis isquiotibials trapesis estabilitzador )
            (Classe forsa)
            (Repeticions  8 12 15)
            (TempsDedicat 5 10 15)
@@ -90,7 +90,7 @@
 
 ([Lunges] of Exercici
            (NomExercici  Lunges )
-           (QueTreballa   quadriceps   glutis   isquiotibials   estabilitzador )
+           (QueTreballa quadriceps glutis isquiotibials estabilitzador)
            (Classe forsa)
            (Repeticions  8 12 15)
            (TempsDedicat 5 10 15)
@@ -101,7 +101,7 @@
 
 ([Burpees] of Exercici
            (NomExercici  Burpees )
-           (QueTreballa   colzes deltoides   pectoral   triceps   quadriceps   isquiotibials   glutis   estabilitzador )
+           (QueTreballa colzes deltoides pectoral triceps quadriceps isquiotibials glutis estabilitzador genolls)
            (Classe explosivitat)
            (Repeticions  5 10 15)
            (TempsDedicat 4 8 12)
@@ -112,7 +112,7 @@
 
 ([Mountain_Climbers] of Exercici
            (NomExercici  MountainClimbers )
-           (QueTreballa   abdominals   quadriceps   deltoides   glutis   isquiotibials   estabilitzador )
+           (QueTreballa abdominals quadriceps deltoides glutis isquiotibials estabilitzador genolls)
            (Classe resistencia)
            (Repeticions  10 20 30)
            (TempsDedicat 3 5 7)
@@ -124,7 +124,7 @@
 ;;------------------------resistencia-----------------------------------
 ([Correr_En_Maquina] of Exercici
            (NomExercici  Correr )
-           (QueTreballa   quadriceps   isquiotibials   glutis   cadera   genolls   tormells   peus   cervicals )
+           (QueTreballa   quadriceps isquiotibials glutis cadera genolls tormells peus cervicals )
            (Classe resistencia)
            (Repeticions  1 1 1)
            (TempsDedicat 7 15 30)
@@ -157,7 +157,7 @@
 
 ([Caminar] of Exercici
            (NomExercici  Caminar )
-           (QueTreballa   quadriceps   isquiotibials   glutis   cadera   genolls   tormells   peus )
+           (QueTreballa quadriceps isquiotibials glutis cadera genolls tormells peus )
            (Classe resistencia)
            (Repeticions  1 1 1)
            (TempsDedicat 7 15 30)
@@ -168,7 +168,7 @@
 
 ([Nadar] of Exercici
            (NomExercici  Nadar )
-           (QueTreballa   dorsals   pectoral   abdominals   biceps   triceps   glutis   quadriceps   isquiotibials )
+           (QueTreballa dorsals pectoral abdominals biceps triceps glutis quadriceps isquiotibials )
            (Classe resistencia)
            (Repeticions  3 5 10)
            (TempsDedicat 8 12 17)
@@ -179,7 +179,7 @@
 
 ([Aquagym] of Exercici
            (NomExercici Aquagym )
-           (QueTreballa   dorsals   pectoral   abdominals   biceps   triceps   glutis   quadriceps   isquiotibials )
+           (QueTreballa dorsals pectoral abdominals biceps triceps glutis quadriceps isquiotibials )
            (Classe resistencia)
            (Repeticions  1 1 1)
            (TempsDedicat 7 15 30)
