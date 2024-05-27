@@ -303,7 +303,7 @@
 
 ([Equilibri_Amb_Bosch_Ball] of Exercici
             (NomExercici EquilibriAmbBoschBall )
-            (QueTreballa estabilitzador equilibri quadriceps isquiotibials)
+            (QueTreballa estabilitzador quadriceps isquiotibials)
             (Classe equilibri)
             (Repeticions 10 15 20)
             (TempsDedicat 5 10 15)
