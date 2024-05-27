@@ -635,7 +635,7 @@
         (bind ?exercici_nth (nth$ ?i ?*exercicis*))
         (bind ?queTreball (send ?exercici_nth get-QueTreballa))
         (bind ?indicacions (send ?exercici_nth get-Indicacions))
-        (if (or (and (not(tenen_element_en_comu ?*parts_del_cos_no_treballables* ?queTreball)) (tenen_element_en_comu ?indicacions ?limitacions)) (tenen_element_en_comu ?indicacions ?*marc_de_caracteristiques*) )
+        (if (or (not(tenen_element_en_comu ?*parts_del_cos_no_treballables* ?queTreball)) (tenen_element_en_comu ?indicacions ?limitacions) (tenen_element_en_comu ?indicacions ?*marc_de_caracteristiques*) )
             then (bind ?aux (create$ ?aux ?exercici_nth)))
         (bind ?i (+ ?i 1))
     )   
@@ -678,7 +678,7 @@
             (bind ?exercici_nth (nth$ ?i ?*exercicis*))
             (bind ?queTreballa (send ?exercici_nth get-QueTreballa))
             (bind ?classe (send ?exercici_nth get-Classe))
-            (if (or (tenen_element_en_comu ?*parts_del_cos_prioritaries* ?queTreballa) (member$ ?classe ?*classes_prioritaries*))
+            (if (and (tenen_element_en_comu ?*parts_del_cos_prioritaries* ?queTreballa) (member$ ?classe ?*classes_prioritaries*))
                 then (bind ?aux (create$ ?aux ?exercici_nth))
             else
                 (bind ?aux2 (create$ ?aux2 ?exercici_nth))
