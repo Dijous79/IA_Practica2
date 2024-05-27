@@ -45,9 +45,6 @@
     (multislot Bloquejos
         (type STRING)
         (create-accessor read-write))
-    (slot GrauLesio
-        (type STRING)
-        (create-accessor read-write))
 )
 
 (defclass Objectiu

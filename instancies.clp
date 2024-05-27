@@ -7,8 +7,8 @@
            (Repeticions  5 10 20)
            (TempsDedicat 3 7 10)
            (Calories 15 30 45)
-           (Contraindicacions Dolor_esquena)
-           (Indicacions Millorar_la_forsa_del_tren_superior)
+           (Contraindicacions sobrepes obesitat)
+           (Indicacions )
 )
 
 ([Dominades] of Exercici
@@ -18,7 +18,7 @@
            (Repeticions 5 10 15)
            (TempsDedicat 3 7 10)
            (Calories 20 40 60)
-           (Contraindicacions Dolor_esquena)
+           (Contraindicacions obesitat)
            (Indicacions Millorar_la_forsa_del_tren_superior)
 )
 
@@ -29,7 +29,7 @@
            (Repeticions  8 12 20)
            (TempsDedicat 5 8 12)
            (Calories 25 40 65)
-           (Contraindicacions Dolor_esquena)
+           (Contraindicacions )
            (Indicacions Millorar_la_forsa_del_tren_superior)
 )
 
@@ -40,8 +40,8 @@
            (Repeticions  10 15 20)
            (TempsDedicat 5 10 15)
            (Calories 20 30 40)
-           (Contraindicacions Dolor_esquena)
-           (Indicacions Millorar_la_forsa_del_tren_superior)
+           (Contraindicacions sobrepes obesitat)
+           (Indicacions )
 )
 
 ([Press_De_Banca] of Exercici
@@ -51,8 +51,8 @@
            (Repeticions  8 12 15)
            (TempsDedicat 5 10 15)
            (Calories 30 50 70)
-           (Contraindicacions Dolor_esquena)
-           (Indicacions Millorar_la_forsa_del_tren_superior)
+           (Contraindicacions )
+           (Indicacions )
 )
 
 ([Press_Militar] of Exercici
@@ -63,7 +63,7 @@
            (TempsDedicat 5 10 15)
            (Calories 25 40 55)
            (Contraindicacions Dolor_esquena)
-           (Indicacions Millorar_la_forsa_del_tren_superior)
+           (Indicacions )
 )
 
 ([Hip_Thrusts] of Exercici
@@ -74,7 +74,7 @@
            (TempsDedicat 5 10 15)
            (Calories 30 50 70)
            (Contraindicacions Dolor_esquena)
-           (Indicacions Millorar_la_forsa_del_tren_superior)
+           (Indicacions )
 )
 
 ([Squats] of Exercici
@@ -85,7 +85,7 @@
            (TempsDedicat 8 12 16)
            (Calories 40 60 80)
            (Contraindicacions Dolor_esquena)
-           (Indicacions Millorar_la_forsa_del_tren_superior)
+           (Indicacions )
 )
 
 ([Planchas] of Exercici
@@ -96,7 +96,7 @@
            (TempsDedicat 3 5 10)
            (Calories 15 25 35)
            (Contraindicacions Dolor_esquena)
-           (Indicacions Millorar_la_forsa_del_tren_superior)
+           (Indicacions )
 )
 
 ([Deadlifts] of Exercici
@@ -107,7 +107,7 @@
            (TempsDedicat 5 10 15)
            (Calories 35 55 75)
            (Contraindicacions Dolor_esquena)
-           (Indicacions Millorar_la_forsa_del_tren_superior)
+           (Indicacions )
 )
 
 ([Lunges] of Exercici
@@ -118,7 +118,7 @@
            (TempsDedicat 5 10 15)
            (Calories 25 40 55)
            (Contraindicacions Dolor_esquena)
-           (Indicacions Millorar_la_forsa_del_tren_superior)
+           (Indicacions )
 )
 
 ([Burpees] of Exercici
@@ -128,8 +128,8 @@
            (Repeticions  5 10 15)
            (TempsDedicat 4 8 12)
            (Calories 30 50 70)
-           (Contraindicacions Dolor_esquena)
-           (Indicacions Millorar_la_forsa_del_tren_superior)
+           (Contraindicacions sobrepes obesitat)
+           (Indicacions )
 )
 
 ([Mountain_Climbers] of Exercici
@@ -139,15 +139,15 @@
            (Repeticions  10 20 30)
            (TempsDedicat 3 5 7)
            (Calories 20 30 40)
-           (Contraindicacions Dolor_esquena)
-           (Indicacions Millorar_la_forsa_del_tren_superior)
+           (Contraindicacions )
+           (Indicacions )
 )
 
-;;------------------------Cardio-----------------------------------
+;;------------------------resistencia-----------------------------------
 ([Correr_En_Maquina] of Exercici
            (NomExercici  Correr )
            (QueTreballa   quadriceps   isquiotibials   glutis   cadera   genolls   tormells   peus   cervicals )
-           (Classe cardio)
+           (Classe resistencia)
            (Repeticions  1 1 1)
            (TempsDedicat 7 15 30)
            (Calories 70 150 300)
@@ -158,7 +158,7 @@
 ([Lateral_Toe_Tabs] of Exercici
            (NomExercici  Lateral_Toe_Tabs )
            (QueTreballa   quadriceps   isquiotibials   glutis   cadera   genolls   tormells   peus)
-           (Classe cardio)
+           (Classe resistencia)
            (Repeticions  20 30 40)
            (TempsDedicat 5 7 10)
            (Calories 25 40 55)
@@ -169,7 +169,7 @@
 ([Bicicleta_Estatica] of Exercici
            (NomExercici  Bicicleta_Estatica )
            (QueTreballa   quadriceps   isquiotibials   glutis   genolls   tormells   peus   dorsals )
-           (Classe cardio)
+           (Classe resistencia)
            (Repeticions  1 1 1)
            (TempsDedicat 7 15 30)
            (Calories 50 100 200)
@@ -180,7 +180,7 @@
 ([Caminar] of Exercici
            (NomExercici  Caminar )
            (QueTreballa   quadriceps   isquiotibials   glutis   cadera   genolls   tormells   peus )
-           (Classe cardio)
+           (Classe resistencia)
            (Repeticions  1 1 1)
            (TempsDedicat 7 15 30)
            (Calories 25 50 100)
@@ -191,7 +191,7 @@
 ([Nadar] of Exercici
            (NomExercici  Nadar )
            (QueTreballa   dorsals   pectoral   abdominals   biceps   triceps   glutis   quadriceps   isquiotibials )
-           (Classe cardio)
+           (Classe resistencia)
            (Repeticions  3 5 10)
            (TempsDedicat 8 12 17)
            (Calories 60 100 150)
@@ -202,7 +202,7 @@
 ([Aquagym] of Exercici
            (NomExercici Aquagym )
            (QueTreballa   dorsals   pectoral   abdominals   biceps   triceps   glutis   quadriceps   isquiotibials )
-           (Classe cardio)
+           (Classe resistencia)
            (Repeticions  1 1 1)
            (TempsDedicat 7 15 30)
            (Calories 30 60 120)
@@ -229,73 +229,61 @@
 ([Dolor_esquena] of Limitacions
          (NomLimitacio Dolor_esquena )
          (Bloquejos  pectoral dorsals trapesis espatllaFrontal espatllaPosterior )
-         (GrauLesio   invalid )
     )
 
 ([Dolor_biceps] of Limitacions
          (NomLimitacio  Dolor_biceps )
          (Bloquejos   biceps )
-         (GrauLesio   invalid )
     )
 
 ([Dolor_cervicals] of Limitacions
           (NomLimitacio  Dolor_cervicals )
          (Bloquejos   trapesis espatllaFrontal espatllaPosterior cervicals )
-         (GrauLesio   invalid )
     )
 
 ([Sindrome_tunel_carpia] of Limitacions
          (NomLimitacio  Sindrome_tunel_carpia )
          (Bloquejos   canells )
-         (GrauLesio   invalid )
     )
 
 ([Tendinitis] of Limitacions
            (NomLimitacio  Tendinitis)
          (Bloquejos   colzes )
-         (GrauLesio   invalid )
     )
 
 ([Contractura_Muscular_Lumbar] of Limitacions
           (NomLimitacio  Contractura_Muscular_Lumbar )
           (Bloquejos   lumbars )
-          (GrauLesio   invalid )
     )
 
 ([Espero_calcani] of Limitacions
           (NomLimitacio  Espero_calcani )
          (Bloquejos   peus )
-         (GrauLesio   invalid )
     )
 
 ([Ciatica] of Limitacions
           (NomLimitacio  Ciatica )
          (Bloquejos   lumbars   glutis   isquiotibials   genolls   peus )
-         (GrauLesio   invalid )
     )
 
 ([Esquinc_tormell] of Limitacions
          (NomLimitacio  Esquinc_tormell )
          (Bloquejos   tormells )
-         (GrauLesio   invalid )
     )
 
 ([Hombro_Congelado] of Limitacions
          (NomLimitacio  Hombro_Congelado )
          (Bloquejos   hombro )
-         (GrauLesio   invalid )
     )
 
 ([Sindrome_Piramidal] of Limitacions
          (NomLimitacio  Sindrome_Piramidal )
          (Bloquejos   glutis   peus )
-         (GrauLesio   invalid )
     )
 
 ([Bursitis_genoll] of Limitacions
          (NomLimitacio  Bursitis_Rodilla )
          (Bloquejos   genolls )
-         (GrauLesio   invalid )
     )
 
 ;; ------------------Objectius------------------------------------
@@ -315,7 +303,7 @@
 ([Desenvolupar_cames] of Objectiu
 (NomObjectiu  Desenvolupar_cames )
 (PartsDelCosObjectiu  quadriceps   isquiotibials   glutis )
-(ClassesObjectiu forsa cardio)
+(ClassesObjectiu forsa resistencia)
 )
 
 ([Millorar_la_flexibilitat_i_la_mobilitat] of Objectiu
@@ -327,7 +315,7 @@
 ([Augmentar_la_resistencia_cardiovascular] of Objectiu
 (NomObjectiu  Augmentar_la_resistencia_cardiovascular )
 (PartsDelCosObjectiu  )
-(ClassesObjectiu cardio)
+(ClassesObjectiu resistencia)
 )
 
 ([Millorar_la_coordinacio_i_l'equilibri] of Objectiu

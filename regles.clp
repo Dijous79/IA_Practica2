@@ -5,8 +5,8 @@
 (defglobal ?*parts_del_cos_no_treballables* = (create$))
 (defglobal ?*classes_prioritaries* = (create$))
 (defglobal ?*parts_del_cos_prioritaries* = (create$))
-;                                               card  forsa res   expl  flex  equilibri
-(defglobal ?*intensitats_per_classe* = (create$ baixa baixa baixa baixa baixa baixa))
+;                                               res  forsa expl  flex  equilibri
+(defglobal ?*intensitats_per_classe* = (create$ baixa baixa  baixa baixa baixa))
 (defglobal ?*marc_de_caracteristiques* = (create$))
 
 ;; MODULS
@@ -133,12 +133,11 @@
 
 (deffunction MAIN::convertir_classe_a_index(?classe)
     (switch ?classe
-        (case cardio       then (return 1))
+        (case resistencia       then (return 1))
         (case forsa        then (return 2))
-        (case resistencia then (return 3))
-        (case explosivitat then (return 4))
-        (case flexibilitat then (return 5))
-        (case equilibri    then (return 6))
+        (case explosivitat then (return 3))
+        (case flexibilitat then (return 4))
+        (case equilibri    then (return 5))
     )
 )
 
@@ -225,22 +224,22 @@
     (printout t "Benvingut a la teva rutina d'exercicis personalitzada!" crlf)
     (printout t "Per iniciar, ens caldra una mica d'informacio sobre tu." crlf)
 
-    (bind ?edat (demanar_int "Quina edat tens?" 0 120))
-    ;(bind ?edat 21)
+    ;;(bind ?edat (demanar_int "Quina edat tens?" 0 120))
+    (bind ?edat 21)
     
     (send ?usuari put-Edat ?edat)
 
-    (bind ?estatura (demanar_float "En metres, quant mesures?" 0.0 3.0))
-    (bind ?pes (demanar_float "En quilograms, quant peses?" 30.0 300.0))
+    ;;(bind ?estatura (demanar_float "En metres, quant mesures?" 0.0 3.0))
+    ;;(bind ?pes (demanar_float "En quilograms, quant peses?" 30.0 300.0))
     
-    ;IMC = index de massa corporal pes/estatura^2
-    (bind ?valorIMC (/ ?pes (* ?estatura ?estatura)))
-    ;(bind ?valorIMC 24.0)
+    ;;IMC = index de massa corporal pes/estatura^2
+    ;(bind ?valorIMC (/ ?pes (* ?estatura ?estatura)))
+    (bind ?valorIMC 24.0)
     (send ?usuari put-Imc ?valorIMC)
-    (bind ?presioMax (demanar_int "En mmHg, quina és la teva pressiò sistòlica?" 10 180))
-    (bind ?presioMin (demanar_int "En mmHg, quina és la teva pressiò diastòlica?" 0 ?presioMax))
-    ;(bind ?presioMax 100)
-    ;(bind ?presioMin 90)
+    ;(bind ?presioMax (demanar_int "En mmHg, quina és la teva pressiò sistòlica?" 10 180))
+    ;(bind ?presioMin (demanar_int "En mmHg, quina és la teva pressiò diastòlica?" 0 ?presioMax))
+    (bind ?presioMax 100)
+    (bind ?presioMin 90)
     
     (send ?usuari put-PresioSistolica ?presioMax)
     (send ?usuari put-PresioDiastolica ?presioMin)
@@ -274,8 +273,8 @@
 
         (send ?usuari put-MinutsCaminatsDiaris ?minutsCaminatsDiaris)
 
-        ;                       c f r e fl eq
-        (bind ?tasques (create$ 0 0 0 0 0 0))
+        ;                       r f e fl eq
+        (bind ?tasques (create$ 0 0 0 0 0))
         
         (printout t "D'entre els seguents grups de tasques de la casa, quantes en fas setmanalment?" crlf)
         (printout t "Si p.e. escombres dos cops suma 2 en el seu respectiu grup" crlf)
@@ -300,7 +299,7 @@
 
         (send ?usuari put-Tasques ?tasques)
     else
-        (bind ?opcionsClasse (create$ cardio forsa resistencia explosivitat flexibilitat equilibri))
+        (bind ?opcionsClasse (create$ resistencia forsa explosivitat flexibilitat equilibri))
         (bind ?classesTreballades (demanar_multiples_respostes "En el teu esport que treballes d'entre les seguents opcions?" ?opcionsClasse))
         (send ?usuari put-ClassesTreballades ?classesTreballades)
     )
@@ -354,10 +353,7 @@
     (bind ?res (demanar_multiples_respostes "Digues quines d'entre les seguents opcions:" ?objectius_posibles))
     
     (send ?usuari put-TeObjectius ?res)
-    (assert (abstreure_objectius))
-    
-
-    
+       
 	(focus ABSTREURE)
 )
 
@@ -372,7 +368,6 @@
 
 (defrule ABSTREURE::abstraccio_objectius ""
     (declare (salience 9))
-    ?fet <- (abstreure_objectius)
     ?usuari <- (object(is-a Usuari))
     =>
     (bind ?objectius (send ?usuari get-TeObjectius))
@@ -401,7 +396,6 @@
         )
     )
     
-    (retract ?fet)
 
 )
 
@@ -411,19 +405,19 @@
     =>
     (bind ?edat (send ?usuari get-Edat))
     (if (<= ?edat 11) then
-        (bind ?*intensitats_per_classe* (create$ baixa baixa baixa baixa baixa baixa))
+        (bind ?*intensitats_per_classe* (create$ baixa baixa baixa baixa baixa))
         (bind ?*marc_de_caracteristiques* (create$ ?*marc_de_caracteristiques* infant))
     else
         (if (<= ?edat 17) then
-            (bind ?*intensitats_per_classe* (create$ mitja mitja mitja mitja mitja mitja))
+            (bind ?*intensitats_per_classe* (create$ mitja mitja mitja mitja mitja))
         else
             (if (<= ?edat 30) then
-                (bind ?*intensitats_per_classe* (create$ alta alta alta alta alta alta))
+                (bind ?*intensitats_per_classe* (create$ alta alta alta alta alta))
             else
                 (if (<= ?edat 55) then
-                    (bind ?*intensitats_per_classe* (create$ mitja mitja mitja mitja mitja mitja))
+                    (bind ?*intensitats_per_classe* (create$ mitja mitja mitja mitja mitja))
                 else
-                    (bind ?*intensitats_per_classe* (create$ baixa baixa baixa baixa baixa baixa))
+                    (bind ?*intensitats_per_classe* (create$ baixa baixa baixa baixa baixa))
                     (bind ?*marc_de_caracteristiques* (create$ ?*marc_de_caracteristiques* avi))
 
                 )
@@ -517,7 +511,7 @@
     =>
     (bind ?imc (send ?usuari get-Imc))
     (if (> ?imc 29.9) then
-        (bind ?*intensitats_per_classe* (create$ baixa baixa baixa baixa baixa baixa))
+        (bind ?*intensitats_per_classe* (create$ baixa baixa baixa baixa baixa))
         (bind ?*marc_de_caracteristiques* (create$ ?*marc_de_caracteristiques* obesitat))
     else
         (if (or (< ?imc 18.5) (> ?imc 24.9)) then
@@ -544,7 +538,7 @@
     (bind ?presioSanguinea2 (send ?usuari get-PresioDiastolica))
     (if (and (<= ?presioSanguinea 90) (<= ?presioSanguinea2 60)) ;baixa
         then 
-            (bind ?*classes_prioritaries* (create$ ?*classes_prioritaries* cardio))
+            (bind ?*classes_prioritaries* (create$ ?*classes_prioritaries* resistencia))
             (bind ?i 1)
             (progn$ (?var ?*intensitats_per_classe*)
                 (if (eq ?var alta) then
@@ -577,7 +571,7 @@
                     )
                     (bind ?*marc_de_caracteristiques* (create$ ?*marc_de_caracteristiques* hipertensio))
                 )
-            (bind ?*classes_prioritaries* (create$ ?*classes_prioritaries* cardio))
+            (bind ?*classes_prioritaries* (create$ ?*classes_prioritaries* resistencia))
             )
         )
     )
@@ -638,12 +632,13 @@
 
     (bind ?i 1)
     (bind ?aux (create$))
+    (bind ?limitacions (send ?usuari get-TeLimitacions))
 
     (while (<= ?i (length$ ?*exercicis*)) do
         (bind ?exercici_nth (nth$ ?i ?*exercicis*))
         (bind ?queTreball (send ?exercici_nth get-QueTreballa))
         (bind ?indicacions (send ?exercici_nth get-Indicacions))
-        (if (or (not(tenen_element_en_comu ?*parts_del_cos_no_treballables* ?queTreball)) (tenen_element_en_comu ?indicacions ?*marc_de_caracteristiques*))
+        (if (or (not(tenen_element_en_comu ?*parts_del_cos_no_treballables* ?queTreball)) (tenen_element_en_comu ?indicacions ?*marc_de_caracteristiques*) (tenen_element_en_comu ?indicacions ?*limitacions*))
             then (bind ?aux (create$ ?aux ?exercici_nth)))
         (bind ?i (+ ?i 1))
     )   
