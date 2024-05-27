@@ -282,8 +282,8 @@
         
         (printout t "D'entre els seguents grups de tasques de la casa, quantes en fas setmanalment?" crlf)
         (printout t "Si p.e. escombres dos cops suma 2 en el seu respectiu grup" crlf)
-        (bind ?tasques (replace$ ?tasques 1 1 (demanar_int "Escombrar Fregar Passar_aspiradora Netejar_Finestres Rentar_cotxe Netejar_bany Rentar_roba" 0 50)))
-        (bind ?tasques (replace$ ?tasques 2 2 (demanar_int "Moure_mobles Apujar_caixes Jardineria Carregar_boses_de_la_Compra Planxar" 0 50)))
+        (bind ?tasques (replace$ ?tasques 1 1 (demanar_int "Escombrar Fregar Passar_aspiradora Netejar_Finestres Rentar_cotxe Netejar_bany Rentar_roba" -1 50)))
+        (bind ?tasques (replace$ ?tasques 2 2 (demanar_int "Moure_mobles Apujar_caixes Jardineria Carregar_boses_de_la_Compra Planxar" -1 50)))
         
         
         (bind ?res (demanar_boolea "Treballes d'algo que inclogui aixecar/moure objectes pesats?"))
@@ -342,7 +342,6 @@
             (bind ?limitacions_posibles (create$ ?limitacions_posibles ?nom))        
         )
         (bind ?res (demanar_multiples_respostes "Digues quines d'entre les seguents opcions:" ?limitacions_posibles))
-        ;(bind ?limitacio Hombro_Congelado)
         (send ?usuari put-TeLimitacions ?res)
         (assert (abstreure_parts_no_treballables))
     )
@@ -736,8 +735,6 @@
 
 (defrule PROCESAR::fer_rutina ""
     ?usuari <- (object(is-a Usuari))
-    ;?fact <- (nombre ?value)
-    ;?minuts <- (objectiuMinutsDiaris ?value)
     =>
     (bind ?minuts (send ?usuari get-TempsDisponible))
     
